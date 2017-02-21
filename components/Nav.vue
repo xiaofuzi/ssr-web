@@ -1,21 +1,39 @@
 <style>
-	
+	.navbar {
+		background: #ffffff;
+	}
+
+	.container .logo{
+		float: left;
+	}
+
+	.container .logo h2 {
+		margin-top: 10px;
+		font-weight: 900;
+	}
+
+	.container .logo a {
+		text-decoration: none;
+		font-weight: 900;
+	}
 </style>
 <template>
-	<header class="nav">
-		<div class="logo">
-			<nuxt-link to="/index">
-				<h2>News</h2>
-			</nuxt-link>
+	<nav class="navbar navbar-default main-menu">
+		<div class="container">
+			<div class="logo">
+				<nuxt-link to="/index">
+					<h2>ffe</h2>
+				</nuxt-link>
+			</div>
+			<div class="nav-item">
+				<ul class="nav navbar-nav navbar-right">
+					<li v-for='item in navItems'>
+						<nuxt-link :to="item.url">{{item.text}}</nuxt-link>
+					</li>
+				</ul>
+			</div>
 		</div>
-		<div class="nav-item">
-			<ul>
-				<li v-for='item in navItems'>
-					<nuxt-link :to="item.url">{{item.text}}</nuxt-link>
-				</li>
-			</ul>
-		</div>
-	</header>
+	</nav>
 </template>
 <script>
 	export default {

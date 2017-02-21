@@ -1,5 +1,30 @@
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  body {
+      color: #3E3E41;
+      font-weight: 300;
+  }
+
+  ul {
+      padding-left: 40px;  
+  }
+
+  .wrapper {
+    background: #f5f5f5;
+  }
+
+</style>
 <template>
   <div class="wrapper">
+    <web-nav :nav-items='navItems'></web-nav>
     <nuxt/>
     <my-footer/>
   </div>
@@ -19,7 +44,7 @@ export default {
                 },
                 {
                     text: 'Posts',
-                    url: '/posts'
+                    url: '/page/1'
                 },
                 {
                     text: 'Lab',
@@ -39,38 +64,3 @@ export default {
 }
 </script>
 
-<style>
-.container
-{
-  margin: 0;
-  width: 100%;
-  padding: 100px 0;
-  text-align: center;
-}
-
-.button, .button:visited
-{
-  display: inline-block;
-  color: black;
-  letter-spacing: 1px;
-  background-color: #fff;
-  border: 2px solid #000;
-  text-decoration: none;
-  text-transform: uppercase;
-  padding: 15px 45px;
-}
-
-.button:hover, .button:focus
-{
-  color: #fff;
-  background-color: #000;
-}
-
-.title
-{
-  color: #000;
-  font-weight: 300;
-  font-size: 2.5em;
-  margin: 0;
-}
-</style>

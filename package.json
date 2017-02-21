@@ -15,6 +15,8 @@
   "dependencies": {
     "axios": "^0.15.3",
     "express": "^4.14.0",
+    "marked": "^0.3.6",
+    "moment": "^2.17.1",
     "nuxt": "latest",
     "serve-static": "^1.11.2"
   },

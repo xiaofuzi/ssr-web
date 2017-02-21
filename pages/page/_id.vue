@@ -30,7 +30,7 @@
     <div class="pageWrap">
       <ul>
            <li v-for='post in posts.data'>
-              <nuxt-link :to='post.meta.id'>{{post.meta.title}}</nuxt-link> 
+              <nuxt-link :to='"/posts/" + post.meta.id'>{{post.meta.title}}</nuxt-link> 
           </li>
       </ul>
     </div>
@@ -42,7 +42,7 @@ import axios from '~plugins/axios'
 
 export default {
   data ({ params, error }) {
-    return axios.get('/api/posts')
+    return axios.get(`/api/page/${params.id}`)
     .then((res) => {
       return { posts: res.data }
     })
