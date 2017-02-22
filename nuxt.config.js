@@ -44,6 +44,7 @@ module.exports = {
     vendor: ['axios']
   },
   generate: {
+      dir: 'docs',
       routeParams: {
           '/page/:id': pageIds,
           '/posts/:id': postsIds
