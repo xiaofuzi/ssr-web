@@ -61,7 +61,7 @@ module.exports =
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/_nuxt/";
+/******/ 	__webpack_require__.p = "/nuxt-blog/_nuxt/";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 170);
@@ -1291,7 +1291,7 @@ function getContext(context) {
 
     route: context.to ? context.to : context.route,
     error: context.error,
-    base: '/',
+    base: '/nuxt-blog/',
     env: {}
   };
   var next = context.next;
@@ -1688,7 +1688,7 @@ var scrollBehavior = function scrollBehavior(to, from, savedPosition) {
 
 /* harmony default export */ __webpack_exports__["a"] = new __WEBPACK_IMPORTED_MODULE_1_vue_router___default.a({
   mode: 'history',
-  base: '/',
+  base: '/nuxt-blog/',
   linkActiveClass: 'nuxt-link-active',
   scrollBehavior: scrollBehavior,
   routes: [{
@@ -2160,6 +2160,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data(_ref) {
     var params = _ref.params,
         error = _ref.error;
+
+    return {};
   },
   head: function head() {
     return {
@@ -2274,13 +2276,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             case 2:
               _ref = _context.sent;
               data = _ref.data;
-
-              console.log(data.data[0]);
               return _context.abrupt('return', {
                 newPosts: data
               });
 
-            case 6:
+            case 5:
             case 'end':
               return _context.stop();
           }
@@ -5383,7 +5383,7 @@ var _app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a(__WEBPACK_IMPORTED_MO
     }
     opts.query = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_querystring__["stringify"])(opts.query);
     opts.path = opts.path + (opts.query ? '?' + opts.query : '');
-    opts.path = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__utils__["a" /* urlJoin */])('/', opts.path);
+    opts.path = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__utils__["a" /* urlJoin */])('/nuxt-blog/', opts.path);
     context.res.writeHead(opts.status, {
       'Location': opts.path
     });

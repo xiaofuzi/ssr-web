@@ -43,6 +43,9 @@ module.exports = {
   build: {
     vendor: ['axios']
   },
+  router: {
+    base: '/nuxt-blog/'
+  },
   generate: {
       dir: 'docs',
       routeParams: {

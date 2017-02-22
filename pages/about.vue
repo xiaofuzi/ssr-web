@@ -44,7 +44,7 @@ import axios from '~plugins/axios'
 
 export default {
   data ({ params, error }) {
-    
+      return {}
   },
   head () {
     return {

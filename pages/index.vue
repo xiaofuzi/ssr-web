@@ -77,7 +77,6 @@ import axios from '~plugins/axios'
 export default {
   async data () {
     let { data } = await axios.get('/api/posts/new');
-    console.log(data.data[0])
     return {
       newPosts: data
     }
