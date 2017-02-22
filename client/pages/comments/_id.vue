@@ -18,7 +18,7 @@
       }
 
       .user-info {
-        width: 70px;
+        min-width: 70px;
       }
 
       .comment-body {
@@ -29,6 +29,7 @@
       .avatar {
             width: 50px;
             height: 50px;
+            margin: auto auto;
             margin-bottom: 10px;
             img {
                 width: 100%;
@@ -68,6 +69,15 @@
         margin-right: 10px;
   }
 
+  .main-wrap {
+      .no-data {
+          text-align: center;
+          padding: 20px;
+          margin-top: 30px;
+          background-color: #ffffff;
+      }
+  }
+
   .main-wrap ul {
         padding: 0;
   }
@@ -79,7 +89,7 @@
 <template>
   <section class="page-wrapper container">
     <h2 class="title">
-        A place to discuss questions about web.
+        {{title}}
     </h2>
     <div class="main-wrap">
         <ul>
@@ -95,6 +105,9 @@
                 </div>
             </li>
         </ul>
+        <div class="no-data" v-if='!hasData'>
+            暂无数据
+        </div>
     </div>
   </section>
 </template>
@@ -107,19 +120,30 @@ export default {
   data ({ params, error }) {
     return axios.get(`/api/comments/${params.id}`)
     .then((res) => {
-      return { comments: res.data }
+      return { 
+        comments: res.data,
+        title: '' 
+      }
     })
     .catch((e) => {
       error({ statusCode: 404, message: 'Posts not found' })
     })
+  },
+  computed: {
+      hasData () {
+          return this.comments.length > 0 ? true : false;
+      }
   },
   components: {
     aLink
   },
   head () {
     return {
-      title: `Archive list`
+      title: `${this.title}`
     }
+  },
+  mounted () {
+      this.title = this.$route.query.title;
   }
 }
 </script>

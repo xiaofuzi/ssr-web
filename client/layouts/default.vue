@@ -33,7 +33,6 @@
 <script>
 import WebNav from '~components/Nav.vue'
 import MyFooter from '~components/Footer.vue'
-var basePath = '/nuxt-blog';
 
 export default {
     data () {
@@ -47,10 +46,10 @@ export default {
                     text: 'Posts',
                     url: '/page/1'
                 },
-                // {
-                //     text: 'Lab',
-                //     url: '/lab'
-                // },
+                {
+                    text: 'Ask',
+                    url: '/asks/1?currentPage=1'
+                },
                 {
                     text: 'About',
                     url:  '/about'

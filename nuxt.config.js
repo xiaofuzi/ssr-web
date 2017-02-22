@@ -1,3 +1,5 @@
+var getIssueList = require('./api/github/ffe.js');
+
 var getPosts = require('./lib/mdToJson.js').parsedFiles;
 
 var total = getPosts().total;
@@ -17,6 +19,19 @@ for( let i = 0; i < total; i++) {
     })
 }
 
+var getIssueListPromise = new Promise(function(res, rej){
+    getIssueList(function(err, arr){
+        if (err) {
+            rej(err);
+        } else {
+            res(arr);
+        }
+    })
+})
+
+getIssueListPromise.then(function(arr){
+  console.log('aaa',arr);
+})
 module.exports = {
   srcDir: 'client/',
   /*
@@ -45,7 +60,7 @@ module.exports = {
     vendor: ['axios'],
     loaders: [
       {
-        test: /\.(less)$/,
+        test: /\.(css|less)$/,
         loader: 'less-loader'
       }
     ]
@@ -57,7 +72,20 @@ module.exports = {
       dir: 'docs',
       routeParams: {
           '/page/:id': pageIds,
-          '/posts/:id': postsIds
+          '/posts/:id': postsIds,
+          '/asks/:id': [{id: 1}],
+          '/comments/:id': [{id: 1}]
       }
   }
 }
+
+/*
+function () {
+        return getIssueListPromise
+          .then((res) => {
+            return res.map((comment) => {
+              return { id: comment.number }
+            })
+          })
+  }
+*/

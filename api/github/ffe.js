@@ -33,7 +33,7 @@ router.get('/comments/:id', function (req, res, next) {
     if (issueNum < 0) {
         res.sendStatus(404)
     } else {
-        getIssueComments(issueNum, (arr)=>{
+        getIssueComments(issueNum, (err, arr)=>{
         	res.json(arr);
         })
     }
@@ -45,8 +45,8 @@ router.get('/comments/:id', function (req, res, next) {
  * return issue list
  */
 function getIssueList (cb=()=>{}) {
-	gh.IssueObj.listIssues({
-		labels: 'post'
+	return gh.IssueObj.listIssues({
+		//labels: 'post'
 	}, (err, issues)=>{
 		let arr = [];
 		issues.forEach((issue)=>{
@@ -56,7 +56,8 @@ function getIssueList (cb=()=>{}) {
 				commentUrl: issue.comments_url,
 				body: marked(issue.body),
 				user: issue.user,
-				id: issue.id
+				id: issue.id,
+                number: issue.number
 			});
 		})
 
@@ -69,17 +70,22 @@ function getIssueList (cb=()=>{}) {
  */
 function getIssueComments (id, cb=()=>{}) {
 	gh.IssueObj.listIssueComments(id, (err, comments)=>{
-		let arr = [];
-		comments.forEach((comment)=>{
-			arr.push({
-				user: comment.user,
-				body: marked(comment.body),
-				createdAt: comment.created_at,
-				updatedAt: comment.updated_at
-			})
-		})
-		cb(arr);
+        if (err) {
+            cb(err, []);
+        } else {
+            let arr = [];
+            comments.forEach((comment)=>{
+                arr.push({
+                    user: comment.user,
+                    body: marked(comment.body),
+                    createdAt: comment.created_at,
+                    updatedAt: comment.updated_at
+                })
+            })
+            cb(err, arr);
+        }
 	})
 }
 
 module.exports = router
+exports.getIssueList = getIssueList
