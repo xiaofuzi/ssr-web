@@ -2359,7 +2359,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   head: function head() {
     return {
-      title: 'ffe hot post'
+      title: 'ffe hot posts'
     };
   }
 };
@@ -5194,7 +5194,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "box"
     }, [_c('div', [_c('a-link', {
       attrs: {
-        "to": "/posts/" + post.meta.id
+        "to": "/posts/" + post.meta.id + "/index.html"
       }
     }, [_c('h3', [_vm._v(_vm._s(post.meta.title))])])], 1), _c('div', {
       staticClass: "post-meta"

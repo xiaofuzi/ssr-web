@@ -57,7 +57,7 @@
             <li class="col-md-6" v-for='post in newPosts.data'>
                 <div class="box">
                     <div>
-                        <a-link :to='"/posts/" + post.meta.id'><h3>{{post.meta.title}}</h3></a-link>
+                        <a-link :to='"/posts/" + post.meta.id + "/index.html"'><h3>{{post.meta.title}}</h3></a-link>
                     </div> 
                     <div class="post-meta">
                         <span>{{ post.meta.strTag}}</span>
@@ -87,7 +87,7 @@ export default {
   },
   head () {
     return {
-      title: 'ffe hot post'
+      title: 'ffe hot posts'
     }
   }
 }
