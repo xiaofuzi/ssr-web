@@ -1,109 +1,84 @@
-<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><base href="/nuxt-blog/"><link href="/nuxt-blog/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-739c3fb7 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/nuxt-blog/"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/nuxt-blog/">Home</a><li><a href="/nuxt-blog/page/1">Posts</a><li><a href="/nuxt-blog/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><a href="/nuxt-blog/posts/5"><h2>jQuery is not must for us——异步请求</h2></a></div><div class="post-meta"><span>jquery</span><span>2015-11-24</span></div><div><div><hr><p>jQuery对象只是对XMLHttpRequest对象进行了封装，真正的异步请求还是由浏览器发起的。<ul><li>GET<li>POST<li>URL Encode<li>JSON<li>Uploading<li>CORS<li>JSONP</ul><h2 id="get-">GET请求</h2><p>在这里我们向服务器发起一个请求，给服务器传一个id参数然后希望服务器传回该id的用户名。<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">/*常用的jquery get请求方式*/
-$.ajax('myservice/username', {
-    data: {
-    id: 'unique_id'
-    }
-})
-.then(
-function success(name){
-    alert("用户名是：" + name);
-},
-function fail(data, status){
-    alert("请求失败. Return status of " + status);
-})
-</code></pre><h3 id="-xmlhttprequest-">原生XMLHttpRequest对象实现</h3><pre><code class="lang-javascript">var xhr = new XMLHttpRequest();
-xhr.open('GET', encodeURL('myservice/username?id=unique_id'));
-xhr.onload = function(){
-    if(xhr.status === 200){
-    alert("用户名是：" + xhr.responseText);
+<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><base href="/nuxt-blog/"><link href="/nuxt-blog/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-739c3fb7 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/nuxt-blog/"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/nuxt-blog/">Home</a><li><a href="/nuxt-blog/page/1">Posts</a><li><a href="/nuxt-blog/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><a href="/nuxt-blog/posts/10"><h2>再谈对闭包的理解</h2></a></div><div class="post-meta"><span>js、pl</span><span>2016-03-05</span></div><div><div><hr><h3 id="-">闭包只是为了实现词法作用域而用到的一种数据结构而已</h3><p>先从阮一峰09年写的一篇关于闭包的文章开始<a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html">(原文地址)</a>文中说"可以把闭包理解为就是能够读取其他函数内部变量的函数,因为js中,只有函数内部的子函数才能读取局部变量，因此也可以把闭包定义在一个函数内部的函数。所以闭包本质就是将函数内部和函数外部连接起来的一座桥梁"。<p>毕竟不是专业学习js的，也不是程序语言方面的专家，在这里就不去计较了，下文会给出更完整的闭包说明。(PS:个人还是比较欣赏阮一峰写的文章的，能将一些概念讲得通俗易懂)<p>最后还留下了一个思考题<ul><li>示例01：<pre><code class="lang-js">　　var name = "The Window";
+　　var object = {
+　　　　name : "My Object",
+　　　　getNameFunc : function(){
+　　　　　　return function(){
+　　　　　　　　return this.name;
+　　　　　　};
+　　　　}
+　　};
+　　alert(object.getNameFunc()());
+</code></pre><li>示例02：<pre><code class="lang-js">　　var name = "The Window";
+　　var object = {
+　　　　name : "My Object",
+　　　　getNameFunc : function(){
+　　　　　　var that = this;
+　　　　　　return function(){
+　　　　　　　　return that.name;
+　　　　　　};
+　　　　}
+　　};
+　　alert(object.getNameFunc()());
+</code></pre>看完这道题，就希望大家将this和闭包分开，不要给自己找麻烦？</ul><p>在开始说闭包之前，需要理解好以下的概念：<ul><li>词法作用域(静态作用域)<li>函数上下文</ul><p><a href="http://yangxiaofu.com/2016/01/25/js/closure-this/">之前简单的提过</a>,词法作用域简单的理解就是函数的上下文是在声明是确定的，而不是在调用时确定的。这里不想对这两个名词作过多的解释，我们知道js/ruby/python等主流的语言都是词法作用域就好，因为与之相对的动态作用域有许多的问题，所以现在的语言基本都是词法作用域的。<p>函数上下文就简单的理解为函数执行的环境好了，在这个环境中保存了函数执行所需的变量。<h3 id="javascript-">JavaScript权威指南第六版关于闭包的说明</h3><blockquote><p>JavaScript采用词法作用域，也就是说函数的执行依赖于变量的作用域，这个作用域是在函数定义时决定的，而不是函数调用时决定的。为了实现词法作用域，JavaScript函数对象的内部状态不仅包含函数的代码逻辑，还必须引用当前的作用域链。函数对象可以通过作用域链相互关联起来，函数体内部的变量都可以保存在函数作用域内，这种特性在计算机科学文献中称为"闭包"。<p>当定义一个函数时，它实际上保存了一个作用域链。当调用这个函数时，它创建 一个新的对象来存储它的局部变量，并将这个对象添加到保存的作用域链上。</blockquote><p>(闭包可以简单的理解为函数用来存储它的局部变量的对象，这个对象我们来说是不可见的，是js解释器实现的过程中才会用到的。每一个函数都会有这样的一个对象，作用域链则是这些对象之间的关系。)<p>"闭包"这个术语的来源：指函数变量可以被隐藏于作用域链之内，因此看起来是函数将变量"包裹"了起来。<p>看文字可能会比较绕，下面是书中的一个例子：<pre><code class="lang-js">var scope = "global scope";            /*全局变量*/
+function checkscope(){
+    var scope = "local scope";        /*局部变量*/
+    function f(){return scope;}
+    return f();
 }
-else{
-    alert('Request failed. Return status of ' + xhr.status);
+checkscope();                        /*=>"local scope"*/
+</code></pre><pre><code class="lang-js">var scope = "global scope";            /*全局变量*/
+function checkscope(){
+    var scope = "local scope";        /*局部变量*/
+    function f(){return scope;}
+    return f;
 }
-};
-xhr.send();
-</code></pre><h2 id="post">POST</h2><p>post用来向服务器传送数据，这里我们传入一个用户id和新用户名，希望服务器完成对该用户的修改同时会返回修改的内容。<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">var newName = 'yangxiaofu';
-$.ajax('myservice/username?' + $.param({id: 'unique_id'}),
-{    method: 'POST',
-    data: {
-        name: newName
-    }
-})
-.then(
-    function sucess(name){
-    if(name !== newName){
-        alert("something wrong. Name is now " + name);
-    }
-},
-function fail(data, status){
-    alert('Request failed. Returned status of ' + status);
+checkscope()();                        /*=>"local scope"*/
+</code></pre><p>checkscope最后的返回值都是一样的，即"local scope"。<p>上面两个例子的不同之处就是函数f执行的地方不同，一个在checkscope这个作用域里调用的(每一个函数都是一个作用域)，一个在全局作用域里调用的。回忆之前说的，函数调用时的上下文或者说作用域是在声明时确定的，所以与调用的位置无关，即f函数的调用位置虽然不同，调用的环境虽然不同，但最终的结果都是一样的。<p>说到这里，闭包就说得差不多了，回过头来看一下常规的对于闭包的理解：<blockquote><p>通过返回函数的形式取得函数的局部变量。</blockquote><p>这种说法本身没有错，但它只是闭包的一种表现形式，<p>比如将上例进行下更改：<pre><code class="lang-js">var scope = "global scope";            /*全局变量*/
+function checkscope(fn){
+    var scope = "local scope";        /*局部变量*/
+    function f(){return scope;}
+    fn(f);
 }
-);
-</code></pre><h3 id="-xmlhttprequest-">原生XMLHttpRequest对象实现</h3><pre><code class="lang-javascript">var newName = "yangxiaofu",
-    xhr = new XMLHttpRequest();
-
-xhr.open("POST",
-    encodeURI('myservice/username?id=unique_id'));
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencode');
-    xhr.onload = function(){
-        if(xhr.status === 200 && xhr.responseText !== newName){
-        alert('Something went wrong.  Name is now ' + xhr.responseText);
-    } else if (xhr.status !== 200) {
-        alert('Request failed.  Returned status of ' + xhr.status);
+checkscope(function(func){
+    var scope = "func scope";
+    return func();
+});                                    /*=>"local scope"*/
+</code></pre><p>改成类似回调的执行方式，结果还是一样的，注意结果并不是func scope，但是并没有返回f函数这一说，难道这就不是闭包了吗？(当然这里有点扣字眼)<h3 id="-">复杂点的闭包题</h3><p>真不知道按照前面那种简单的理解该怎么来理解这道题，但是如果理解了闭包的实质，那么就会发现其实很简单。<pre><code class="lang-js">function fun(n,o) {
+  console.log(o)
+  return {
+    fun:function(m){
+      return fun(m,n);
     }
-};
-xhr.send(encodeURI('name=' + newName));
-</code></pre><h3 id="url-encoding">URL Encoding</h3><p>将一个对象转换成URL编码的字符串<pre><code class="lang-javascript">$.param({
-    key1: "value1",
-    'key2': "value2"
-});
-</code></pre><p>我们可以用encodeURL和encodeURLComponent来实现同样的功能,如果 URI 组件中含有分隔符，比如 ? 和 #，则应当使用 encodeURIComponent() 方法分别对各组件进行编码。<pre><code class="lang-javascript">function param(obj){
-    var encodedString = '';
-    for(var prop in object){
-        if(object.hasOwnProperty(prop)){
-            if(encodedString.length > 0){
-                encodedString += '&';
-            }
-            encodedString += encodeURL(prop + '=' + object[prop]);
-        }
-    }
-    return encodedString;
+  };
 }
-</code></pre><h2 id="-">文件上传</h2><p>首先我们应该明确，IE9及之前的版本如果要上传文件的话只能通过form表单，即如下的形式<pre><code class="lang-html">&lt;input type="file">
-</code></pre><p>通过浏览器提供的文件API ,我们可以通过两种方式上传文件：<ul><li>使用multipart/form-data形式的表单<li>将文件数据存放在请求体中</ul><p>通过下面的表单提交文件<pre><code class="lang-html">&lt;input type="file" id="test-input">
-</code></pre><h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">var file = $('#test-input')[0].files[0],
-    formData = new FormData();
+var a = fun(0);  a.fun(1);  a.fun(2);  a.fun(3);    /*undefined,?,?,?*/
+var b = fun(0).fun(1).fun(2).fun(3);                /*undefined,?,?,?*/
+var c = fun(0).fun(1);  c.fun(2);  c.fun(3);        /*undefined,?,?,?*/
 
-formData.append('file', file);
-
-$.ajax('myserver/uploads',{
-    method: 'POST',
-    contentType: false,
-    processData: false,
-    data: formData
-});
-
-/*直接提交文件数据*/
-$.ajax('myserver/uploads',{
-    method: 'POST',
-    contentType: file.type,
-    processData: false,    /*避免jquery使用URL encode的形式对文件数据进行编码*/
-    data: file
-})
-</code></pre><h3 id="xmlhttprequest">XMLHttpRequest</h3><pre><code class="lang-javascript">/*multipart编码形式*/
-var formData = new FormData(),
-    file = document.getElementById('test-input').files[0],
-    xhr = new XMLHttpRequest();
-
-formData.append('file', file);
-xhr.open('POST', 'myserver/uploads');
-xhr.send(formData);
-
-/*将文件数据以request body的形式提交*/
-var file = document.getElementById('test-input').files[0],
-    xhr = new XMLHttpRequest();
-
-    xhr.open('POST', 'myserver/uploads');
-    xhr.setRequestHeader('Content-Type', file.type);
-    xhr.send(file);
-</code></pre></div></div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"jQuery is not must for us——异步请求",date:"2015-11-24T12:40:32.000Z",tags:"jquery",archives:"pl",id:"5",createTime:"2015-11-24",url:"2015-11-24-jQuery is not must for us——异步请求",strTag:"jquery"},content:'<hr>\n<p>jQuery对象只是对XMLHttpRequest对象进行了封装，真正的异步请求还是由浏览器发起的。</p>\n<ul>\n<li>GET</li>\n<li>POST</li>\n<li>URL Encode</li>\n<li>JSON</li>\n<li>Uploading</li>\n<li>CORS</li>\n<li>JSONP</li>\n</ul>\n<h2 id="get-">GET请求</h2>\n<p>在这里我们向服务器发起一个请求，给服务器传一个id参数然后希望服务器传回该id的用户名。</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">/*常用的jquery get请求方式*/\n$.ajax(&#39;myservice/username&#39;, {\n    data: {\n    id: &#39;unique_id&#39;\n    }\n})\n.then(\nfunction success(name){\n    alert(&quot;用户名是：&quot; + name);\n},\nfunction fail(data, status){\n    alert(&quot;请求失败. Return status of &quot; + status);\n})\n</code></pre>\n<h3 id="-xmlhttprequest-">原生XMLHttpRequest对象实现</h3>\n<pre><code class="lang-javascript">var xhr = new XMLHttpRequest();\nxhr.open(&#39;GET&#39;, encodeURL(&#39;myservice/username?id=unique_id&#39;));\nxhr.onload = function(){\n    if(xhr.status === 200){\n    alert(&quot;用户名是：&quot; + xhr.responseText);\n}\nelse{\n    alert(&#39;Request failed. Return status of &#39; + xhr.status);\n}\n};\nxhr.send();\n</code></pre>\n<h2 id="post">POST</h2>\n<p>post用来向服务器传送数据，这里我们传入一个用户id和新用户名，希望服务器完成对该用户的修改同时会返回修改的内容。</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">var newName = &#39;yangxiaofu&#39;;\n$.ajax(&#39;myservice/username?&#39; + $.param({id: &#39;unique_id&#39;}),\n{    method: &#39;POST&#39;,\n    data: {\n        name: newName\n    }\n})\n.then(\n    function sucess(name){\n    if(name !== newName){\n        alert(&quot;something wrong. Name is now &quot; + name);\n    }\n},\nfunction fail(data, status){\n    alert(&#39;Request failed. Returned status of &#39; + status);\n}\n);\n</code></pre>\n<h3 id="-xmlhttprequest-">原生XMLHttpRequest对象实现</h3>\n<pre><code class="lang-javascript">var newName = &quot;yangxiaofu&quot;,\n    xhr = new XMLHttpRequest();\n\nxhr.open(&quot;POST&quot;,\n    encodeURI(&#39;myservice/username?id=unique_id&#39;));\n    xhr.setRequestHeader(&#39;Content-Type&#39;, &#39;application/x-www-form-urlencode&#39;);\n    xhr.onload = function(){\n        if(xhr.status === 200 &amp;&amp; xhr.responseText !== newName){\n        alert(&#39;Something went wrong.  Name is now &#39; + xhr.responseText);\n    } else if (xhr.status !== 200) {\n        alert(&#39;Request failed.  Returned status of &#39; + xhr.status);\n    }\n};\nxhr.send(encodeURI(&#39;name=&#39; + newName));\n</code></pre>\n<h3 id="url-encoding">URL Encoding</h3>\n<p>将一个对象转换成URL编码的字符串</p>\n<pre><code class="lang-javascript">$.param({\n    key1: &quot;value1&quot;,\n    &#39;key2&#39;: &quot;value2&quot;\n});\n</code></pre>\n<p>我们可以用encodeURL和encodeURLComponent来实现同样的功能,如果 URI 组件中含有分隔符，比如 ? 和 #，则应当使用 encodeURIComponent() 方法分别对各组件进行编码。</p>\n<pre><code class="lang-javascript">function param(obj){\n    var encodedString = &#39;&#39;;\n    for(var prop in object){\n        if(object.hasOwnProperty(prop)){\n            if(encodedString.length &gt; 0){\n                encodedString += &#39;&amp;&#39;;\n            }\n            encodedString += encodeURL(prop + &#39;=&#39; + object[prop]);\n        }\n    }\n    return encodedString;\n}\n</code></pre>\n<h2 id="-">文件上传</h2>\n<p>首先我们应该明确，IE9及之前的版本如果要上传文件的话只能通过form表单，即如下的形式</p>\n<pre><code class="lang-html">&lt;input type=&quot;file&quot;&gt;\n</code></pre>\n<p>通过浏览器提供的文件API ,我们可以通过两种方式上传文件：</p>\n<ul>\n<li>使用multipart/form-data形式的表单</li>\n<li>将文件数据存放在请求体中</li>\n</ul>\n<p>通过下面的表单提交文件</p>\n<pre><code class="lang-html">&lt;input type=&quot;file&quot; id=&quot;test-input&quot;&gt;\n</code></pre>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">var file = $(&#39;#test-input&#39;)[0].files[0],\n    formData = new FormData();\n\nformData.append(&#39;file&#39;, file);\n\n$.ajax(&#39;myserver/uploads&#39;,{\n    method: &#39;POST&#39;,\n    contentType: false,\n    processData: false,\n    data: formData\n});\n\n/*直接提交文件数据*/\n$.ajax(&#39;myserver/uploads&#39;,{\n    method: &#39;POST&#39;,\n    contentType: file.type,\n    processData: false,    /*避免jquery使用URL encode的形式对文件数据进行编码*/\n    data: file\n})\n</code></pre>\n<h3 id="xmlhttprequest">XMLHttpRequest</h3>\n<pre><code class="lang-javascript">/*multipart编码形式*/\nvar formData = new FormData(),\n    file = document.getElementById(&#39;test-input&#39;).files[0],\n    xhr = new XMLHttpRequest();\n\nformData.append(&#39;file&#39;, file);\nxhr.open(&#39;POST&#39;, &#39;myserver/uploads&#39;);\nxhr.send(formData);\n\n/*将文件数据以request body的形式提交*/\nvar file = document.getElementById(&#39;test-input&#39;).files[0],\n    xhr = new XMLHttpRequest();\n\n    xhr.open(&#39;POST&#39;, &#39;myserver/uploads&#39;);\n    xhr.setRequestHeader(&#39;Content-Type&#39;, file.type);\n    xhr.send(file);\n</code></pre>\n',summary:"<hr>\n<p>jQuery对象只是对XMLHttpRequest对象进行了封装，真正的异步请求还是由浏览器发起的。</p>\n<ul>\n<li>GET</li>\n<li>POST</li>\n<li>URL Encode</li>\n<li>JSON</li>\n<li>Uploading</li>\n<li>CORS</li>\n<li>JSONP</li>\n</ul>\n"}}],error:null,serverRendered:!0}</script><script defer src="/nuxt-blog/_nuxt/vendor.bundle.js"></script><script defer src="/nuxt-blog/_nuxt/nuxt.bundle.js"></script>
+/*
+* 问:三行a,b,c的输出分别是什么？
+* 提示:形参也属于局部变量，包含在作用域中
+*/
+</code></pre><p>这里就不给出答案了，自行运行即可知道结果。<h3 id="-this">说说this</h3><p>想起最开始时的那个思考题了吗？与闭包就没什么关系(注：任何一个函数其实都用到了闭包，但我们暂且考虑两层以及两层以上的嵌套情况，未嵌套情况下因为使用的都是全局作用域，结果应该是很直观的)。this一般用来代表函数的调用对象，它和上下文对象并不是同一个，上下文对象对我们来说是不可见的，除了全局作用域。<ul><li>示例01：<pre><code class="lang-js">　　var name = "The Window";
+　　var object = {
+　　　　name : "My Object",
+　　　　getNameFunc : function(){
+　　　　　　return function(){
+　　　　　　　　return this.name;
+　　　　　　};
+　　　　}
+　　};
+　　alert(object.getNameFunc()());        /*The Window*/
+</code></pre><li>示例02：<pre><code class="lang-js">　　var name = "The Window";
+　　var object = {
+　　　　name : "My Object",
+　　　　getNameFunc : function(){
+　　　　　　var that = this;
+　　　　　　return function(){
+　　　　　　　　return that.name;
+　　　　　　};
+　　　　}
+　　};
+ var that = {name: 'xiaofu'};            /*干扰项*/ 
+　　alert(object.getNameFunc()());        /*My Object*/
+</code></pre></ul><p>我们再来看一下题目，示例01输出的是"The Window",示例02输出的是"My Object"。<p>说明： 示例01最终执行的是 function(){return this.name}，因为没有显示指明调用对象，所以其this执行全局对象。 示例02先调用object.getNameFunc(),因为显示的指定了调用对象，所以内部的this是object(注：这里说的是this指向的问题，还没有说闭包)，接着执行function (){return that.name}，这个函数在getNameFunc这个函数作用域中声明的，所以它调用的时候使用的是这个作用域，即得到var that = this;的这个that;而不是外面的that。<h3 id="-">作用域链不等同于原型链</h3><p>真不知道这两个不相关的东西怎么会被等同起来看待，以后谁告诉我它们是同一个东西，我就想问了，ruby、python这种没有原型概念的语言难道就没有作用域链了吗？<p>更有甚者将变量声明提升和闭包混在一起，也是醉了。<h3 id="-this-">如果无法理解，但记住下面的一点使用技巧，那么遇到闭包和this时也能够轻松的应对</h3><ul><li>闭包：函数执行时变量的获取从声明的作用域处去获取(注意链式关系，当前没有就往父级找，知道全局作用域)<li>this：显示指定调用者则this就指向谁，如未指定则为全局对象</ul></div></div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"再谈对闭包的理解",date:"2016-03-05T15:06:36.000Z",tags:["js","pl"],id:"10",createTime:"2016-03-05",url:"2016-03-05-再谈对闭包的理解",strTag:"js、pl"},content:'<hr>\n<h3 id="-">闭包只是为了实现词法作用域而用到的一种数据结构而已</h3>\n<p>先从阮一峰09年写的一篇关于闭包的文章开始<a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html">(原文地址)</a>文中说&quot;可以把闭包理解为就是能够读取其他函数内部变量的函数,因为js中,只有函数内部的子函数才能读取局部变量，因此也可以把闭包定义在一个函数内部的函数。所以闭包本质就是将函数内部和函数外部连接起来的一座桥梁&quot;。</p>\n<p>毕竟不是专业学习js的，也不是程序语言方面的专家，在这里就不去计较了，下文会给出更完整的闭包说明。(PS:个人还是比较欣赏阮一峰写的文章的，能将一些概念讲得通俗易懂)</p>\n<p>最后还留下了一个思考题</p>\n<ul>\n<li>示例01：<pre><code class="lang-js">　　var name = &quot;The Window&quot;;\n　　var object = {\n　　　　name : &quot;My Object&quot;,\n　　　　getNameFunc : function(){\n　　　　　　return function(){\n　　　　　　　　return this.name;\n　　　　　　};\n　　　　}\n　　};\n　　alert(object.getNameFunc()());\n</code></pre>\n</li>\n<li>示例02：<pre><code class="lang-js">　　var name = &quot;The Window&quot;;\n　　var object = {\n　　　　name : &quot;My Object&quot;,\n　　　　getNameFunc : function(){\n　　　　　　var that = this;\n　　　　　　return function(){\n　　　　　　　　return that.name;\n　　　　　　};\n　　　　}\n　　};\n　　alert(object.getNameFunc()());\n</code></pre>\n看完这道题，就希望大家将this和闭包分开，不要给自己找麻烦？</li>\n</ul>\n<p>在开始说闭包之前，需要理解好以下的概念：</p>\n<ul>\n<li>词法作用域(静态作用域)</li>\n<li>函数上下文</li>\n</ul>\n<p><a href="http://yangxiaofu.com/2016/01/25/js/closure-this/">之前简单的提过</a>,词法作用域简单的理解就是函数的上下文是在声明是确定的，而不是在调用时确定的。这里不想对这两个名词作过多的解释，我们知道js/ruby/python等主流的语言都是词法作用域就好，因为与之相对的动态作用域有许多的问题，所以现在的语言基本都是词法作用域的。</p>\n<p>函数上下文就简单的理解为函数执行的环境好了，在这个环境中保存了函数执行所需的变量。</p>\n<h3 id="javascript-">JavaScript权威指南第六版关于闭包的说明</h3>\n<blockquote>\n<p>JavaScript采用词法作用域，也就是说函数的执行依赖于变量的作用域，这个作用域是在函数定义时决定的，而不是函数调用时决定的。为了实现词法作用域，JavaScript函数对象的内部状态不仅包含函数的代码逻辑，还必须引用当前的作用域链。函数对象可以通过作用域链相互关联起来，函数体内部的变量都可以保存在函数作用域内，这种特性在计算机科学文献中称为&quot;闭包&quot;。</p>\n<p>当定义一个函数时，它实际上保存了一个作用域链。当调用这个函数时，它创建\n一个新的对象来存储它的局部变量，并将这个对象添加到保存的作用域链上。</p>\n</blockquote>\n<p>(闭包可以简单的理解为函数用来存储它的局部变量的对象，这个对象我们来说是不可见的，是js解释器实现的过程中才会用到的。每一个函数都会有这样的一个对象，作用域链则是这些对象之间的关系。)</p>\n<p>&quot;闭包&quot;这个术语的来源：指函数变量可以被隐藏于作用域链之内，因此看起来是函数将变量&quot;包裹&quot;了起来。</p>\n<p>看文字可能会比较绕，下面是书中的一个例子：</p>\n<pre><code class="lang-js">var scope = &quot;global scope&quot;;            /*全局变量*/\nfunction checkscope(){\n    var scope = &quot;local scope&quot;;        /*局部变量*/\n    function f(){return scope;}\n    return f();\n}\ncheckscope();                        /*=&gt;&quot;local scope&quot;*/\n</code></pre>\n<pre><code class="lang-js">var scope = &quot;global scope&quot;;            /*全局变量*/\nfunction checkscope(){\n    var scope = &quot;local scope&quot;;        /*局部变量*/\n    function f(){return scope;}\n    return f;\n}\ncheckscope()();                        /*=&gt;&quot;local scope&quot;*/\n</code></pre>\n<p>checkscope最后的返回值都是一样的，即&quot;local scope&quot;。</p>\n<p>上面两个例子的不同之处就是函数f执行的地方不同，一个在checkscope这个作用域里调用的(每一个函数都是一个作用域)，一个在全局作用域里调用的。回忆之前说的，函数调用时的上下文或者说作用域是在声明时确定的，所以与调用的位置无关，即f函数的调用位置虽然不同，调用的环境虽然不同，但最终的结果都是一样的。</p>\n<p>说到这里，闭包就说得差不多了，回过头来看一下常规的对于闭包的理解：</p>\n<blockquote>\n<p>通过返回函数的形式取得函数的局部变量。</p>\n</blockquote>\n<p>这种说法本身没有错，但它只是闭包的一种表现形式，</p>\n<p>比如将上例进行下更改：</p>\n<pre><code class="lang-js">var scope = &quot;global scope&quot;;            /*全局变量*/\nfunction checkscope(fn){\n    var scope = &quot;local scope&quot;;        /*局部变量*/\n    function f(){return scope;}\n    fn(f);\n}\ncheckscope(function(func){\n    var scope = &quot;func scope&quot;;\n    return func();\n});                                    /*=&gt;&quot;local scope&quot;*/\n</code></pre>\n<p>改成类似回调的执行方式，结果还是一样的，注意结果并不是func scope，但是并没有返回f函数这一说，难道这就不是闭包了吗？(当然这里有点扣字眼)</p>\n<h3 id="-">复杂点的闭包题</h3>\n<p>真不知道按照前面那种简单的理解该怎么来理解这道题，但是如果理解了闭包的实质，那么就会发现其实很简单。</p>\n<pre><code class="lang-js">function fun(n,o) {\n  console.log(o)\n  return {\n    fun:function(m){\n      return fun(m,n);\n    }\n  };\n}\nvar a = fun(0);  a.fun(1);  a.fun(2);  a.fun(3);    /*undefined,?,?,?*/\nvar b = fun(0).fun(1).fun(2).fun(3);                /*undefined,?,?,?*/\nvar c = fun(0).fun(1);  c.fun(2);  c.fun(3);        /*undefined,?,?,?*/\n\n/*\n* 问:三行a,b,c的输出分别是什么？\n* 提示:形参也属于局部变量，包含在作用域中\n*/\n</code></pre>\n<p>这里就不给出答案了，自行运行即可知道结果。</p>\n<h3 id="-this">说说this</h3>\n<p>想起最开始时的那个思考题了吗？与闭包就没什么关系(注：任何一个函数其实都用到了闭包，但我们暂且考虑两层以及两层以上的嵌套情况，未嵌套情况下因为使用的都是全局作用域，结果应该是很直观的)。this一般用来代表函数的调用对象，它和上下文对象并不是同一个，上下文对象对我们来说是不可见的，除了全局作用域。</p>\n<ul>\n<li>示例01：<pre><code class="lang-js">　　var name = &quot;The Window&quot;;\n　　var object = {\n　　　　name : &quot;My Object&quot;,\n　　　　getNameFunc : function(){\n　　　　　　return function(){\n　　　　　　　　return this.name;\n　　　　　　};\n　　　　}\n　　};\n　　alert(object.getNameFunc()());        /*The Window*/\n</code></pre>\n</li>\n<li>示例02：<pre><code class="lang-js">　　var name = &quot;The Window&quot;;\n　　var object = {\n　　　　name : &quot;My Object&quot;,\n　　　　getNameFunc : function(){\n　　　　　　var that = this;\n　　　　　　return function(){\n　　　　　　　　return that.name;\n　　　　　　};\n　　　　}\n　　};\n var that = {name: &#39;xiaofu&#39;};            /*干扰项*/ \n　　alert(object.getNameFunc()());        /*My Object*/\n</code></pre>\n</li>\n</ul>\n<p>我们再来看一下题目，示例01输出的是&quot;The Window&quot;,示例02输出的是&quot;My Object&quot;。</p>\n<p>说明：\n示例01最终执行的是 function(){return this.name}，因为没有显示指明调用对象，所以其this执行全局对象。\n示例02先调用object.getNameFunc(),因为显示的指定了调用对象，所以内部的this是object(注：这里说的是this指向的问题，还没有说闭包)，接着执行function (){return that.name}，这个函数在getNameFunc这个函数作用域中声明的，所以它调用的时候使用的是这个作用域，即得到var that = this;的这个that;而不是外面的that。</p>\n<h3 id="-">作用域链不等同于原型链</h3>\n<p>真不知道这两个不相关的东西怎么会被等同起来看待，以后谁告诉我它们是同一个东西，我就想问了，ruby、python这种没有原型概念的语言难道就没有作用域链了吗？</p>\n<p>更有甚者将变量声明提升和闭包混在一起，也是醉了。</p>\n<h3 id="-this-">如果无法理解，但记住下面的一点使用技巧，那么遇到闭包和this时也能够轻松的应对</h3>\n<ul>\n<li>闭包：函数执行时变量的获取从声明的作用域处去获取(注意链式关系，当前没有就往父级找，知道全局作用域)</li>\n<li>this：显示指定调用者则this就指向谁，如未指定则为全局对象</li>\n</ul>\n',summary:'<hr>\n<h3 id="-">闭包只是为了实现词法作用域而用到的一种数据结构而已</h3>\n<p>先从阮一峰09年写的一篇关于闭包的文章开始<a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html">(原文地址)</a>文中说&quot;可以把闭包理解为就是能够读取其他函数内部变量的函数,因为js中,只有函数内部的子函数才能读取局部变量，因此也可以把闭包定义在一个函数内部的函数。所以闭包本质就是将函数内部和函数外部连接起来的一座桥梁&quot;。</p>\n<p>毕竟不是专业学习js的，也不是程序语言方面的专家，在这里就不去计较了，下文会给出更完整的闭包说明。(PS:个人还是比较欣赏阮一峰写的文章的，能将一些概念讲得通俗易懂)</p>\n<p>最后还留下了一个思考题</p>\n<ul>\n<li>示例01：<pre><code class="lang-js">　　var name = &quot;The Window&quot;;\n　　var object = {\n　　　　name : &quot;My Object&quot;,\n　　　　getNameFunc : function(){\n　　　　　　return function(){\n　　　　　　　　return this.name;\n　　　　　　};\n　　　　}\n　　};\n　　alert(object.getNameFunc()());\n</code></pre>\n</li>\n<li>示例02：<pre><code class="lang-js">　　var name = &quot;The Window&quot;;\n　　var object = {\n　　　　name : &quot;My Object&quot;,\n　　　　getNameFunc : function(){\n　　　　　　var that = this;\n　　　　　　return function(){\n　　　　　　　　return that.name;\n　　　　　　};\n　　　　}\n　　};\n　　alert(object.getNameFunc()());\n</code></pre>\n看完这道题，就希望大家将this和闭包分开，不要给自己找麻烦？</li>\n</ul>\n'}}],error:null,serverRendered:!0}</script><script defer src="/nuxt-blog/_nuxt/vendor.bundle.js"></script><script defer src="/nuxt-blog/_nuxt/nuxt.bundle.js"></script>

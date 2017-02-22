@@ -1,84 +1,91 @@
-<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><base href="/nuxt-blog/"><link href="/nuxt-blog/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-739c3fb7 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/nuxt-blog/"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/nuxt-blog/">Home</a><li><a href="/nuxt-blog/page/1">Posts</a><li><a href="/nuxt-blog/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><a href="/nuxt-blog/posts/10"><h2>再谈对闭包的理解</h2></a></div><div class="post-meta"><span>js、pl</span><span>2016-03-05</span></div><div><div><hr><h3 id="-">闭包只是为了实现词法作用域而用到的一种数据结构而已</h3><p>先从阮一峰09年写的一篇关于闭包的文章开始<a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html">(原文地址)</a>文中说"可以把闭包理解为就是能够读取其他函数内部变量的函数,因为js中,只有函数内部的子函数才能读取局部变量，因此也可以把闭包定义在一个函数内部的函数。所以闭包本质就是将函数内部和函数外部连接起来的一座桥梁"。<p>毕竟不是专业学习js的，也不是程序语言方面的专家，在这里就不去计较了，下文会给出更完整的闭包说明。(PS:个人还是比较欣赏阮一峰写的文章的，能将一些概念讲得通俗易懂)<p>最后还留下了一个思考题<ul><li>示例01：<pre><code class="lang-js">　　var name = "The Window";
-　　var object = {
-　　　　name : "My Object",
-　　　　getNameFunc : function(){
-　　　　　　return function(){
-　　　　　　　　return this.name;
-　　　　　　};
-　　　　}
-　　};
-　　alert(object.getNameFunc()());
-</code></pre><li>示例02：<pre><code class="lang-js">　　var name = "The Window";
-　　var object = {
-　　　　name : "My Object",
-　　　　getNameFunc : function(){
-　　　　　　var that = this;
-　　　　　　return function(){
-　　　　　　　　return that.name;
-　　　　　　};
-　　　　}
-　　};
-　　alert(object.getNameFunc()());
-</code></pre>看完这道题，就希望大家将this和闭包分开，不要给自己找麻烦？</ul><p>在开始说闭包之前，需要理解好以下的概念：<ul><li>词法作用域(静态作用域)<li>函数上下文</ul><p><a href="http://yangxiaofu.com/2016/01/25/js/closure-this/">之前简单的提过</a>,词法作用域简单的理解就是函数的上下文是在声明是确定的，而不是在调用时确定的。这里不想对这两个名词作过多的解释，我们知道js/ruby/python等主流的语言都是词法作用域就好，因为与之相对的动态作用域有许多的问题，所以现在的语言基本都是词法作用域的。<p>函数上下文就简单的理解为函数执行的环境好了，在这个环境中保存了函数执行所需的变量。<h3 id="javascript-">JavaScript权威指南第六版关于闭包的说明</h3><blockquote><p>JavaScript采用词法作用域，也就是说函数的执行依赖于变量的作用域，这个作用域是在函数定义时决定的，而不是函数调用时决定的。为了实现词法作用域，JavaScript函数对象的内部状态不仅包含函数的代码逻辑，还必须引用当前的作用域链。函数对象可以通过作用域链相互关联起来，函数体内部的变量都可以保存在函数作用域内，这种特性在计算机科学文献中称为"闭包"。<p>当定义一个函数时，它实际上保存了一个作用域链。当调用这个函数时，它创建 一个新的对象来存储它的局部变量，并将这个对象添加到保存的作用域链上。</blockquote><p>(闭包可以简单的理解为函数用来存储它的局部变量的对象，这个对象我们来说是不可见的，是js解释器实现的过程中才会用到的。每一个函数都会有这样的一个对象，作用域链则是这些对象之间的关系。)<p>"闭包"这个术语的来源：指函数变量可以被隐藏于作用域链之内，因此看起来是函数将变量"包裹"了起来。<p>看文字可能会比较绕，下面是书中的一个例子：<pre><code class="lang-js">var scope = "global scope";            /*全局变量*/
-function checkscope(){
-    var scope = "local scope";        /*局部变量*/
-    function f(){return scope;}
-    return f();
-}
-checkscope();                        /*=>"local scope"*/
-</code></pre><pre><code class="lang-js">var scope = "global scope";            /*全局变量*/
-function checkscope(){
-    var scope = "local scope";        /*局部变量*/
-    function f(){return scope;}
-    return f;
-}
-checkscope()();                        /*=>"local scope"*/
-</code></pre><p>checkscope最后的返回值都是一样的，即"local scope"。<p>上面两个例子的不同之处就是函数f执行的地方不同，一个在checkscope这个作用域里调用的(每一个函数都是一个作用域)，一个在全局作用域里调用的。回忆之前说的，函数调用时的上下文或者说作用域是在声明时确定的，所以与调用的位置无关，即f函数的调用位置虽然不同，调用的环境虽然不同，但最终的结果都是一样的。<p>说到这里，闭包就说得差不多了，回过头来看一下常规的对于闭包的理解：<blockquote><p>通过返回函数的形式取得函数的局部变量。</blockquote><p>这种说法本身没有错，但它只是闭包的一种表现形式，<p>比如将上例进行下更改：<pre><code class="lang-js">var scope = "global scope";            /*全局变量*/
-function checkscope(fn){
-    var scope = "local scope";        /*局部变量*/
-    function f(){return scope;}
-    fn(f);
-}
-checkscope(function(func){
-    var scope = "func scope";
-    return func();
-});                                    /*=>"local scope"*/
-</code></pre><p>改成类似回调的执行方式，结果还是一样的，注意结果并不是func scope，但是并没有返回f函数这一说，难道这就不是闭包了吗？(当然这里有点扣字眼)<h3 id="-">复杂点的闭包题</h3><p>真不知道按照前面那种简单的理解该怎么来理解这道题，但是如果理解了闭包的实质，那么就会发现其实很简单。<pre><code class="lang-js">function fun(n,o) {
-  console.log(o)
-  return {
-    fun:function(m){
-      return fun(m,n);
-    }
-  };
-}
-var a = fun(0);  a.fun(1);  a.fun(2);  a.fun(3);    /*undefined,?,?,?*/
-var b = fun(0).fun(1).fun(2).fun(3);                /*undefined,?,?,?*/
-var c = fun(0).fun(1);  c.fun(2);  c.fun(3);        /*undefined,?,?,?*/
+<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><base href="/nuxt-blog/"><link href="/nuxt-blog/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-739c3fb7 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/nuxt-blog/"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/nuxt-blog/">Home</a><li><a href="/nuxt-blog/page/1">Posts</a><li><a href="/nuxt-blog/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><a href="/nuxt-blog/posts/2"><h2>jQuery is not must for us——事件</h2></a></div><div class="post-meta"><span>jquery</span><span>2015-11-25</span></div><div><div><hr><p>在这里我们将对比Web提供的事件API与jQuery 事件函数间的差别。jQuery给我们提供了非常好的事件API,但理解好底层是如何实现的可以帮助我们更好的使用jQuery,同时遇到错误也能修复。<ul><li>发送DOM事件<li>发送自定义事件<li>监听事件<li>移除事件句柄<li>修改事件<li>事件预测<li>键盘事件<li>鼠标事件<li>浏览器加载事件<li>老式浏览器的支持</ul><h2 id="dom-">DOM事件发送</h2><p>以点击事件为例： focus/blur/submit语法相同<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$(a).click();
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">a.click();
+</code></pre><h2 id="-">自定义事件</h2><h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">/*触发一个事件(custom-event)*/
+$('element').trigger('custom-event');
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">var event = document.createEvent('Event');
+event.initEvent('custom-event', true, true); /*第二和第三参数说明属于冒泡事件并可取消默认事件*/
+someElement.dispatchEvent(event);    /*发起事件*/
 
-/*
-* 问:三行a,b,c的输出分别是什么？
-* 提示:形参也属于局部变量，包含在作用域中
-*/
-</code></pre><p>这里就不给出答案了，自行运行即可知道结果。<h3 id="-this">说说this</h3><p>想起最开始时的那个思考题了吗？与闭包就没什么关系(注：任何一个函数其实都用到了闭包，但我们暂且考虑两层以及两层以上的嵌套情况，未嵌套情况下因为使用的都是全局作用域，结果应该是很直观的)。this一般用来代表函数的调用对象，它和上下文对象并不是同一个，上下文对象对我们来说是不可见的，除了全局作用域。<ul><li>示例01：<pre><code class="lang-js">　　var name = "The Window";
-　　var object = {
-　　　　name : "My Object",
-　　　　getNameFunc : function(){
-　　　　　　return function(){
-　　　　　　　　return this.name;
-　　　　　　};
-　　　　}
-　　};
-　　alert(object.getNameFunc()());        /*The Window*/
-</code></pre><li>示例02：<pre><code class="lang-js">　　var name = "The Window";
-　　var object = {
-　　　　name : "My Object",
-　　　　getNameFunc : function(){
-　　　　　　var that = this;
-　　　　　　return function(){
-　　　　　　　　return that.name;
-　　　　　　};
-　　　　}
-　　};
- var that = {name: 'xiaofu'};            /*干扰项*/ 
-　　alert(object.getNameFunc()());        /*My Object*/
-</code></pre></ul><p>我们再来看一下题目，示例01输出的是"The Window",示例02输出的是"My Object"。<p>说明： 示例01最终执行的是 function(){return this.name}，因为没有显示指明调用对象，所以其this执行全局对象。 示例02先调用object.getNameFunc(),因为显示的指定了调用对象，所以内部的this是object(注：这里说的是this指向的问题，还没有说闭包)，接着执行function (){return that.name}，这个函数在getNameFunc这个函数作用域中声明的，所以它调用的时候使用的是这个作用域，即得到var that = this;的这个that;而不是外面的that。<h3 id="-">作用域链不等同于原型链</h3><p>真不知道这两个不相关的东西怎么会被等同起来看待，以后谁告诉我它们是同一个东西，我就想问了，ruby、python这种没有原型概念的语言难道就没有作用域链了吗？<p>更有甚者将变量声明提升和闭包混在一起，也是醉了。<h3 id="-this-">如果无法理解，但记住下面的一点使用技巧，那么遇到闭包和this时也能够轻松的应对</h3><ul><li>闭包：函数执行时变量的获取从声明的作用域处去获取(注意链式关系，当前没有就往父级找，知道全局作用域)<li>this：显示指定调用者则this就指向谁，如未指定则为全局对象</ul></div></div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"再谈对闭包的理解",date:"2016-03-05T15:06:36.000Z",tags:["js","pl"],id:"10",createTime:"2016-03-05",url:"2016-03-05-再谈对闭包的理解",strTag:"js、pl"},content:'<hr>\n<h3 id="-">闭包只是为了实现词法作用域而用到的一种数据结构而已</h3>\n<p>先从阮一峰09年写的一篇关于闭包的文章开始<a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html">(原文地址)</a>文中说&quot;可以把闭包理解为就是能够读取其他函数内部变量的函数,因为js中,只有函数内部的子函数才能读取局部变量，因此也可以把闭包定义在一个函数内部的函数。所以闭包本质就是将函数内部和函数外部连接起来的一座桥梁&quot;。</p>\n<p>毕竟不是专业学习js的，也不是程序语言方面的专家，在这里就不去计较了，下文会给出更完整的闭包说明。(PS:个人还是比较欣赏阮一峰写的文章的，能将一些概念讲得通俗易懂)</p>\n<p>最后还留下了一个思考题</p>\n<ul>\n<li>示例01：<pre><code class="lang-js">　　var name = &quot;The Window&quot;;\n　　var object = {\n　　　　name : &quot;My Object&quot;,\n　　　　getNameFunc : function(){\n　　　　　　return function(){\n　　　　　　　　return this.name;\n　　　　　　};\n　　　　}\n　　};\n　　alert(object.getNameFunc()());\n</code></pre>\n</li>\n<li>示例02：<pre><code class="lang-js">　　var name = &quot;The Window&quot;;\n　　var object = {\n　　　　name : &quot;My Object&quot;,\n　　　　getNameFunc : function(){\n　　　　　　var that = this;\n　　　　　　return function(){\n　　　　　　　　return that.name;\n　　　　　　};\n　　　　}\n　　};\n　　alert(object.getNameFunc()());\n</code></pre>\n看完这道题，就希望大家将this和闭包分开，不要给自己找麻烦？</li>\n</ul>\n<p>在开始说闭包之前，需要理解好以下的概念：</p>\n<ul>\n<li>词法作用域(静态作用域)</li>\n<li>函数上下文</li>\n</ul>\n<p><a href="http://yangxiaofu.com/2016/01/25/js/closure-this/">之前简单的提过</a>,词法作用域简单的理解就是函数的上下文是在声明是确定的，而不是在调用时确定的。这里不想对这两个名词作过多的解释，我们知道js/ruby/python等主流的语言都是词法作用域就好，因为与之相对的动态作用域有许多的问题，所以现在的语言基本都是词法作用域的。</p>\n<p>函数上下文就简单的理解为函数执行的环境好了，在这个环境中保存了函数执行所需的变量。</p>\n<h3 id="javascript-">JavaScript权威指南第六版关于闭包的说明</h3>\n<blockquote>\n<p>JavaScript采用词法作用域，也就是说函数的执行依赖于变量的作用域，这个作用域是在函数定义时决定的，而不是函数调用时决定的。为了实现词法作用域，JavaScript函数对象的内部状态不仅包含函数的代码逻辑，还必须引用当前的作用域链。函数对象可以通过作用域链相互关联起来，函数体内部的变量都可以保存在函数作用域内，这种特性在计算机科学文献中称为&quot;闭包&quot;。</p>\n<p>当定义一个函数时，它实际上保存了一个作用域链。当调用这个函数时，它创建\n一个新的对象来存储它的局部变量，并将这个对象添加到保存的作用域链上。</p>\n</blockquote>\n<p>(闭包可以简单的理解为函数用来存储它的局部变量的对象，这个对象我们来说是不可见的，是js解释器实现的过程中才会用到的。每一个函数都会有这样的一个对象，作用域链则是这些对象之间的关系。)</p>\n<p>&quot;闭包&quot;这个术语的来源：指函数变量可以被隐藏于作用域链之内，因此看起来是函数将变量&quot;包裹&quot;了起来。</p>\n<p>看文字可能会比较绕，下面是书中的一个例子：</p>\n<pre><code class="lang-js">var scope = &quot;global scope&quot;;            /*全局变量*/\nfunction checkscope(){\n    var scope = &quot;local scope&quot;;        /*局部变量*/\n    function f(){return scope;}\n    return f();\n}\ncheckscope();                        /*=&gt;&quot;local scope&quot;*/\n</code></pre>\n<pre><code class="lang-js">var scope = &quot;global scope&quot;;            /*全局变量*/\nfunction checkscope(){\n    var scope = &quot;local scope&quot;;        /*局部变量*/\n    function f(){return scope;}\n    return f;\n}\ncheckscope()();                        /*=&gt;&quot;local scope&quot;*/\n</code></pre>\n<p>checkscope最后的返回值都是一样的，即&quot;local scope&quot;。</p>\n<p>上面两个例子的不同之处就是函数f执行的地方不同，一个在checkscope这个作用域里调用的(每一个函数都是一个作用域)，一个在全局作用域里调用的。回忆之前说的，函数调用时的上下文或者说作用域是在声明时确定的，所以与调用的位置无关，即f函数的调用位置虽然不同，调用的环境虽然不同，但最终的结果都是一样的。</p>\n<p>说到这里，闭包就说得差不多了，回过头来看一下常规的对于闭包的理解：</p>\n<blockquote>\n<p>通过返回函数的形式取得函数的局部变量。</p>\n</blockquote>\n<p>这种说法本身没有错，但它只是闭包的一种表现形式，</p>\n<p>比如将上例进行下更改：</p>\n<pre><code class="lang-js">var scope = &quot;global scope&quot;;            /*全局变量*/\nfunction checkscope(fn){\n    var scope = &quot;local scope&quot;;        /*局部变量*/\n    function f(){return scope;}\n    fn(f);\n}\ncheckscope(function(func){\n    var scope = &quot;func scope&quot;;\n    return func();\n});                                    /*=&gt;&quot;local scope&quot;*/\n</code></pre>\n<p>改成类似回调的执行方式，结果还是一样的，注意结果并不是func scope，但是并没有返回f函数这一说，难道这就不是闭包了吗？(当然这里有点扣字眼)</p>\n<h3 id="-">复杂点的闭包题</h3>\n<p>真不知道按照前面那种简单的理解该怎么来理解这道题，但是如果理解了闭包的实质，那么就会发现其实很简单。</p>\n<pre><code class="lang-js">function fun(n,o) {\n  console.log(o)\n  return {\n    fun:function(m){\n      return fun(m,n);\n    }\n  };\n}\nvar a = fun(0);  a.fun(1);  a.fun(2);  a.fun(3);    /*undefined,?,?,?*/\nvar b = fun(0).fun(1).fun(2).fun(3);                /*undefined,?,?,?*/\nvar c = fun(0).fun(1);  c.fun(2);  c.fun(3);        /*undefined,?,?,?*/\n\n/*\n* 问:三行a,b,c的输出分别是什么？\n* 提示:形参也属于局部变量，包含在作用域中\n*/\n</code></pre>\n<p>这里就不给出答案了，自行运行即可知道结果。</p>\n<h3 id="-this">说说this</h3>\n<p>想起最开始时的那个思考题了吗？与闭包就没什么关系(注：任何一个函数其实都用到了闭包，但我们暂且考虑两层以及两层以上的嵌套情况，未嵌套情况下因为使用的都是全局作用域，结果应该是很直观的)。this一般用来代表函数的调用对象，它和上下文对象并不是同一个，上下文对象对我们来说是不可见的，除了全局作用域。</p>\n<ul>\n<li>示例01：<pre><code class="lang-js">　　var name = &quot;The Window&quot;;\n　　var object = {\n　　　　name : &quot;My Object&quot;,\n　　　　getNameFunc : function(){\n　　　　　　return function(){\n　　　　　　　　return this.name;\n　　　　　　};\n　　　　}\n　　};\n　　alert(object.getNameFunc()());        /*The Window*/\n</code></pre>\n</li>\n<li>示例02：<pre><code class="lang-js">　　var name = &quot;The Window&quot;;\n　　var object = {\n　　　　name : &quot;My Object&quot;,\n　　　　getNameFunc : function(){\n　　　　　　var that = this;\n　　　　　　return function(){\n　　　　　　　　return that.name;\n　　　　　　};\n　　　　}\n　　};\n var that = {name: &#39;xiaofu&#39;};            /*干扰项*/ \n　　alert(object.getNameFunc()());        /*My Object*/\n</code></pre>\n</li>\n</ul>\n<p>我们再来看一下题目，示例01输出的是&quot;The Window&quot;,示例02输出的是&quot;My Object&quot;。</p>\n<p>说明：\n示例01最终执行的是 function(){return this.name}，因为没有显示指明调用对象，所以其this执行全局对象。\n示例02先调用object.getNameFunc(),因为显示的指定了调用对象，所以内部的this是object(注：这里说的是this指向的问题，还没有说闭包)，接着执行function (){return that.name}，这个函数在getNameFunc这个函数作用域中声明的，所以它调用的时候使用的是这个作用域，即得到var that = this;的这个that;而不是外面的that。</p>\n<h3 id="-">作用域链不等同于原型链</h3>\n<p>真不知道这两个不相关的东西怎么会被等同起来看待，以后谁告诉我它们是同一个东西，我就想问了，ruby、python这种没有原型概念的语言难道就没有作用域链了吗？</p>\n<p>更有甚者将变量声明提升和闭包混在一起，也是醉了。</p>\n<h3 id="-this-">如果无法理解，但记住下面的一点使用技巧，那么遇到闭包和this时也能够轻松的应对</h3>\n<ul>\n<li>闭包：函数执行时变量的获取从声明的作用域处去获取(注意链式关系，当前没有就往父级找，知道全局作用域)</li>\n<li>this：显示指定调用者则this就指向谁，如未指定则为全局对象</li>\n</ul>\n',summary:'<hr>\n<h3 id="-">闭包只是为了实现词法作用域而用到的一种数据结构而已</h3>\n<p>先从阮一峰09年写的一篇关于闭包的文章开始<a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html">(原文地址)</a>文中说&quot;可以把闭包理解为就是能够读取其他函数内部变量的函数,因为js中,只有函数内部的子函数才能读取局部变量，因此也可以把闭包定义在一个函数内部的函数。所以闭包本质就是将函数内部和函数外部连接起来的一座桥梁&quot;。</p>\n<p>毕竟不是专业学习js的，也不是程序语言方面的专家，在这里就不去计较了，下文会给出更完整的闭包说明。(PS:个人还是比较欣赏阮一峰写的文章的，能将一些概念讲得通俗易懂)</p>\n<p>最后还留下了一个思考题</p>\n<ul>\n<li>示例01：<pre><code class="lang-js">　　var name = &quot;The Window&quot;;\n　　var object = {\n　　　　name : &quot;My Object&quot;,\n　　　　getNameFunc : function(){\n　　　　　　return function(){\n　　　　　　　　return this.name;\n　　　　　　};\n　　　　}\n　　};\n　　alert(object.getNameFunc()());\n</code></pre>\n</li>\n<li>示例02：<pre><code class="lang-js">　　var name = &quot;The Window&quot;;\n　　var object = {\n　　　　name : &quot;My Object&quot;,\n　　　　getNameFunc : function(){\n　　　　　　var that = this;\n　　　　　　return function(){\n　　　　　　　　return that.name;\n　　　　　　};\n　　　　}\n　　};\n　　alert(object.getNameFunc()());\n</code></pre>\n看完这道题，就希望大家将this和闭包分开，不要给自己找麻烦？</li>\n</ul>\n'}}],error:null,serverRendered:!0}</script><script defer src="/nuxt-blog/_nuxt/vendor.bundle.js"></script><script defer src="/nuxt-blog/_nuxt/nuxt.bundle.js"></script>
+/*ie not support*/
+var event = new CustomEvent('custom-event', {bubbles: true, cancelable: true});
+someElement.dispatchEvent(event);
+</code></pre><h2 id="-">事件监听</h2><h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$('element').on('click', function(){
+    /*当点击的时候做点什么*、
+})
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">/*ie 9*/
+element.addEventLister('click', function(){
+    /*当点击的时候做点什么*、
+})
+</code></pre><h2 id="-">移除事件</h2><h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">/*jquery还提供了一个移除某元素上所有事件的api*/
+$('element').off('click', myEventHander);
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">elment.removeEventLister('click', myEventHander);
+</code></pre><h2 id="-">事件修改</h2><p>阻止事件冒泡<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$(element).on('event', function(event){
+    event.stopPropagation();
+})
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">element.addEventListener('event', function(event){
+    event.stopPropagation();
+})
+</code></pre><p>阻止其它事件对当前元素的影响<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$(element).on('event', function(event){
+    event.stopImmediatePropagation();
+})
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">element.addEventListener('event', function(event){
+    event.stopImmediatePropagation();
+})
+</code></pre><p>阻止浏览器默认事件，比如一个a标签的跳转事件<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$(Aelement).on('click', function(event){
+    event.stopPropagation();
+})
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">Aelement.addEventListener('click', function(event){
+    event.preventDefault();
+})
+</code></pre><h2 id="-">预测事件</h2><pre><code class="lang-html">&lt;ul id="my-list">
+    &lt;li>foo &lt;button>x&lt;/button>&lt;/li>
+    &lt;li>bar &lt;button>x&lt;/button>&lt;/li>
+    &lt;li>abc &lt;button>x&lt;/button>&lt;/li>
+    &lt;li>123 &lt;button>x&lt;/button>&lt;/li>
+&lt;/ul>
+</code></pre><p>点击按钮的时候删除其li标签<h3 id="jquery">jquery</h3><pre><code class="lang-javascript">$('#my-list').on('click', 'BUTTON', function() {
+    $(this).parent().remove();
+});
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">document.getElementById('my-list').addEventListener('click', function(event) {
+    var clickedEl = event.target;
+    if(clickedEl.tagName === 'BUTTON') {
+       var listItem = clickedEl.parentNode;
+       listItem.parentNode.removeChild(listItem);
+    }
+});
+</code></pre><h2 id="-">键盘事件</h2><h3 id="jquery">jquery</h3><pre><code class="lang-javascript">$(document).keydown(function(event){
+    if(event.ctrlkey && event.which === 72){
+        /*ctrl+H*/
+    }
+})
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.which === 72) {
+        /*ctrl+H*/
+    }
+});
+</code></pre><h2 id="-">鼠标事件</h2><h3 id="jquery">jquery</h3><pre><code class="lang-javascript">$('element').hover(function hoverIn(){
+
+},
+function hoverOut(){
+
+})
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">someEl.addEventListener('mouseover', function() {
+});
+
+someEl.addEventListener('mouseout', function() {
+});
+</code></pre><h2 id="-">浏览器加载事件</h2><ul><li>文档加载<li>样式加载<li>图片加载<li>iframes加载</ul><h3 id="jquery">jquery</h3><pre><code class="lang-javascript">$(window).load(function(){
+    /*页面加载并渲染完毕*/
+})
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">window.addEventListener('load', function(){
+    /*页面加载并渲染完毕*/
+})
+</code></pre><p>文档加载完毕但未渲染<h3 id="jquery">jquery</h3><pre><code class="lang-javascript">$(document).ready(function(){
+    /*文档加载完毕*/
+})
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">document.addEventListener('DOMContentLoaded',function(){
+
+})
+</code></pre><h3 id="jquery">jquery</h3><pre><code class="lang-javascript">
+</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">
+</code></pre></div></div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"jQuery is not must for us——事件",date:"2015-11-25T12:40:32.000Z",tags:"jquery",archives:"pl",id:"2",createTime:"2015-11-25",url:"2015-11-25-jQuery is not must for us——事件",strTag:"jquery"},content:'<hr>\n<p>在这里我们将对比Web提供的事件API与jQuery 事件函数间的差别。jQuery给我们提供了非常好的事件API,但理解好底层是如何实现的可以帮助我们更好的使用jQuery,同时遇到错误也能修复。</p>\n<ul>\n<li>发送DOM事件</li>\n<li>发送自定义事件</li>\n<li>监听事件</li>\n<li>移除事件句柄</li>\n<li>修改事件</li>\n<li>事件预测</li>\n<li>键盘事件</li>\n<li>鼠标事件</li>\n<li>浏览器加载事件</li>\n<li>老式浏览器的支持</li>\n</ul>\n<h2 id="dom-">DOM事件发送</h2>\n<p>以点击事件为例：\nfocus/blur/submit语法相同</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(a).click();\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">a.click();\n</code></pre>\n<h2 id="-">自定义事件</h2>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">/*触发一个事件(custom-event)*/\n$(&#39;element&#39;).trigger(&#39;custom-event&#39;);\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">var event = document.createEvent(&#39;Event&#39;);\nevent.initEvent(&#39;custom-event&#39;, true, true); /*第二和第三参数说明属于冒泡事件并可取消默认事件*/\nsomeElement.dispatchEvent(event);    /*发起事件*/\n\n/*ie not support*/\nvar event = new CustomEvent(&#39;custom-event&#39;, {bubbles: true, cancelable: true});\nsomeElement.dispatchEvent(event);\n</code></pre>\n<h2 id="-">事件监听</h2>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(&#39;element&#39;).on(&#39;click&#39;, function(){\n    /*当点击的时候做点什么*、\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">/*ie 9*/\nelement.addEventLister(&#39;click&#39;, function(){\n    /*当点击的时候做点什么*、\n})\n</code></pre>\n<h2 id="-">移除事件</h2>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">/*jquery还提供了一个移除某元素上所有事件的api*/\n$(&#39;element&#39;).off(&#39;click&#39;, myEventHander);\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">elment.removeEventLister(&#39;click&#39;, myEventHander);\n</code></pre>\n<h2 id="-">事件修改</h2>\n<p>阻止事件冒泡</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(element).on(&#39;event&#39;, function(event){\n    event.stopPropagation();\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">element.addEventListener(&#39;event&#39;, function(event){\n    event.stopPropagation();\n})\n</code></pre>\n<p>阻止其它事件对当前元素的影响</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(element).on(&#39;event&#39;, function(event){\n    event.stopImmediatePropagation();\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">element.addEventListener(&#39;event&#39;, function(event){\n    event.stopImmediatePropagation();\n})\n</code></pre>\n<p>阻止浏览器默认事件，比如一个a标签的跳转事件</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(Aelement).on(&#39;click&#39;, function(event){\n    event.stopPropagation();\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">Aelement.addEventListener(&#39;click&#39;, function(event){\n    event.preventDefault();\n})\n</code></pre>\n<h2 id="-">预测事件</h2>\n<pre><code class="lang-html">&lt;ul id=&quot;my-list&quot;&gt;\n    &lt;li&gt;foo &lt;button&gt;x&lt;/button&gt;&lt;/li&gt;\n    &lt;li&gt;bar &lt;button&gt;x&lt;/button&gt;&lt;/li&gt;\n    &lt;li&gt;abc &lt;button&gt;x&lt;/button&gt;&lt;/li&gt;\n    &lt;li&gt;123 &lt;button&gt;x&lt;/button&gt;&lt;/li&gt;\n&lt;/ul&gt;\n</code></pre>\n<p>点击按钮的时候删除其li标签</p>\n<h3 id="jquery">jquery</h3>\n<pre><code class="lang-javascript">$(&#39;#my-list&#39;).on(&#39;click&#39;, &#39;BUTTON&#39;, function() {\n    $(this).parent().remove();\n});\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">document.getElementById(&#39;my-list&#39;).addEventListener(&#39;click&#39;, function(event) {\n    var clickedEl = event.target;\n    if(clickedEl.tagName === &#39;BUTTON&#39;) {\n       var listItem = clickedEl.parentNode;\n       listItem.parentNode.removeChild(listItem);\n    }\n});\n</code></pre>\n<h2 id="-">键盘事件</h2>\n<h3 id="jquery">jquery</h3>\n<pre><code class="lang-javascript">$(document).keydown(function(event){\n    if(event.ctrlkey &amp;&amp; event.which === 72){\n        /*ctrl+H*/\n    }\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">document.addEventListener(&#39;keydown&#39;, function(event) {\n    if (event.ctrlKey &amp;&amp; event.which === 72) {\n        /*ctrl+H*/\n    }\n});\n</code></pre>\n<h2 id="-">鼠标事件</h2>\n<h3 id="jquery">jquery</h3>\n<pre><code class="lang-javascript">$(&#39;element&#39;).hover(function hoverIn(){\n\n},\nfunction hoverOut(){\n\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">someEl.addEventListener(&#39;mouseover&#39;, function() {\n});\n\nsomeEl.addEventListener(&#39;mouseout&#39;, function() {\n});\n</code></pre>\n<h2 id="-">浏览器加载事件</h2>\n<ul>\n<li>文档加载</li>\n<li>样式加载</li>\n<li>图片加载</li>\n<li>iframes加载</li>\n</ul>\n<h3 id="jquery">jquery</h3>\n<pre><code class="lang-javascript">$(window).load(function(){\n    /*页面加载并渲染完毕*/\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">window.addEventListener(&#39;load&#39;, function(){\n    /*页面加载并渲染完毕*/\n})\n</code></pre>\n<p>文档加载完毕但未渲染</p>\n<h3 id="jquery">jquery</h3>\n<pre><code class="lang-javascript">$(document).ready(function(){\n    /*文档加载完毕*/\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">document.addEventListener(&#39;DOMContentLoaded&#39;,function(){\n\n})\n</code></pre>\n<h3 id="jquery">jquery</h3>\n<pre><code class="lang-javascript">\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">\n</code></pre>\n',summary:"<hr>\n<p>在这里我们将对比Web提供的事件API与jQuery 事件函数间的差别。jQuery给我们提供了非常好的事件API,但理解好底层是如何实现的可以帮助我们更好的使用jQuery,同时遇到错误也能修复。</p>\n<ul>\n<li>发送DOM事件</li>\n<li>发送自定义事件</li>\n<li>监听事件</li>\n<li>移除事件句柄</li>\n<li>修改事件</li>\n<li>事件预测</li>\n<li>键盘事件</li>\n<li>鼠标事件</li>\n<li>浏览器加载事件</li>\n<li>老式浏览器的支持</li>\n</ul>\n"}}],error:null,serverRendered:!0}</script><script defer src="/nuxt-blog/_nuxt/vendor.bundle.js"></script><script defer src="/nuxt-blog/_nuxt/nuxt.bundle.js"></script>

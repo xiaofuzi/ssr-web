@@ -1,91 +1,23 @@
-<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><base href="/nuxt-blog/"><link href="/nuxt-blog/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-739c3fb7 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/nuxt-blog/"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/nuxt-blog/">Home</a><li><a href="/nuxt-blog/page/1">Posts</a><li><a href="/nuxt-blog/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><a href="/nuxt-blog/posts/36"><h2>jQuery is not must for us——事件</h2></a></div><div class="post-meta"><span>jquery</span><span>2015-11-25</span></div><div><div><hr><p>在这里我们将对比Web提供的事件API与jQuery 事件函数间的差别。jQuery给我们提供了非常好的事件API,但理解好底层是如何实现的可以帮助我们更好的使用jQuery,同时遇到错误也能修复。<ul><li>发送DOM事件<li>发送自定义事件<li>监听事件<li>移除事件句柄<li>修改事件<li>事件预测<li>键盘事件<li>鼠标事件<li>浏览器加载事件<li>老式浏览器的支持</ul><h2 id="dom-">DOM事件发送</h2><p>以点击事件为例： focus/blur/submit语法相同<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$(a).click();
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">a.click();
-</code></pre><h2 id="-">自定义事件</h2><h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">/*触发一个事件(custom-event)*/
-$('element').trigger('custom-event');
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">var event = document.createEvent('Event');
-event.initEvent('custom-event', true, true); /*第二和第三参数说明属于冒泡事件并可取消默认事件*/
-someElement.dispatchEvent(event);    /*发起事件*/
+<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><base href="/nuxt-blog/"><link href="/nuxt-blog/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-739c3fb7 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/nuxt-blog/"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/nuxt-blog/">Home</a><li><a href="/nuxt-blog/page/1">Posts</a><li><a href="/nuxt-blog/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><a href="/nuxt-blog/posts/7"><h2>javascript 闭包、this</h2></a></div><div class="post-meta"><span>js、pl</span><span>2016-01-25</span></div><div><div><hr><blockquote><p>闭包其实很好理解，但是由于经常把this和闭包绑在一起，从而加大了理解的难度，如果将他们分开考虑，那就清晰多了。</blockquote><h2 id="-">闭包</h2><p>闭包并不是js首创，在许多语言中都支持闭包，如schemer、ruby等。如果没有闭包，像js这样的支持高阶函数特性的语言将是一个噩梦。<ul><li>静态作用域<li>动态作用域</ul><pre><code class="lang-js">var name = "xiaofu";
+var person = function(lastname){
+    var name = 'yang';
 
-/*ie not support*/
-var event = new CustomEvent('custom-event', {bubbles: true, cancelable: true});
-someElement.dispatchEvent(event);
-</code></pre><h2 id="-">事件监听</h2><h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$('element').on('click', function(){
-    /*当点击的时候做点什么*、
-})
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">/*ie 9*/
-element.addEventLister('click', function(){
-    /*当点击的时候做点什么*、
-})
-</code></pre><h2 id="-">移除事件</h2><h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">/*jquery还提供了一个移除某元素上所有事件的api*/
-$('element').off('click', myEventHander);
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">elment.removeEventLister('click', myEventHander);
-</code></pre><h2 id="-">事件修改</h2><p>阻止事件冒泡<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$(element).on('event', function(event){
-    event.stopPropagation();
-})
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">element.addEventListener('event', function(event){
-    event.stopPropagation();
-})
-</code></pre><p>阻止其它事件对当前元素的影响<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$(element).on('event', function(event){
-    event.stopImmediatePropagation();
-})
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">element.addEventListener('event', function(event){
-    event.stopImmediatePropagation();
-})
-</code></pre><p>阻止浏览器默认事件，比如一个a标签的跳转事件<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$(Aelement).on('click', function(event){
-    event.stopPropagation();
-})
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">Aelement.addEventListener('click', function(event){
-    event.preventDefault();
-})
-</code></pre><h2 id="-">预测事件</h2><pre><code class="lang-html">&lt;ul id="my-list">
-    &lt;li>foo &lt;button>x&lt;/button>&lt;/li>
-    &lt;li>bar &lt;button>x&lt;/button>&lt;/li>
-    &lt;li>abc &lt;button>x&lt;/button>&lt;/li>
-    &lt;li>123 &lt;button>x&lt;/button>&lt;/li>
-&lt;/ul>
-</code></pre><p>点击按钮的时候删除其li标签<h3 id="jquery">jquery</h3><pre><code class="lang-javascript">$('#my-list').on('click', 'BUTTON', function() {
-    $(this).parent().remove();
-});
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">document.getElementById('my-list').addEventListener('click', function(event) {
-    var clickedEl = event.target;
-    if(clickedEl.tagName === 'BUTTON') {
-       var listItem = clickedEl.parentNode;
-       listItem.parentNode.removeChild(listItem);
+    function personName(){
+        return name + lastname;
     }
-});
-</code></pre><h2 id="-">键盘事件</h2><h3 id="jquery">jquery</h3><pre><code class="lang-javascript">$(document).keydown(function(event){
-    if(event.ctrlkey && event.which === 72){
-        /*ctrl+H*/
+    return personName;
+}
+var pName = person();
+pName("xiaoming");
+</code></pre><p>js是函数作用域的，即一个function就是一个作用域，所以personName在person这个函数的作用域里面。但是调用的是在这个作用域的外面，那么当personName执行的时候，它里面的name取的是person这个作用域还是最外层的作用域呢？<p>如果是静态作用域则调用的是person里面的 name, 如果是动态作用域则调用的是外层的name("xiaofu");而不是"yang"。<p>而闭包就是用来实现静态作用域的一种方式，即通过闭包将函数和它声明时的作用域保存下来，这样在调用的时候取到的就是声明时所在的作用域而不是调用时的作用域。<h2 id="this">this</h2><p>this则与变量有点不同，即this采用的是类似于动态作用域的情况。js里面一切都是对象，所以函数也都是某个对象的方法，如果没有显示指定则是全局对象。<pre><code class="lang-js">var person = {
+    fullname: function{
+        console.log(this);
+    },
+    printAge: function(){
+        console.log(this);
     }
-})
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">document.addEventListener('keydown', function(event) {
-    if (event.ctrlKey && event.which === 72) {
-        /*ctrl+H*/
-    }
-});
-</code></pre><h2 id="-">鼠标事件</h2><h3 id="jquery">jquery</h3><pre><code class="lang-javascript">$('element').hover(function hoverIn(){
-
-},
-function hoverOut(){
-
-})
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">someEl.addEventListener('mouseover', function() {
-});
-
-someEl.addEventListener('mouseout', function() {
-});
-</code></pre><h2 id="-">浏览器加载事件</h2><ul><li>文档加载<li>样式加载<li>图片加载<li>iframes加载</ul><h3 id="jquery">jquery</h3><pre><code class="lang-javascript">$(window).load(function(){
-    /*页面加载并渲染完毕*/
-})
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">window.addEventListener('load', function(){
-    /*页面加载并渲染完毕*/
-})
-</code></pre><p>文档加载完毕但未渲染<h3 id="jquery">jquery</h3><pre><code class="lang-javascript">$(document).ready(function(){
-    /*文档加载完毕*/
-})
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">document.addEventListener('DOMContentLoaded',function(){
-
-})
-</code></pre><h3 id="jquery">jquery</h3><pre><code class="lang-javascript">
-</code></pre><h3 id="dom-api">DOM API</h3><pre><code class="lang-javascript">
-</code></pre></div></div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"jQuery is not must for us——事件",date:"2015-11-25T12:40:32.000Z",tags:"jquery",archives:"pl",id:"36",createTime:"2015-11-25",url:"2015-11-25-jQuery is not must for us——事件",strTag:"jquery"},content:'<hr>\n<p>在这里我们将对比Web提供的事件API与jQuery 事件函数间的差别。jQuery给我们提供了非常好的事件API,但理解好底层是如何实现的可以帮助我们更好的使用jQuery,同时遇到错误也能修复。</p>\n<ul>\n<li>发送DOM事件</li>\n<li>发送自定义事件</li>\n<li>监听事件</li>\n<li>移除事件句柄</li>\n<li>修改事件</li>\n<li>事件预测</li>\n<li>键盘事件</li>\n<li>鼠标事件</li>\n<li>浏览器加载事件</li>\n<li>老式浏览器的支持</li>\n</ul>\n<h2 id="dom-">DOM事件发送</h2>\n<p>以点击事件为例：\nfocus/blur/submit语法相同</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(a).click();\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">a.click();\n</code></pre>\n<h2 id="-">自定义事件</h2>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">/*触发一个事件(custom-event)*/\n$(&#39;element&#39;).trigger(&#39;custom-event&#39;);\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">var event = document.createEvent(&#39;Event&#39;);\nevent.initEvent(&#39;custom-event&#39;, true, true); /*第二和第三参数说明属于冒泡事件并可取消默认事件*/\nsomeElement.dispatchEvent(event);    /*发起事件*/\n\n/*ie not support*/\nvar event = new CustomEvent(&#39;custom-event&#39;, {bubbles: true, cancelable: true});\nsomeElement.dispatchEvent(event);\n</code></pre>\n<h2 id="-">事件监听</h2>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(&#39;element&#39;).on(&#39;click&#39;, function(){\n    /*当点击的时候做点什么*、\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">/*ie 9*/\nelement.addEventLister(&#39;click&#39;, function(){\n    /*当点击的时候做点什么*、\n})\n</code></pre>\n<h2 id="-">移除事件</h2>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">/*jquery还提供了一个移除某元素上所有事件的api*/\n$(&#39;element&#39;).off(&#39;click&#39;, myEventHander);\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">elment.removeEventLister(&#39;click&#39;, myEventHander);\n</code></pre>\n<h2 id="-">事件修改</h2>\n<p>阻止事件冒泡</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(element).on(&#39;event&#39;, function(event){\n    event.stopPropagation();\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">element.addEventListener(&#39;event&#39;, function(event){\n    event.stopPropagation();\n})\n</code></pre>\n<p>阻止其它事件对当前元素的影响</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(element).on(&#39;event&#39;, function(event){\n    event.stopImmediatePropagation();\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">element.addEventListener(&#39;event&#39;, function(event){\n    event.stopImmediatePropagation();\n})\n</code></pre>\n<p>阻止浏览器默认事件，比如一个a标签的跳转事件</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(Aelement).on(&#39;click&#39;, function(event){\n    event.stopPropagation();\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">Aelement.addEventListener(&#39;click&#39;, function(event){\n    event.preventDefault();\n})\n</code></pre>\n<h2 id="-">预测事件</h2>\n<pre><code class="lang-html">&lt;ul id=&quot;my-list&quot;&gt;\n    &lt;li&gt;foo &lt;button&gt;x&lt;/button&gt;&lt;/li&gt;\n    &lt;li&gt;bar &lt;button&gt;x&lt;/button&gt;&lt;/li&gt;\n    &lt;li&gt;abc &lt;button&gt;x&lt;/button&gt;&lt;/li&gt;\n    &lt;li&gt;123 &lt;button&gt;x&lt;/button&gt;&lt;/li&gt;\n&lt;/ul&gt;\n</code></pre>\n<p>点击按钮的时候删除其li标签</p>\n<h3 id="jquery">jquery</h3>\n<pre><code class="lang-javascript">$(&#39;#my-list&#39;).on(&#39;click&#39;, &#39;BUTTON&#39;, function() {\n    $(this).parent().remove();\n});\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">document.getElementById(&#39;my-list&#39;).addEventListener(&#39;click&#39;, function(event) {\n    var clickedEl = event.target;\n    if(clickedEl.tagName === &#39;BUTTON&#39;) {\n       var listItem = clickedEl.parentNode;\n       listItem.parentNode.removeChild(listItem);\n    }\n});\n</code></pre>\n<h2 id="-">键盘事件</h2>\n<h3 id="jquery">jquery</h3>\n<pre><code class="lang-javascript">$(document).keydown(function(event){\n    if(event.ctrlkey &amp;&amp; event.which === 72){\n        /*ctrl+H*/\n    }\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">document.addEventListener(&#39;keydown&#39;, function(event) {\n    if (event.ctrlKey &amp;&amp; event.which === 72) {\n        /*ctrl+H*/\n    }\n});\n</code></pre>\n<h2 id="-">鼠标事件</h2>\n<h3 id="jquery">jquery</h3>\n<pre><code class="lang-javascript">$(&#39;element&#39;).hover(function hoverIn(){\n\n},\nfunction hoverOut(){\n\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">someEl.addEventListener(&#39;mouseover&#39;, function() {\n});\n\nsomeEl.addEventListener(&#39;mouseout&#39;, function() {\n});\n</code></pre>\n<h2 id="-">浏览器加载事件</h2>\n<ul>\n<li>文档加载</li>\n<li>样式加载</li>\n<li>图片加载</li>\n<li>iframes加载</li>\n</ul>\n<h3 id="jquery">jquery</h3>\n<pre><code class="lang-javascript">$(window).load(function(){\n    /*页面加载并渲染完毕*/\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">window.addEventListener(&#39;load&#39;, function(){\n    /*页面加载并渲染完毕*/\n})\n</code></pre>\n<p>文档加载完毕但未渲染</p>\n<h3 id="jquery">jquery</h3>\n<pre><code class="lang-javascript">$(document).ready(function(){\n    /*文档加载完毕*/\n})\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">document.addEventListener(&#39;DOMContentLoaded&#39;,function(){\n\n})\n</code></pre>\n<h3 id="jquery">jquery</h3>\n<pre><code class="lang-javascript">\n</code></pre>\n<h3 id="dom-api">DOM API</h3>\n<pre><code class="lang-javascript">\n</code></pre>\n',summary:"<hr>\n<p>在这里我们将对比Web提供的事件API与jQuery 事件函数间的差别。jQuery给我们提供了非常好的事件API,但理解好底层是如何实现的可以帮助我们更好的使用jQuery,同时遇到错误也能修复。</p>\n<ul>\n<li>发送DOM事件</li>\n<li>发送自定义事件</li>\n<li>监听事件</li>\n<li>移除事件句柄</li>\n<li>修改事件</li>\n<li>事件预测</li>\n<li>键盘事件</li>\n<li>鼠标事件</li>\n<li>浏览器加载事件</li>\n<li>老式浏览器的支持</li>\n</ul>\n"}}],error:null,serverRendered:!0}</script><script defer src="/nuxt-blog/_nuxt/vendor.bundle.js"></script><script defer src="/nuxt-blog/_nuxt/nuxt.bundle.js"></script>
+}
+person.fullname();        //this指向person
+var age = person.printAge;
+age();                    //this指向window(浏览器中)
+</code></pre><p>将person.printAge赋值给age之后，再执行age(),此时age没有显示指定调用对象则默认是window(浏览器环境)。所以this并不是声明所在的环境。<h2 id="-es6-">箭头函数（es6)</h2><p>es6中新增了箭头函数，箭头函数与通过function声明的函数不同，它的this是使用的声明时上下文中的this.并且不可通过apply, call等改变。</div></div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"javascript 闭包、this",date:"2016-01-25T15:06:36.000Z",tags:["js","pl"],id:"7",createTime:"2016-01-25",url:"2016-01-25-javascript 闭包、this",strTag:"js、pl"},content:'<hr>\n<blockquote>\n<p>闭包其实很好理解，但是由于经常把this和闭包绑在一起，从而加大了理解的难度，如果将他们分开考虑，那就清晰多了。</p>\n</blockquote>\n<h2 id="-">闭包</h2>\n<p>闭包并不是js首创，在许多语言中都支持闭包，如schemer、ruby等。如果没有闭包，像js这样的支持高阶函数特性的语言将是一个噩梦。</p>\n<ul>\n<li>静态作用域</li>\n<li>动态作用域</li>\n</ul>\n<pre><code class="lang-js">var name = &quot;xiaofu&quot;;\nvar person = function(lastname){\n    var name = &#39;yang&#39;;\n\n    function personName(){\n        return name + lastname;\n    }\n    return personName;\n}\nvar pName = person();\npName(&quot;xiaoming&quot;);\n</code></pre>\n<p>js是函数作用域的，即一个function就是一个作用域，所以personName在person这个函数的作用域里面。但是调用的是在这个作用域的外面，那么当personName执行的时候，它里面的name取的是person这个作用域还是最外层的作用域呢？</p>\n<p>如果是静态作用域则调用的是person里面的 name, 如果是动态作用域则调用的是外层的name(&quot;xiaofu&quot;);而不是&quot;yang&quot;。</p>\n<p>而闭包就是用来实现静态作用域的一种方式，即通过闭包将函数和它声明时的作用域保存下来，这样在调用的时候取到的就是声明时所在的作用域而不是调用时的作用域。</p>\n<h2 id="this">this</h2>\n<p>this则与变量有点不同，即this采用的是类似于动态作用域的情况。js里面一切都是对象，所以函数也都是某个对象的方法，如果没有显示指定则是全局对象。</p>\n<pre><code class="lang-js">var person = {\n    fullname: function{\n        console.log(this);\n    },\n    printAge: function(){\n        console.log(this);\n    }\n}\nperson.fullname();        //this指向person\nvar age = person.printAge;\nage();                    //this指向window(浏览器中)\n</code></pre>\n<p>将person.printAge赋值给age之后，再执行age(),此时age没有显示指定调用对象则默认是window(浏览器环境)。所以this并不是声明所在的环境。</p>\n<h2 id="-es6-">箭头函数（es6)</h2>\n<p>es6中新增了箭头函数，箭头函数与通过function声明的函数不同，它的this是使用的声明时上下文中的this.并且不可通过apply, call等改变。</p>\n',summary:'<hr>\n<blockquote>\n<p>闭包其实很好理解，但是由于经常把this和闭包绑在一起，从而加大了理解的难度，如果将他们分开考虑，那就清晰多了。</p>\n</blockquote>\n<h2 id="-">闭包</h2>\n<p>闭包并不是js首创，在许多语言中都支持闭包，如schemer、ruby等。如果没有闭包，像js这样的支持高阶函数特性的语言将是一个噩梦。</p>\n<ul>\n<li>静态作用域</li>\n<li>动态作用域</li>\n</ul>\n<pre><code class="lang-js">var name = &quot;xiaofu&quot;;\nvar person = function(lastname){\n    var name = &#39;yang&#39;;\n\n    function personName(){\n        return name + lastname;\n    }\n    return personName;\n}\nvar pName = person();\npName(&quot;xiaoming&quot;);\n</code></pre>\n<p>js是函数作用域的，即一个function就是一个作用域，所以personName在person这个函数的作用域里面。但是调用的是在这个作用域的外面，那么当personName执行的时候，它里面的name取的是person这个作用域还是最外层的作用域呢？</p>\n<p>如果是静态作用域则调用的是person里面的 name, 如果是动态作用域则调用的是外层的name(&quot;xiaofu&quot;);而不是&quot;yang&quot;。</p>\n<p>而闭包就是用来实现静态作用域的一种方式，即通过闭包将函数和它声明时的作用域保存下来，这样在调用的时候取到的就是声明时所在的作用域而不是调用时的作用域。</p>\n'}}],error:null,serverRendered:!0}</script><script defer src="/nuxt-blog/_nuxt/vendor.bundle.js"></script><script defer src="/nuxt-blog/_nuxt/nuxt.bundle.js"></script>
