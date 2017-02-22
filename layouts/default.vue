@@ -46,10 +46,10 @@ export default {
                     text: 'Posts',
                     url: '/page/1'
                 },
-                {
-                    text: 'Lab',
-                    url: '/lab'
-                },
+                // {
+                //     text: 'Lab',
+                //     url: '/lab'
+                // },
                 {
                     text: 'About',
                     url: '/about'

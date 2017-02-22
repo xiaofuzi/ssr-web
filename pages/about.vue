@@ -3,6 +3,10 @@
       background: #ffffff;
   }
 
+  .page-wrapper .pageWrap {
+    padding-bottom: 200px;
+  }
+
   .page-wrapper .pageWrap ul {
     padding-left: 40px;
     margin-bottom: 40px;
@@ -24,15 +28,13 @@
 </style>
 <template>
   <section class="container page-wrapper">
-    <h1 class="title">
-      Archive
-    </h1>
+    <h2 class="title">
+      Who am I?
+    </h2>
     <div class="pageWrap">
-      <ul>
-           <li v-for='post in posts.data'>
-              <nuxt-link :to='post.meta.id'>{{post.meta.title}}</nuxt-link> 
-          </li>
-      </ul>
+      <p>
+        近距离的了解当前行业各公司、团队、开发者的开发情况，加强了解，共同成长，为混乱的行业注入一股鲜泉。
+      </p>
     </div>
   </section>
 </template>
@@ -42,17 +44,11 @@ import axios from '~plugins/axios'
 
 export default {
   data ({ params, error }) {
-    return axios.get('/api/posts')
-    .then((res) => {
-      return { posts: res.data }
-    })
-    .catch((e) => {
-      error({ statusCode: 404, message: 'Posts not found' })
-    })
+    
   },
   head () {
     return {
-      title: `Archive list`
+      title: `about ffe`
     }
   }
 }

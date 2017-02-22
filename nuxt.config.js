@@ -1,3 +1,22 @@
+var getPosts = require('./lib/mdToJson.js').parsedFiles;
+
+var total = getPosts().total;
+
+var pageNumbers = parseInt(total/10);
+
+var pageIds = [], postsIds = [];
+for (let i = 1; i <= pageIds; i++) {
+    pageIds.push({
+      id: i
+    })
+}
+
+for( let i = 1; i <= total; i++) {
+    postsIds.push({
+      id: i
+    })
+}
+
 module.exports = {
   /*
   ** Headers of the page
@@ -26,7 +45,8 @@ module.exports = {
   },
   generate: {
       routeParams: {
-       
+          '/page/:id': pageIds,
+          '/posts/:id': postsIds
       }
   }
 }
