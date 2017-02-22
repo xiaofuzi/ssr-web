@@ -33,6 +33,7 @@
 <script>
 import WebNav from '~components/Nav.vue'
 import MyFooter from '~components/Footer.vue'
+var basePath = '/nuxt-blog';
 
 export default {
     data () {
@@ -40,11 +41,11 @@ export default {
             navItems: [
                 {
                     text: 'Home',
-                    url: '/'
+                    url: basePath + '/'
                 },
                 {
                     text: 'Posts',
-                    url: '/page/1'
+                    url: basePath + '/page/1'
                 },
                 // {
                 //     text: 'Lab',
@@ -52,7 +53,7 @@ export default {
                 // },
                 {
                     text: 'About',
-                    url: '/about'
+                    url: basePath + '/about'
                 }
             ]
         }
