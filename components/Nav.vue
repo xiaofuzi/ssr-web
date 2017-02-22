@@ -1,6 +1,7 @@
 <style>
 	.navbar {
 		background: #ffffff;
+		border-bottom: 2px solid #C12127;
 	}
 
 	.container .logo{

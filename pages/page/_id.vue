@@ -3,6 +3,10 @@
       background: #ffffff;
   }
 
+  .page-wrapper .pageWrap {
+      padding-top: 20px;
+  }
+  
   .page-wrapper .pageWrap ul {
     padding-left: 40px;
     margin-bottom: 40px;
@@ -24,9 +28,7 @@
 </style>
 <template>
   <section class="container page-wrapper">
-    <h1 class="title">
-      Archive
-    </h1>
+   
     <div class="pageWrap">
       <ul>
            <li v-for='post in posts.data'>

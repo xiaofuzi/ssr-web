@@ -40,7 +40,7 @@ export default {
             navItems: [
                 {
                     text: 'Home',
-                    url: '/index'
+                    url: '/'
                 },
                 {
                     text: 'Posts',
