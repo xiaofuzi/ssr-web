@@ -22,7 +22,7 @@
 	<nav class="navbar navbar-default main-menu">
 		<div class="container">
 			<div class="logo">
-				<nuxt-link to="/index">
+				<nuxt-link to="/">
 					<h2>ffe</h2>
 				</nuxt-link>
 			</div>

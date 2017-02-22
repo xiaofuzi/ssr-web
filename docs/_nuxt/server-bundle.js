@@ -2052,16 +2052,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+var basePath = '/nuxt-blog';
 
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
         return {
             navItems: [{
                 text: 'Home',
-                url: '/'
+                url: basePath + '/'
             }, {
                 text: 'Posts',
-                url: '/page/1'
+                url: basePath + '/page/1'
             },
             // {
             //     text: 'Lab',
@@ -2069,7 +2070,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // },
             {
                 text: 'About',
-                url: '/about'
+                url: basePath + '/about'
             }]
         };
     },
@@ -5006,7 +5007,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "logo"
   }, [_c('nuxt-link', {
     attrs: {
-      "to": "/index"
+      "to": "/"
     }
   }, [_c('h2', [_vm._v("ffe")])])], 1), _c('div', {
     staticClass: "nav-item"

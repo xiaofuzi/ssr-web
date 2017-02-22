@@ -5,7 +5,7 @@ var total = getPosts().total;
 var pageNumbers = parseInt(total/10);
 
 var pageIds = [], postsIds = [];
-for (let i = 1; i <= pageIds; i++) {
+for (let i = 1; i <= pageNumbers; i++) {
     pageIds.push({
       id: i
     })
