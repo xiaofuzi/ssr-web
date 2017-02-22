@@ -41,11 +41,11 @@ export default {
             navItems: [
                 {
                     text: 'Home',
-                    url: basePath + '/'
+                    url: '/'
                 },
                 {
                     text: 'Posts',
-                    url: basePath + '/page/1'
+                    url: '/page/1'
                 },
                 // {
                 //     text: 'Lab',
@@ -53,7 +53,7 @@ export default {
                 // },
                 {
                     text: 'About',
-                    url: basePath + '/about'
+                    url:  '/about'
                 }
             ]
         }

@@ -2059,10 +2059,10 @@ var basePath = '/nuxt-blog';
         return {
             navItems: [{
                 text: 'Home',
-                url: basePath + '/'
+                url: '/'
             }, {
                 text: 'Posts',
-                url: basePath + '/page/1'
+                url: '/page/1'
             },
             // {
             //     text: 'Lab',
@@ -2070,7 +2070,7 @@ var basePath = '/nuxt-blog';
             // },
             {
                 text: 'About',
-                url: basePath + '/about'
+                url: '/about'
             }]
         };
     },
@@ -2372,6 +2372,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__plugins_axios__ = __webpack_require__(20);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3812,7 +3826,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, "\n.post-wrapper {\n    padding: 20px;\n    background-color: #ffffff;\n}\n", ""]);
+exports.push([module.i, "\n.post-wrapper {\n    padding: 20px;\n    background-color: #ffffff;\n}\n.post-wrapper .post-meta {\n    color: #666666;\n    padding-left: 5px;\n}\n", ""]);
 
 // exports
 
@@ -4971,11 +4985,17 @@ module.exports.render._withStripped = true
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "post-wrapper container"
-  }, [_c('div', {
+  }, [_c('div', [_c('nuxt-link', {
+    attrs: {
+      "to": "/posts/" + _vm.post.meta.id
+    }
+  }, [_c('h2', [_vm._v(_vm._s(_vm.post.meta.title))])])], 1), _c('div', {
+    staticClass: "post-meta"
+  }, [_c('span', [_vm._v(_vm._s(_vm.post.meta.strTag))]), _c('span', [_vm._v(_vm._s(_vm.post.meta.createTime))])]), _c('div', [_c('div', {
     domProps: {
       "innerHTML": _vm._s(_vm.post.content)
     }
-  })])
+  })])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 

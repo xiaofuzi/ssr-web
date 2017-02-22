@@ -3,10 +3,24 @@
         padding: 20px;
         background-color: #ffffff;
     }
+
+    .post-wrapper .post-meta {
+        color: #666666;
+        padding-left: 5px;
+    }
 </style>
 <template>
     <div class="post-wrapper container">
-        <div v-html='post.content'></div>
+        <div>
+            <nuxt-link :to='"/posts/" + post.meta.id'><h2>{{post.meta.title}}</h2></nuxt-link>
+        </div> 
+        <div class="post-meta">
+            <span>{{ post.meta.strTag}}</span>
+            <span>{{ post.meta.createTime }}</span>
+        </div>
+        <div>
+          <div v-html='post.content'></div>        
+        </div>
     </div>
 </template>
 <script>
