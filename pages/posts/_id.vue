@@ -33,7 +33,7 @@
 
     export default {
       data ({ params, error }) {
-        let id = parseInt(params.id) - 1;
+        let id = parseInt(params.id);
         return axios.get(`/api/posts/${id}`)
         .then((res) => {
           return { post: res.data }
