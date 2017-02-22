@@ -57,7 +57,7 @@
             <li class="col-md-6" v-for='post in newPosts.data'>
                 <div class="box">
                     <div>
-                        <nuxt-link :to='"/posts/" + post.meta.id'><h3>{{post.meta.title}}</h3></nuxt-link>
+                        <a-link :to='"/posts/" + post.meta.id'><h3>{{post.meta.title}}</h3></a-link>
                     </div> 
                     <div class="post-meta">
                         <span>{{ post.meta.strTag}}</span>
@@ -72,7 +72,8 @@
 </template>
 
 <script>
-import axios from '~plugins/axios'
+import axios from '~plugins/axios';
+import aLink from '~components/Link.vue';
 
 export default {
   async data () {
@@ -81,9 +82,12 @@ export default {
       newPosts: data
     }
   },
+  components: {
+        aLink
+  },
   head () {
     return {
-      title: 'new posts'
+      title: 'ffe hot post'
     }
   }
 }
