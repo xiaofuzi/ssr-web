@@ -4,6 +4,10 @@
         background-color: #ffffff;
     }
 
+    .post-wrapper a {
+        text-decoration: none;
+    }
+
     .post-wrapper .post-meta {
         color: #666666;
         padding-left: 5px;
@@ -12,7 +16,7 @@
 <template>
     <div class="post-wrapper container">
         <div>
-            <nuxt-link :to='"/posts/" + post.meta.id'><h2>{{post.meta.title}}</h2></nuxt-link>
+            <a-link :to='"/posts/" + post.meta.id'><h2>{{post.meta.title}}</h2></a-link>
         </div> 
         <div class="post-meta">
             <span>{{ post.meta.strTag}}</span>
@@ -25,6 +29,7 @@
 </template>
 <script>
     import axios from '~plugins/axios'
+    import aLink from '~components/Link.vue';
 
     export default {
       data ({ params, error }) {
@@ -36,6 +41,9 @@
         .catch((e) => {
           error({ statusCode: 404, message: 'Posts not found' })
         })
+      },
+      components: {
+          aLink
       },
       head () {
         return {

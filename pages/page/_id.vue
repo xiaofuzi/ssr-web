@@ -6,7 +6,7 @@
   .page-wrapper .pageWrap {
       padding-top: 20px;
   }
-  
+
   .page-wrapper .pageWrap ul {
     padding-left: 40px;
     margin-bottom: 40px;
@@ -32,7 +32,7 @@
     <div class="pageWrap">
       <ul>
            <li v-for='post in posts.data'>
-              <nuxt-link :to='"/posts/" + post.meta.id'>{{post.meta.title}}</nuxt-link> 
+              <a-link :to='"/posts/" + post.meta.id'>{{post.meta.title}}</a-link> 
           </li>
       </ul>
     </div>
@@ -41,6 +41,7 @@
 
 <script>
 import axios from '~plugins/axios'
+import aLink from '~components/Link.vue';
 
 export default {
   data ({ params, error }) {
@@ -51,6 +52,9 @@ export default {
     .catch((e) => {
       error({ statusCode: 404, message: 'Posts not found' })
     })
+  },
+  components: {
+    aLink
   },
   head () {
     return {
