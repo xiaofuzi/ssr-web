@@ -1,0 +1,81 @@
+<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><link href="/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-739c3fb7 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/index"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/"class="nuxt-link-active">Home</a><li><a href="/page/1">Posts</a><li><a href="/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><hr><p>通过浏览器提供的DOM API,我们可以完成对页面元素的增删改查移动等。<ul><li>创建元素<li>插入元素<li>移动元素<li>删除元素<li>类操作<li>属性操作<li>文本操作<li>样式操作</ul><h2 id="-">创建元素</h2><pre><code class="lang-javascript">/*jquery*/
+    $('&lt;div>&lt;/div>');
+/*DOM*/
+document.createElement('div');
+</code></pre><h2 id="-">插入元素</h2><pre><code class="lang-html">&lt;div id="1">&lt;/div>
+&lt;div id="2">&lt;/div>
+&lt;div id="3">&lt;/div>
+</code></pre><h3 id="-id-1-div-id-1-1-div">在id为1的div的后面插入一个id为1.1的div</h3><pre><code class="lang-html">&lt;div id="1">&lt;/div>
+&lt;div id="01">&lt;/div>
+&lt;div id="2">&lt;/div>
+&lt;div id="3">&lt;/div>
+</code></pre><pre><code class="lang-javascript">/*jquery*/
+    $('#1').after('&lt;div id="1.1">&lt;/div>');
+/*DOM*/
+document.getElementById('1').insertAdjacentHTML('afterend', '&lt;div id="1.1">&lt;/div>');
+</code></pre><h3 id="-id-1-div-id-a-div">在id为1的div之前插入一个id为A的div</h3><pre><code class="lang-html">&lt;div id="A">&lt;/div>
+&lt;div id="1">&lt;/div>
+&lt;div id="2">&lt;/div>
+&lt;div id="3">&lt;/div>
+</code></pre><pre><code class="lang-javascript">$('#1').before('&lt;div id="A">&lt;/div>');
+
+/*DOM
+document.getElementById('1').insertAdjacentHTML('beforebegin', '&lt;div id="A">&lt;/div>');
+</code></pre><h3 id="-">插入子元素</h3><pre><code class="lang-html">&lt;div id="parent">
+    &lt;div id="oldChild">&lt;/div>
+&lt;/div>
+</code></pre><p>插入一个子元素将其变成<pre><code class="lang-html">&lt;div id="parent">
+    &lt;div id="newChild">&lt;/div>
+    &lt;div id="oldChild">&lt;/div>
+&lt;/div>
+</code></pre><pre><code class="lang-javascript">$('#parent').prepend('&lt;div id="newChild">&lt;/div>');
+
+/*DOM*/
+document.getElementById('parent')
+    .insertAdjacentHTML('afterbegin', '&lt;div id="newChild">&lt;/div>');
+</code></pre><h2 id="-">移动元素</h2><p>将下面的结构<pre><code class="lang-html">&lt;div id="parent">
+    &lt;div id="c1">&lt;/div>
+    &lt;div id="c2">&lt;/div>
+    &lt;div id="c3">&lt;/div>
+&lt;/div>
+&lt;div id="orphan">&lt;/div>
+</code></pre><p>变成<pre><code class="lang-html">&lt;div id="parent">
+    &lt;div id="c1">&lt;/div>
+    &lt;div id="c2">&lt;/div>
+    &lt;div id="c3">&lt;/div>
+    &lt;div id="orphan">&lt;/div>
+&lt;/div>
+</code></pre><h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$('#parent').append('#orphan');
+</code></pre><h3 id="dom">DOM</h3><pre><code class="lang-javascript">document.getElementById('parent')
+    .appendChild(document.getElementById('orphan'));
+</code></pre><p>如果想将id为orphan的div插入到c1<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$('#parent').prepend($('#orphan'));
+</code></pre><pre><code class="lang-javascript">document.getElementById('parent')
+    .insertBefore(document.getElementById('orphan'), document.getElementById('c1'));
+</code></pre><h2 id="-">移除</h2><p>这里假设存在一个id为foobar的元素<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$('#foobar').remove();
+</code></pre><h3 id="dom">DOM</h3><pre><code class="lang-javascript">document.getElementById('foobar').parentNode.removeChild(document.getElementById("foobar"));
+</code></pre><h2 id="-class">添加和移除class</h2><p>现在我们希望将<pre><code class="lang-html">&lt;div id="foo">&lt;/div>
+</code></pre><pre><code class="lang-html">&lt;div id="foo" class="bold">&lt;/div>
+</code></pre><h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$('#foo').addClass('bold');
+</code></pre><h3 id="dom">DOM</h3><pre><code class="lang-javascript">/*IE9有问题*/
+docuement.getElementById('foo').classList.add('bold');
+
+/*所有浏览器都支持*/
+document.getElementById('foo').className += 'bold';
+</code></pre><p>移除bold类<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$('#foo').removeClass('bold');
+</code></pre><h3 id="dom">DOM</h3><pre><code class="lang-javascript">/*IE9有问题*/
+docuement.getElementById('foo').classList.remove('bold');
+
+/*所有浏览器都支持
+document.getElementById('foo').className = document.getElementById('foo').className.replace(/^bold$/, '');
+</code></pre><h2 id="-">属性修改</h2><p>给id="foo"的元素设置role属性为button<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$('#foo').attr('role', 'button');
+</code></pre><h3 id="dom">DOM</h3><pre><code class="lang-javascript">document.getElementById('foo').setAttribute('role', 'button');
+</code></pre><p>移除我们添加的属性<h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$('#foo').removeAttr('role');
+</code></pre><h3 id="dom">DOM</h3><pre><code class="lang-javascript">document.getElementById('foo').removeAttribute('role');
+</code></pre><h2 id="-">文本修改</h2><h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$('#foo').text('Goodbye!');
+</code></pre><h3 id="dom">DOM</h3><pre><code class="lang-javascript">document.getElementById('foo').innerHTML = 'Goodbye!';
+document.getElementById('foo').innerText = 'GoodBye!';
+/*IE9+*/
+document.getElementById('foo').textContent = 'GoodBye!';
+</code></pre><h2 id="-">样式修改</h2><h3 id="jquery">jQuery</h3><pre><code class="lang-javascript">$('#note').css('fontWeight', 'bold');
+</code></pre><h3 id="dom">DOM</h3><pre><code class="lang-javascript">document.getElementById('note').style.fontWeight = 'bold';
+</code></pre></div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"jQuery is not must for us——DOM操作",date:"2015-11-24T12:50:32.000Z",tags:"jquery",archives:"pl",id:"37",createTime:"2015-11-24",url:"2015-11-24-jQuery is not must for us——DOM操作",strTag:"jquery"},content:'<hr>\n<p>通过浏览器提供的DOM API,我们可以完成对页面元素的增删改查移动等。</p>\n<ul>\n<li>创建元素</li>\n<li>插入元素</li>\n<li>移动元素</li>\n<li>删除元素</li>\n<li>类操作</li>\n<li>属性操作</li>\n<li>文本操作</li>\n<li>样式操作</li>\n</ul>\n<h2 id="-">创建元素</h2>\n<pre><code class="lang-javascript">/*jquery*/\n    $(&#39;&lt;div&gt;&lt;/div&gt;&#39;);\n/*DOM*/\ndocument.createElement(&#39;div&#39;);\n</code></pre>\n<h2 id="-">插入元素</h2>\n<pre><code class="lang-html">&lt;div id=&quot;1&quot;&gt;&lt;/div&gt;\n&lt;div id=&quot;2&quot;&gt;&lt;/div&gt;\n&lt;div id=&quot;3&quot;&gt;&lt;/div&gt;\n</code></pre>\n<h3 id="-id-1-div-id-1-1-div">在id为1的div的后面插入一个id为1.1的div</h3>\n<pre><code class="lang-html">&lt;div id=&quot;1&quot;&gt;&lt;/div&gt;\n&lt;div id=&quot;01&quot;&gt;&lt;/div&gt;\n&lt;div id=&quot;2&quot;&gt;&lt;/div&gt;\n&lt;div id=&quot;3&quot;&gt;&lt;/div&gt;\n</code></pre>\n<pre><code class="lang-javascript">/*jquery*/\n    $(&#39;#1&#39;).after(&#39;&lt;div id=&quot;1.1&quot;&gt;&lt;/div&gt;&#39;);\n/*DOM*/\ndocument.getElementById(&#39;1&#39;).insertAdjacentHTML(&#39;afterend&#39;, &#39;&lt;div id=&quot;1.1&quot;&gt;&lt;/div&gt;&#39;);\n</code></pre>\n<h3 id="-id-1-div-id-a-div">在id为1的div之前插入一个id为A的div</h3>\n<pre><code class="lang-html">&lt;div id=&quot;A&quot;&gt;&lt;/div&gt;\n&lt;div id=&quot;1&quot;&gt;&lt;/div&gt;\n&lt;div id=&quot;2&quot;&gt;&lt;/div&gt;\n&lt;div id=&quot;3&quot;&gt;&lt;/div&gt;\n</code></pre>\n<pre><code class="lang-javascript">$(&#39;#1&#39;).before(&#39;&lt;div id=&quot;A&quot;&gt;&lt;/div&gt;&#39;);\n\n/*DOM\ndocument.getElementById(&#39;1&#39;).insertAdjacentHTML(&#39;beforebegin&#39;, &#39;&lt;div id=&quot;A&quot;&gt;&lt;/div&gt;&#39;);\n</code></pre>\n<h3 id="-">插入子元素</h3>\n<pre><code class="lang-html">&lt;div id=&quot;parent&quot;&gt;\n    &lt;div id=&quot;oldChild&quot;&gt;&lt;/div&gt;\n&lt;/div&gt;\n</code></pre>\n<p>插入一个子元素将其变成</p>\n<pre><code class="lang-html">&lt;div id=&quot;parent&quot;&gt;\n    &lt;div id=&quot;newChild&quot;&gt;&lt;/div&gt;\n    &lt;div id=&quot;oldChild&quot;&gt;&lt;/div&gt;\n&lt;/div&gt;\n</code></pre>\n<pre><code class="lang-javascript">$(&#39;#parent&#39;).prepend(&#39;&lt;div id=&quot;newChild&quot;&gt;&lt;/div&gt;&#39;);\n\n/*DOM*/\ndocument.getElementById(&#39;parent&#39;)\n    .insertAdjacentHTML(&#39;afterbegin&#39;, &#39;&lt;div id=&quot;newChild&quot;&gt;&lt;/div&gt;&#39;);\n</code></pre>\n<h2 id="-">移动元素</h2>\n<p>将下面的结构</p>\n<pre><code class="lang-html">&lt;div id=&quot;parent&quot;&gt;\n    &lt;div id=&quot;c1&quot;&gt;&lt;/div&gt;\n    &lt;div id=&quot;c2&quot;&gt;&lt;/div&gt;\n    &lt;div id=&quot;c3&quot;&gt;&lt;/div&gt;\n&lt;/div&gt;\n&lt;div id=&quot;orphan&quot;&gt;&lt;/div&gt;\n</code></pre>\n<p>变成</p>\n<pre><code class="lang-html">&lt;div id=&quot;parent&quot;&gt;\n    &lt;div id=&quot;c1&quot;&gt;&lt;/div&gt;\n    &lt;div id=&quot;c2&quot;&gt;&lt;/div&gt;\n    &lt;div id=&quot;c3&quot;&gt;&lt;/div&gt;\n    &lt;div id=&quot;orphan&quot;&gt;&lt;/div&gt;\n&lt;/div&gt;\n</code></pre>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(&#39;#parent&#39;).append(&#39;#orphan&#39;);\n</code></pre>\n<h3 id="dom">DOM</h3>\n<pre><code class="lang-javascript">document.getElementById(&#39;parent&#39;)\n    .appendChild(document.getElementById(&#39;orphan&#39;));\n</code></pre>\n<p>如果想将id为orphan的div插入到c1</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(&#39;#parent&#39;).prepend($(&#39;#orphan&#39;));\n</code></pre>\n<pre><code class="lang-javascript">document.getElementById(&#39;parent&#39;)\n    .insertBefore(document.getElementById(&#39;orphan&#39;), document.getElementById(&#39;c1&#39;));\n</code></pre>\n<h2 id="-">移除</h2>\n<p>这里假设存在一个id为foobar的元素</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(&#39;#foobar&#39;).remove();\n</code></pre>\n<h3 id="dom">DOM</h3>\n<pre><code class="lang-javascript">document.getElementById(&#39;foobar&#39;).parentNode.removeChild(document.getElementById(&quot;foobar&quot;));\n</code></pre>\n<h2 id="-class">添加和移除class</h2>\n<p>现在我们希望将</p>\n<pre><code class="lang-html">&lt;div id=&quot;foo&quot;&gt;&lt;/div&gt;\n</code></pre>\n<pre><code class="lang-html">&lt;div id=&quot;foo&quot; class=&quot;bold&quot;&gt;&lt;/div&gt;\n</code></pre>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(&#39;#foo&#39;).addClass(&#39;bold&#39;);\n</code></pre>\n<h3 id="dom">DOM</h3>\n<pre><code class="lang-javascript">/*IE9有问题*/\ndocuement.getElementById(&#39;foo&#39;).classList.add(&#39;bold&#39;);\n\n/*所有浏览器都支持*/\ndocument.getElementById(&#39;foo&#39;).className += &#39;bold&#39;;\n</code></pre>\n<p>移除bold类</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(&#39;#foo&#39;).removeClass(&#39;bold&#39;);\n</code></pre>\n<h3 id="dom">DOM</h3>\n<pre><code class="lang-javascript">/*IE9有问题*/\ndocuement.getElementById(&#39;foo&#39;).classList.remove(&#39;bold&#39;);\n\n/*所有浏览器都支持\ndocument.getElementById(&#39;foo&#39;).className = document.getElementById(&#39;foo&#39;).className.replace(/^bold$/, &#39;&#39;);\n</code></pre>\n<h2 id="-">属性修改</h2>\n<p>给id=&quot;foo&quot;的元素设置role属性为button</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(&#39;#foo&#39;).attr(&#39;role&#39;, &#39;button&#39;);\n</code></pre>\n<h3 id="dom">DOM</h3>\n<pre><code class="lang-javascript">document.getElementById(&#39;foo&#39;).setAttribute(&#39;role&#39;, &#39;button&#39;);\n</code></pre>\n<p>移除我们添加的属性</p>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(&#39;#foo&#39;).removeAttr(&#39;role&#39;);\n</code></pre>\n<h3 id="dom">DOM</h3>\n<pre><code class="lang-javascript">document.getElementById(&#39;foo&#39;).removeAttribute(&#39;role&#39;);\n</code></pre>\n<h2 id="-">文本修改</h2>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(&#39;#foo&#39;).text(&#39;Goodbye!&#39;);\n</code></pre>\n<h3 id="dom">DOM</h3>\n<pre><code class="lang-javascript">document.getElementById(&#39;foo&#39;).innerHTML = &#39;Goodbye!&#39;;\ndocument.getElementById(&#39;foo&#39;).innerText = &#39;GoodBye!&#39;;\n/*IE9+*/\ndocument.getElementById(&#39;foo&#39;).textContent = &#39;GoodBye!&#39;;\n</code></pre>\n<h2 id="-">样式修改</h2>\n<h3 id="jquery">jQuery</h3>\n<pre><code class="lang-javascript">$(&#39;#note&#39;).css(&#39;fontWeight&#39;, &#39;bold&#39;);\n</code></pre>\n<h3 id="dom">DOM</h3>\n<pre><code class="lang-javascript">document.getElementById(&#39;note&#39;).style.fontWeight = &#39;bold&#39;;\n</code></pre>\n',summary:"<hr>\n<p>通过浏览器提供的DOM API,我们可以完成对页面元素的增删改查移动等。</p>\n<ul>\n<li>创建元素</li>\n<li>插入元素</li>\n<li>移动元素</li>\n<li>删除元素</li>\n<li>类操作</li>\n<li>属性操作</li>\n<li>文本操作</li>\n<li>样式操作</li>\n</ul>\n"}}],error:null,serverRendered:!0}</script><script defer src="/_nuxt/vendor.bundle.js"></script><script defer src="/_nuxt/nuxt.bundle.js"></script>

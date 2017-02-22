@@ -1,0 +1,71 @@
+<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><link href="/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-739c3fb7 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/index"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/"class="nuxt-link-active">Home</a><li><a href="/page/1">Posts</a><li><a href="/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><hr><ul><li>a标签不可以嵌套交互式元素<li>块级元素可以包含内联元素和某些块级元素，内联元素不能包含块级元素，只能包含内联元素<li>p标签不能包含块级元素<li>这些标签不可包含块级元素<li>li标签可以包含div以及ul，ul的子元素应该只有li<li>元素并排（块级和块级并列，内联和内联并列)</ul><h2 id="-">标签错误嵌套</h2><h3 id="-">语法错误</h3><ul><li>a标签不可以嵌套交互式元素[a， audio（如果设置了controls属性）， button， details， embed， iframe， img（如果设置了usemap属性）， input（如果type属性不为hidden状态）， keygen， label， menu（如果type属性为toolbar状态），object（如果设置了usemap属性）， select， textarea， video（如果设置了controls属性）]</ul><pre><code class="lang-css">/*下面这些写法浏览器是不能够正常解析的*/
+&lt;a href="">
+    &lt;a href="">click&lt;/a>
+&lt;/a>
+&lt;a href="">
+    &lt;button>click&lt;/button>
+&lt;/a>
+&lt;a href="">
+    &lt;input type="text">
+&lt;/a>
+&lt;a href="">
+    &lt;textarea name="" id="" cols="10" rows="5">&lt;/textarea>
+&lt;/a>
+</code></pre><p>&lt;a href="">&lt;a href="">click&lt;/a>&lt;/a>&lt;a href="">&lt;button>click&lt;/button>&lt;/a>&lt;a href="">&lt;input type="text">&lt;/a>&lt;a href="">&lt;textarea name="" id="" cols="30" rows="10">&lt;/textarea>&lt;/a><p>有的虽然解析正常，但却达不到预想的目的<h3 id="-">语义错误</h3><p>页面可能正常解析，但不符合语义。这是因为浏览器自带容错机制，对于不规范的写法也能够正确的解析，各浏览器的容错机制不同，所以尽量按规范来写。<ul><li>块级元素可以包含内联元素和某些块级元素，内联元素不能包含块级元素，只能包含内联元素</ul><pre><code class="lang-css">/*规范的写法*/
+&lt;div>
+    &lt;h2>jikexueyuan&lt;/h2>
+    &lt;p>IT education&lt;/p>
+&lt;/div>
+/*不规范的写法*/
+&lt;span>
+    &lt;div>wrong&lt;/div>
+&lt;/span>
+</code></pre><ul><li>p标签不能包含块级元素</ul><pre><code class="lang-css">/*不规范的写法*/
+&lt;p>
+    &lt;h1>&lt;/h1>
+&lt;/p>
+&lt;p>
+    &lt;div>&lt;/div>
+&lt;/p>
+</code></pre><ul><li>如下的标签不可包含块级元素</ul><pre><code class="lang-css">h1、h2、h3、h4、h5、h6、p
+
+/*不规范的写法*/
+&lt;h1>
+    &lt;h2>&lt;/h2>
+&lt;/h1>
+&lt;h2>
+    &lt;p>&lt;/p>
+&lt;/h2>
+</code></pre><ul><li>li标签可以包含div以及ul(这个是不是很牛，可以包含父级元素)</ul><pre><code class="lang-css">/*规范的写法*/
+&lt;li>
+    &lt;ul>
+        &lt;li>&lt;/li>
+        &lt;li>&lt;/li>
+        &lt;li>&lt;/li>
+    &lt;/ul>
+    &lt;div>&lt;/div>
+&lt;/li>
+/*不规范的写法*/
+&lt;ul>
+    &lt;a href="">迷路的a标签&lt;/a>
+    &lt;li>&lt;/li>
+    &lt;li>&lt;/li>
+    &lt;li>&lt;/li>
+&lt;/ul>
+</code></pre><ul><li>元素并排（块级和块级并列，内联和内联并列)</ul><pre><code class="lang-css">/*规范的写法*/
+&lt;div>
+    &lt;h2>&lt;/h2>
+    &lt;p>&lt;/p>
+&lt;/div>
+&lt;div>
+    &lt;img src="" alt="">
+    &lt;a href="">&lt;/a>
+    &lt;span>&lt;/span>
+&lt;/div>
+
+/*不规范的写法*/
+&lt;div>
+    &lt;span>我是内联元素&lt;/span>
+    &lt;p>我是块级元素&lt;/p>
+&lt;/div>
+</code></pre><p>如有错误，请指出，欢迎补充其它一些错误情况。</div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"html不能这么写，你知道吗？",date:"2015-11-17T16:51:15.000Z",tags:"html",archives:"pl",topper:!0,id:"20",createTime:"2015-11-18",url:"2015-11-18-html不能这么写，你知道吗？",strTag:"html"},content:'<hr>\n<ul>\n<li>a标签不可以嵌套交互式元素</li>\n<li>块级元素可以包含内联元素和某些块级元素，内联元素不能包含块级元素，只能包含内联元素</li>\n<li>p标签不能包含块级元素</li>\n<li>这些标签不可包含块级元素</li>\n<li>li标签可以包含div以及ul，ul的子元素应该只有li</li>\n<li>元素并排（块级和块级并列，内联和内联并列)</li>\n</ul>\n<h2 id="-">标签错误嵌套</h2>\n<h3 id="-">语法错误</h3>\n<ul>\n<li>a标签不可以嵌套交互式元素[a， audio（如果设置了controls属性）， button， details， embed， iframe， img（如果设置了usemap属性）， input（如果type属性不为hidden状态）， keygen， label， menu（如果type属性为toolbar状态），object（如果设置了usemap属性）， select， textarea， video（如果设置了controls属性）]</li>\n</ul>\n<pre><code class="lang-css">/*下面这些写法浏览器是不能够正常解析的*/\n&lt;a href=&quot;&quot;&gt;\n    &lt;a href=&quot;&quot;&gt;click&lt;/a&gt;\n&lt;/a&gt;\n&lt;a href=&quot;&quot;&gt;\n    &lt;button&gt;click&lt;/button&gt;\n&lt;/a&gt;\n&lt;a href=&quot;&quot;&gt;\n    &lt;input type=&quot;text&quot;&gt;\n&lt;/a&gt;\n&lt;a href=&quot;&quot;&gt;\n    &lt;textarea name=&quot;&quot; id=&quot;&quot; cols=&quot;10&quot; rows=&quot;5&quot;&gt;&lt;/textarea&gt;\n&lt;/a&gt;\n</code></pre>\n<p>&lt;a href=&quot;&quot;&gt;&lt;a href=&quot;&quot;&gt;click&lt;/a&gt;&lt;/a&gt;&lt;a href=&quot;&quot;&gt;&lt;button&gt;click&lt;/button&gt;&lt;/a&gt;&lt;a href=&quot;&quot;&gt;&lt;input type=&quot;text&quot;&gt;&lt;/a&gt;&lt;a href=&quot;&quot;&gt;&lt;textarea name=&quot;&quot; id=&quot;&quot; cols=&quot;30&quot; rows=&quot;10&quot;&gt;&lt;/textarea&gt;&lt;/a&gt;</p>\n<p>有的虽然解析正常，但却达不到预想的目的</p>\n<h3 id="-">语义错误</h3>\n<p>页面可能正常解析，但不符合语义。这是因为浏览器自带容错机制，对于不规范的写法也能够正确的解析，各浏览器的容错机制不同，所以尽量按规范来写。</p>\n<ul>\n<li>块级元素可以包含内联元素和某些块级元素，内联元素不能包含块级元素，只能包含内联元素</li>\n</ul>\n<pre><code class="lang-css">/*规范的写法*/\n&lt;div&gt;\n    &lt;h2&gt;jikexueyuan&lt;/h2&gt;\n    &lt;p&gt;IT education&lt;/p&gt;\n&lt;/div&gt;\n/*不规范的写法*/\n&lt;span&gt;\n    &lt;div&gt;wrong&lt;/div&gt;\n&lt;/span&gt;\n</code></pre>\n<ul>\n<li>p标签不能包含块级元素</li>\n</ul>\n<pre><code class="lang-css">/*不规范的写法*/\n&lt;p&gt;\n    &lt;h1&gt;&lt;/h1&gt;\n&lt;/p&gt;\n&lt;p&gt;\n    &lt;div&gt;&lt;/div&gt;\n&lt;/p&gt;\n</code></pre>\n<ul>\n<li>如下的标签不可包含块级元素</li>\n</ul>\n<pre><code class="lang-css">h1、h2、h3、h4、h5、h6、p\n\n/*不规范的写法*/\n&lt;h1&gt;\n    &lt;h2&gt;&lt;/h2&gt;\n&lt;/h1&gt;\n&lt;h2&gt;\n    &lt;p&gt;&lt;/p&gt;\n&lt;/h2&gt;\n</code></pre>\n<ul>\n<li>li标签可以包含div以及ul(这个是不是很牛，可以包含父级元素)</li>\n</ul>\n<pre><code class="lang-css">/*规范的写法*/\n&lt;li&gt;\n    &lt;ul&gt;\n        &lt;li&gt;&lt;/li&gt;\n        &lt;li&gt;&lt;/li&gt;\n        &lt;li&gt;&lt;/li&gt;\n    &lt;/ul&gt;\n    &lt;div&gt;&lt;/div&gt;\n&lt;/li&gt;\n/*不规范的写法*/\n&lt;ul&gt;\n    &lt;a href=&quot;&quot;&gt;迷路的a标签&lt;/a&gt;\n    &lt;li&gt;&lt;/li&gt;\n    &lt;li&gt;&lt;/li&gt;\n    &lt;li&gt;&lt;/li&gt;\n&lt;/ul&gt;\n</code></pre>\n<ul>\n<li>元素并排（块级和块级并列，内联和内联并列)</li>\n</ul>\n<pre><code class="lang-css">/*规范的写法*/\n&lt;div&gt;\n    &lt;h2&gt;&lt;/h2&gt;\n    &lt;p&gt;&lt;/p&gt;\n&lt;/div&gt;\n&lt;div&gt;\n    &lt;img src=&quot;&quot; alt=&quot;&quot;&gt;\n    &lt;a href=&quot;&quot;&gt;&lt;/a&gt;\n    &lt;span&gt;&lt;/span&gt;\n&lt;/div&gt;\n\n/*不规范的写法*/\n&lt;div&gt;\n    &lt;span&gt;我是内联元素&lt;/span&gt;\n    &lt;p&gt;我是块级元素&lt;/p&gt;\n&lt;/div&gt;\n</code></pre>\n<p>如有错误，请指出，欢迎补充其它一些错误情况。</p>\n',summary:"<hr>\n<ul>\n<li>a标签不可以嵌套交互式元素</li>\n<li>块级元素可以包含内联元素和某些块级元素，内联元素不能包含块级元素，只能包含内联元素</li>\n<li>p标签不能包含块级元素</li>\n<li>这些标签不可包含块级元素</li>\n<li>li标签可以包含div以及ul，ul的子元素应该只有li</li>\n<li>元素并排（块级和块级并列，内联和内联并列)</li>\n</ul>\n"}}],error:null,serverRendered:!0}</script><script defer src="/_nuxt/vendor.bundle.js"></script><script defer src="/_nuxt/nuxt.bundle.js"></script>

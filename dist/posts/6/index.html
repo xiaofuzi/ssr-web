@@ -1,0 +1,47 @@
+<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><link href="/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-739c3fb7 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/index"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/"class="nuxt-link-active">Home</a><li><a href="/page/1">Posts</a><li><a href="/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><hr><h2 id="-css-hack-">为什么需要css Hack?</h2><p>由于不同的浏览器和浏览器各版本对CSS的支持及解析结果不一样，由此带来的的结果是同样的页面在不同的浏览器中显示效果不一样，甚至会出现布局错乱的情况，为了保证各浏览器呈现的效果一致，有时会需要对各个浏览器做单独的处理。（Hack只是进行修补工作，不要当做一个主要的功能。个人觉得参照优雅降级的方式做兼容会比较好，先兼容主流的、版本高的浏览器。然后针对低版本不能兼容的点做相应的处理。)<p>["优雅降级", "渐进增强"]<p>PS: 个人觉得给css3属性增加前缀也是hack的一种<p>常用的hack方式<ul><li>条件注释方式<li>属性前缀方式</ul><h2 id="ie-hack-">ie Hack解决方案</h2><h3 id="1-">1.条件注释法</h3><p>类型于编程语言里的条件语句<pre><code class="lang-javascript">if(条件满足){
+    显示相应的内容
+}
+</code></pre><pre><code>只在IE下生效
+</code></pre><pre><code class="lang-html">    &lt;!--[if IE]>
+    这段文字只在IE浏览器显示
+    &lt;![endif]-->
+</code></pre><pre><code>只在IE6下生效
+</code></pre><pre><code class="lang-html">    &lt;!--[if IE 6]>
+    这段文字只在IE6浏览器显示
+    &lt;![endif]-->
+</code></pre><pre><code>只在IE6以上版本生效
+</code></pre><pre><code class="lang-html">    &lt;!--[if gte IE 6]>
+    这段文字只在IE6以上(包括)版本IE浏览器显示
+    &lt;![endif]-->
+</code></pre><pre><code>只在IE8上不生效
+</code></pre><pre><code class="lang-html">    &lt;!--[if ! IE 8]>
+    这段文字在非IE8浏览器显示
+    &lt;![endif]-->
+</code></pre><pre><code>非IE浏览器生效
+</code></pre><pre><code class="lang-html">    &lt;!--[if !IE]>
+    这段文字只在非IE浏览器显示
+    &lt;![endif]-->
+</code></pre><h3 id="2-hack-">2.属性前缀法(以下hack在标准模式下使用)</h3><p>ie6-hack<p>"_": 只有ie6能够识别的前缀<pre><code class="lang-css">height: 100px;
+width: 100px;
+_height: 150px;/*在ie6下得到的宽高为150px，其余浏览器为100px*/
+_width: 150px;
+</code></pre><p>ie7-hack<p>"+": 只有ie7能够识别的前缀<pre><code class="lang-css">height: 100px;
+width: 100px;
++height: 150px;/*在ie7下得到的宽高为150px，其余浏览器为100px*/
++width: 150px;
+</code></pre><p>ie6、7-hack<p>"*": 只有ie6、7能够识别的前缀<pre><code class="lang-css">height: 100px;
+width: 100px;
+*height: 150px;/*在ie6/7下得到的宽高为150px，其余浏览器为100px*/
+*width: 150px;
+</code></pre><h3 id="-">属性后加数字声明的方式</h3><p>“\9″ IE6/IE7/IE8/IE9/IE10都生效 “\0″ IE8/IE9/IE10都生效，是IE8/9/10的hack “\9\0″ 只对IE9/IE10生效，是IE9/10的hack<p>在处理ie的hack时，一般会需要对ie6/7/8做单独的处理，6/7有单独的前缀，8并没有。下面说明如何对8做单独的处理<pre><code class="lang-css">height: 100px;
+width: 100px;
+height: 150px\0;    /*在ie8/9/10可以识别*/
+width: 100px\9\0;    /*在ie9/10可以识别*/
+</code></pre><p>按如上的设置方式，就对ie8做了单独的处理。<h2 id="-ie-h5-ie6-">如何让ie支持H5(包括ie6)</h2><p>下载地址1：<a href="https://github.com/afarkas/html5shiv">https://github.com/afarkas/html5shiv</a> 下载地址2：<a href="/js/html5shiv.min.js">html5shiv.min.js</a> 使用方式，在页面头部添加如下代码：<pre><code class="lang-html">&lt;!–[if IE]>  
+&lt;script src=”[html5.js]”>&lt;/script>  
+&lt;![endif]–>
+</code></pre><p>这里的src引入的是我们下载的htmlshiv.js文件。<h2 id="-ie-css3-">如何让ie支持CSS3属性</h2><p>借助于ie-css3.htc,<a href="/css/ie-css3.htc">点我下载</a><p>语法：<pre><code class="lang-css">/*给body添加后，body下的子元素都可以使用*/
+body{
+    behavior: url(ie-css3.htc);
+}
+</code></pre></div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"简单cssHack了解，让ie支持H5、css3",date:"2015-11-13T15:08:09.000Z",archives:"pl",tags:"css",id:"34",createTime:"2015-11-13",url:"2015-11-13-简单cssHack了解，让ie支持H5、css3",strTag:"css"},content:'<hr>\n<h2 id="-css-hack-">为什么需要css Hack?</h2>\n<p>由于不同的浏览器和浏览器各版本对CSS的支持及解析结果不一样，由此带来的的结果是同样的页面在不同的浏览器中显示效果不一样，甚至会出现布局错乱的情况，为了保证各浏览器呈现的效果一致，有时会需要对各个浏览器做单独的处理。（Hack只是进行修补工作，不要当做一个主要的功能。个人觉得参照优雅降级的方式做兼容会比较好，先兼容主流的、版本高的浏览器。然后针对低版本不能兼容的点做相应的处理。)</p>\n<p>[&quot;优雅降级&quot;, &quot;渐进增强&quot;]</p>\n<p>PS: 个人觉得给css3属性增加前缀也是hack的一种</p>\n<p>常用的hack方式</p>\n<ul>\n<li>条件注释方式</li>\n<li>属性前缀方式</li>\n</ul>\n<h2 id="ie-hack-">ie Hack解决方案</h2>\n<h3 id="1-">1.条件注释法</h3>\n<p>类型于编程语言里的条件语句</p>\n<pre><code class="lang-javascript">if(条件满足){\n    显示相应的内容\n}\n</code></pre>\n<pre><code>只在IE下生效\n</code></pre><pre><code class="lang-html">    &lt;!--[if IE]&gt;\n    这段文字只在IE浏览器显示\n    &lt;![endif]--&gt;\n</code></pre>\n<pre><code>只在IE6下生效\n</code></pre><pre><code class="lang-html">    &lt;!--[if IE 6]&gt;\n    这段文字只在IE6浏览器显示\n    &lt;![endif]--&gt;\n</code></pre>\n<pre><code>只在IE6以上版本生效\n</code></pre><pre><code class="lang-html">    &lt;!--[if gte IE 6]&gt;\n    这段文字只在IE6以上(包括)版本IE浏览器显示\n    &lt;![endif]--&gt;\n</code></pre>\n<pre><code>只在IE8上不生效\n</code></pre><pre><code class="lang-html">    &lt;!--[if ! IE 8]&gt;\n    这段文字在非IE8浏览器显示\n    &lt;![endif]--&gt;\n</code></pre>\n<pre><code>非IE浏览器生效\n</code></pre><pre><code class="lang-html">    &lt;!--[if !IE]&gt;\n    这段文字只在非IE浏览器显示\n    &lt;![endif]--&gt;\n</code></pre>\n<h3 id="2-hack-">2.属性前缀法(以下hack在标准模式下使用)</h3>\n<p>ie6-hack</p>\n<p>&quot;_&quot;: 只有ie6能够识别的前缀</p>\n<pre><code class="lang-css">height: 100px;\nwidth: 100px;\n_height: 150px;/*在ie6下得到的宽高为150px，其余浏览器为100px*/\n_width: 150px;\n</code></pre>\n<p>ie7-hack</p>\n<p>&quot;+&quot;: 只有ie7能够识别的前缀</p>\n<pre><code class="lang-css">height: 100px;\nwidth: 100px;\n+height: 150px;/*在ie7下得到的宽高为150px，其余浏览器为100px*/\n+width: 150px;\n</code></pre>\n<p>ie6、7-hack</p>\n<p>&quot;*&quot;: 只有ie6、7能够识别的前缀</p>\n<pre><code class="lang-css">height: 100px;\nwidth: 100px;\n*height: 150px;/*在ie6/7下得到的宽高为150px，其余浏览器为100px*/\n*width: 150px;\n</code></pre>\n<h3 id="-">属性后加数字声明的方式</h3>\n<p>“\\9″     IE6/IE7/IE8/IE9/IE10都生效\n“\\0″     IE8/IE9/IE10都生效，是IE8/9/10的hack\n“\\9\\0″     只对IE9/IE10生效，是IE9/10的hack</p>\n<p>在处理ie的hack时，一般会需要对ie6/7/8做单独的处理，6/7有单独的前缀，8并没有。下面说明如何对8做单独的处理</p>\n<pre><code class="lang-css">height: 100px;\nwidth: 100px;\nheight: 150px\\0;    /*在ie8/9/10可以识别*/\nwidth: 100px\\9\\0;    /*在ie9/10可以识别*/\n</code></pre>\n<p>按如上的设置方式，就对ie8做了单独的处理。</p>\n<h2 id="-ie-h5-ie6-">如何让ie支持H5(包括ie6)</h2>\n<p>下载地址1：<a href="https://github.com/afarkas/html5shiv">https://github.com/afarkas/html5shiv</a>\n下载地址2：<a href="/js/html5shiv.min.js">html5shiv.min.js</a>\n使用方式，在页面头部添加如下代码：</p>\n<pre><code class="lang-html">&lt;!–[if IE]&gt;  \n&lt;script src=”[html5.js]”&gt;&lt;/script&gt;  \n&lt;![endif]–&gt;\n</code></pre>\n<p>这里的src引入的是我们下载的htmlshiv.js文件。</p>\n<h2 id="-ie-css3-">如何让ie支持CSS3属性</h2>\n<p>借助于ie-css3.htc,<a href="/css/ie-css3.htc">点我下载</a></p>\n<p>语法：</p>\n<pre><code class="lang-css">/*给body添加后，body下的子元素都可以使用*/\nbody{\n    behavior: url(ie-css3.htc);\n}\n</code></pre>\n',summary:'<hr>\n<h2 id="-css-hack-">为什么需要css Hack?</h2>\n<p>由于不同的浏览器和浏览器各版本对CSS的支持及解析结果不一样，由此带来的的结果是同样的页面在不同的浏览器中显示效果不一样，甚至会出现布局错乱的情况，为了保证各浏览器呈现的效果一致，有时会需要对各个浏览器做单独的处理。（Hack只是进行修补工作，不要当做一个主要的功能。个人觉得参照优雅降级的方式做兼容会比较好，先兼容主流的、版本高的浏览器。然后针对低版本不能兼容的点做相应的处理。)</p>\n<p>[&quot;优雅降级&quot;, &quot;渐进增强&quot;]</p>\n<p>PS: 个人觉得给css3属性增加前缀也是hack的一种</p>\n<p>常用的hack方式</p>\n<ul>\n<li>条件注释方式</li>\n<li>属性前缀方式</li>\n</ul>\n'}}],error:null,serverRendered:!0}</script><script defer src="/_nuxt/vendor.bundle.js"></script><script defer src="/_nuxt/nuxt.bundle.js"></script>
