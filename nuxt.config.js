@@ -18,6 +18,7 @@ for( let i = 0; i < total; i++) {
 }
 
 module.exports = {
+  srcDir: 'client/',
   /*
   ** Headers of the page
   */
@@ -41,7 +42,13 @@ module.exports = {
   ** Add axios globally
   */
   build: {
-    vendor: ['axios']
+    vendor: ['axios'],
+    loaders: [
+      {
+        test: /\.(less)$/,
+        loader: 'less-loader'
+      }
+    ]
   },
   router: {
     base: '/nuxt-blog/'

@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "express": "^4.14.0",
+    "github-api": "^3.0.0",
     "marked": "^0.3.6",
     "moment": "^2.17.1",
     "nuxt": "latest",
