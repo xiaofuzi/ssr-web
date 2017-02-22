@@ -2477,6 +2477,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -3911,7 +3915,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, "\n.post-wrapper {\n    padding: 20px;\n    background-color: #ffffff;\n}\n.post-wrapper a {\n    text-decoration: none;\n}\n.post-wrapper .post-meta {\n    color: #666666;\n    padding-left: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.post-wrapper {\n    padding: 20px;\n    background-color: #ffffff;\n}\n.post-wrapper a {\n    text-decoration: none;\n}\n.post-wrapper .post-meta {\n    color: #666666;\n    padding-left: 5px;\n}\n.post-wrapper .post-meta > span {\n  margin-right: 10px;\n}\n", ""]);
 
 // exports
 

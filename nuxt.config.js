@@ -11,7 +11,7 @@ for (let i = 1; i <= pageNumbers; i++) {
     })
 }
 
-for( let i = 1; i <= total; i++) {
+for( let i = 0; i < total; i++) {
     postsIds.push({
       id: i
     })

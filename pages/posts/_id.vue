@@ -12,6 +12,10 @@
         color: #666666;
         padding-left: 5px;
     }
+
+    .post-wrapper .post-meta > span {
+      margin-right: 10px;
+    }
 </style>
 <template>
     <div class="post-wrapper container">

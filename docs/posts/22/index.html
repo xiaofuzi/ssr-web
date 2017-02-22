@@ -1,81 +1,156 @@
-<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><base href="/nuxt-blog/"><link href="/nuxt-blog/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-739c3fb7 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/nuxt-blog/"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/nuxt-blog/">Home</a><li><a href="/nuxt-blog/page/1">Posts</a><li><a href="/nuxt-blog/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><a href="/nuxt-blog/posts/22"><h2>react/react-native代码规范实践</h2></a></div><div class="post-meta"><span>js、react、react-native</span><span>2016-09-26</span></div><div><div><hr><h3 id="-">驼峰式命名 + 首字母大写</h3><ul><li>基于react本身的特性，组件命名首字母必须大写<li>Javascript本身类命名推荐首字母<li>组件对应文件首字母大写并与组件名相对应</ul><pre><code class="lang-js">/*TopicComponent*/
-class TopicComponent extends Component {}
-</code></pre><p>对应的文件名推荐使用 <code>TopicComponent</code><h3 id="let-const-var">let/const 替代var</h3><p>使用let/const而不是var,给所以变量加上块级作用域<h3 id="-tab-tab-4-">四个空格缩进(若使用tab缩进可将tab设为4个空格)</h3><h3 id="-">语句必须分号结尾</h3><h3 id="-">声明语句运算符、括号前后加一个空格</h3><pre><code class="lang-js">/*变量声明*/
-const name = 'react';
-let myname = 'xiaofu';
-let num = 1 + 1;
+<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><base href="/nuxt-blog/"><link href="/nuxt-blog/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-739c3fb7 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/nuxt-blog/"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/nuxt-blog/">Home</a><li><a href="/nuxt-blog/page/1">Posts</a><li><a href="/nuxt-blog/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><a href="/nuxt-blog/posts/22"><h2>ES6 new features</h2></a></div><div class="post-meta"><span>js、pl</span><span>2016-01-23</span></div><div><div><hr><h2 id="es6-">ES6新语法</h2><h3 id="let-const-">let、const、块级作用域</h3><p>在这之前js中声明变量可以用var或是直接省略不写就可以声明一个变量，并且使用的是函数作用域。<p>es6可以通过 let、const(常量)这两个关键字来声明变量，并且支持块级作用域。<pre><code class="lang-js">var buttons = document.querySelectorAll('button')
+  var output = document.querySelector('#output')
 
-/*函数声明*/
-function fetch (params) {
-    /**
-     * body
-     */
+  for (var i = 0; i &lt; buttons.length; i++) {
+    buttons[i].addEventListener('click', function() {
+      output.innerText = buttons[i].innerText
+    })
+  }
+</code></pre><p>上面这段代码会报错，因为点击事件的回调函数中的i的值都是buttons.length而不是当前循环的i.但 如果使用 let i 的话就不会出现这个问题。<h3 id="-">=> 箭头函数</h3><p>箭头函数可以把它当做匿名函数，优点就是语法简洁。<pre><code class="lang-js">x => x
+
+(x, y) => x + y
+
+x => {
+    return x
 }
 
-/*对象声明*/
-let topicData = {
-    msg: 'message',
-    data: [],
-    getData () {
-        /**
-         * body
-         */
-    }
+(x, y) => {
+    return x + y
 }
-</code></pre><h3 id="-">私有属性及方法加下划线前缀</h3><h3 id="-class-200-">建议一个class一个文件，单文件不要超过200行</h3><p>单文件过大会带来阅读障碍，如果功能过于复杂，建议拆分为子类<h3 id="-class-">文件名与class名保持一致</h3><h3 id="-props-state-">严格划分好实例属性、props、state，避免重复渲染</h3><p>不要滥用 state,应该只将影响视图的值存放在 state 中，这样可以避免频繁的 state 操作以及渲染。<h3 id="proptypes-es7-static-">propTypes类型声明必须，并以es7 static关键字的格式声明</h3><pre><code class="lang-js">export default class TopicComponent extends Component {
-    static propTypes = {
-        data: PropTypes.object.isRequired,
-        fetchData: PropTypes.func.isRequired
-    }
-
-    constructor (props) {
-        super(props);
-    }
-}
-</code></pre><h3 id="state-">state在构造函数中声明</h3><pre><code class="lang-js">export default class TopicComponent extends Component {
-    static propTypes = {
-        data: PropTypes.object.isRequired,
-        fetchData: PropTypes.func.isRequired
-    }
-
-    constructor (props) {
-        super(props);
-
-        this.state = {
-
+</code></pre><h3 id="-">函数上下文</h3><p>箭头函数带来的另外一个改变是函数上下文的绑定(this)，this不再是随着调用者而改变，即使使用 call、apply也不会改变。即函数的上下文一直都是函数声明时的上下文。<pre><code class="lang-js">name = "xiaofu";
+age = 20;
+var obj = {
+        name: "yang",
+        age: 17,
+        getName: function(){
+            var name = () => {
+                return this.name;
+            }
+            return name;
+        },
+        getAge: function(){
+            var age = function(){
+                return this.age;
+            }
+            return age;
         }
     }
+var person = {
+    name: 'cat',
+    age: 28
 }
-</code></pre><h3 id="-">单行注释写在当前代码行的末尾，尽量保持当前文件所有单行注释对齐</h3><h3 id="-">多行注释按如下格式，紧贴所需注释代码上方，无需空行(注意空格)</h3><pre><code class="lang-js">/**
- * 注释
- */
-</code></pre><h3 id="-class-">常量声明在class之前</h3><h3 id="import-">import模块按类型划分在当前文件最前面部分，解构类型的导入一个空行分隔，与其它代码用两个空行分隔</h3><pre><code class="lang-js">import React, {
-    Component,
-    PropTypes
-} from 'react';
+myname = obj.getName();
+myage = obj.getAge();
+console.log(myname());                /*yang*/
+console.log(myage())                /*20*/
+console.log(myname.call(person));    /*yang*/
+console.log(myage.call(person));    /*28*/
+</code></pre><p>从上面我们可以发现箭头函数输出的一直都是声明的上下文即 obj 对象。<p>注：let const 带来了变量的作用域改变，而箭头函数带来了this指向的改变。而且我觉得这两个改变使js 与其它主流的语言更接近。<h3 id="-">模板字符串</h3><ul><li>支持变量注入<li>支持换行</ul><blockquote><p>ruby中就很好的支持这个特性。</blockquote><p>模板使我们不在需要使用 '+' 来拼接字符串。<pre><code class="lang-js">let name = 'yangxiaofu';
+let company = 'jikexueyuan';
 
-import {
-    View,
-    Text,
-    StyleSheet,
-    NavigatorIOS,
-    ListView,
-    TouchableHighlight,
-    Image,
-    ActivityIndicator,
-    RefreshControl
-} from 'react-native';
+let greet = `Hi, I am ${name}, I am working at ${company}`
+console.log(greet) /* Hi, I am yangxiaofu, I am working at jikexueyuan*/
+</code></pre><p>如果使用es5, 那么我们需要这样做：<pre><code class="lang-js">var name = 'yangxiaofu';
+var company = 'jikexueyuan';
 
-import ScrollableTabView from 'react-native-scrollable-tab-view';
-import moment from 'moment';
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: 64,
-        paddingBottom: 48,
-        backgroundColor: '#ffffff'
+var greet = "Hi, I am " + name ", I am working at ";
+    greet += company;
+console.log(greet) /* Hi, I am yangxiaofu, I am working at jikexueyuan*/
+</code></pre><h3 id="-function-">函数作为属性时可用省略 function 关键字</h3><pre><code class="lang-js">let person = {
+    //es5
+    getName: function(){
+        return 'person';
+    },
+    //es6
+    getAge(){
+        return 'age';
     }
 }
-</code></pre><h3 id="-">组件代码编写顺序</h3><ul><li>PropType声明<li>静态属性<li>实例属性<li>构造函数(包含state)<li>静态方法<li>实例方法<li>私有函数<li>生命周期函数<li>render子函数以及render函数</ul></div></div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"react/react-native代码规范实践",date:"2016-09-26T10:06:36.000Z",tags:["js","react","react-native"],topper:!0,id:"22",createTime:"2016-09-26",url:"2016-09-26-react/react-native代码规范实践",strTag:"js、react、react-native"},content:'<hr>\n<h3 id="-">驼峰式命名 + 首字母大写</h3>\n<ul>\n<li>基于react本身的特性，组件命名首字母必须大写</li>\n<li>Javascript本身类命名推荐首字母</li>\n<li>组件对应文件首字母大写并与组件名相对应</li>\n</ul>\n<pre><code class="lang-js">/*TopicComponent*/\nclass TopicComponent extends Component {}\n</code></pre>\n<p>对应的文件名推荐使用 <code>TopicComponent</code></p>\n<h3 id="let-const-var">let/const 替代var</h3>\n<p>使用let/const而不是var,给所以变量加上块级作用域</p>\n<h3 id="-tab-tab-4-">四个空格缩进(若使用tab缩进可将tab设为4个空格)</h3>\n<h3 id="-">语句必须分号结尾</h3>\n<h3 id="-">声明语句运算符、括号前后加一个空格</h3>\n<pre><code class="lang-js">/*变量声明*/\nconst name = &#39;react&#39;;\nlet myname = &#39;xiaofu&#39;;\nlet num = 1 + 1;\n\n/*函数声明*/\nfunction fetch (params) {\n    /**\n     * body\n     */\n}\n\n/*对象声明*/\nlet topicData = {\n    msg: &#39;message&#39;,\n    data: [],\n    getData () {\n        /**\n         * body\n         */\n    }\n}\n</code></pre>\n<h3 id="-">私有属性及方法加下划线前缀</h3>\n<h3 id="-class-200-">建议一个class一个文件，单文件不要超过200行</h3>\n<p>单文件过大会带来阅读障碍，如果功能过于复杂，建议拆分为子类</p>\n<h3 id="-class-">文件名与class名保持一致</h3>\n<h3 id="-props-state-">严格划分好实例属性、props、state，避免重复渲染</h3>\n<p>不要滥用 state,应该只将影响视图的值存放在 state 中，这样可以避免频繁的 state 操作以及渲染。</p>\n<h3 id="proptypes-es7-static-">propTypes类型声明必须，并以es7 static关键字的格式声明</h3>\n<pre><code class="lang-js">export default class TopicComponent extends Component {\n    static propTypes = {\n        data: PropTypes.object.isRequired,\n        fetchData: PropTypes.func.isRequired\n    }\n\n    constructor (props) {\n        super(props);\n    }\n}\n</code></pre>\n<h3 id="state-">state在构造函数中声明</h3>\n<pre><code class="lang-js">export default class TopicComponent extends Component {\n    static propTypes = {\n        data: PropTypes.object.isRequired,\n        fetchData: PropTypes.func.isRequired\n    }\n\n    constructor (props) {\n        super(props);\n\n        this.state = {\n\n        }\n    }\n}\n</code></pre>\n<h3 id="-">单行注释写在当前代码行的末尾，尽量保持当前文件所有单行注释对齐</h3>\n<h3 id="-">多行注释按如下格式，紧贴所需注释代码上方，无需空行(注意空格)</h3>\n<pre><code class="lang-js">/**\n * 注释\n */\n</code></pre>\n<h3 id="-class-">常量声明在class之前</h3>\n<h3 id="import-">import模块按类型划分在当前文件最前面部分，解构类型的导入一个空行分隔，与其它代码用两个空行分隔</h3>\n<pre><code class="lang-js">import React, {\n    Component,\n    PropTypes\n} from &#39;react&#39;;\n\nimport {\n    View,\n    Text,\n    StyleSheet,\n    NavigatorIOS,\n    ListView,\n    TouchableHighlight,\n    Image,\n    ActivityIndicator,\n    RefreshControl\n} from &#39;react-native&#39;;\n\nimport ScrollableTabView from &#39;react-native-scrollable-tab-view&#39;;\nimport moment from &#39;moment&#39;;\n\n\nconst styles = StyleSheet.create({\n    container: {\n        flex: 1,\n        marginTop: 64,\n        paddingBottom: 48,\n        backgroundColor: &#39;#ffffff&#39;\n    }\n}\n</code></pre>\n<h3 id="-">组件代码编写顺序</h3>\n<ul>\n<li>PropType声明</li>\n<li>静态属性</li>\n<li>实例属性</li>\n<li>构造函数(包含state)</li>\n<li>静态方法</li>\n<li>实例方法 </li>\n<li>私有函数</li>\n<li>生命周期函数 </li>\n<li>render子函数以及render函数</li>\n</ul>\n',summary:'<hr>\n<h3 id="-">驼峰式命名 + 首字母大写</h3>\n<ul>\n<li>基于react本身的特性，组件命名首字母必须大写</li>\n<li>Javascript本身类命名推荐首字母</li>\n<li>组件对应文件首字母大写并与组件名相对应</li>\n</ul>\n<pre><code class="lang-js">/*TopicComponent*/\nclass TopicComponent extends Component {}\n</code></pre>\n<p>对应的文件名推荐使用 <code>TopicComponent</code></p>\n<h3 id="let-const-var">let/const 替代var</h3>\n<p>使用let/const而不是var,给所以变量加上块级作用域</p>\n'}}],error:null,serverRendered:!0}</script><script defer src="/nuxt-blog/_nuxt/vendor.bundle.js"></script><script defer src="/nuxt-blog/_nuxt/nuxt.bundle.js"></script>
+</code></pre><p>不过我还是看着之前的写法比较习惯， function 关键字让我一眼就知道它是一个函数， 不过省略的写法的确简洁不少。<h3 id="-">多重赋值</h3><pre><code class="lang-js">let [x, y] = [30, 20];
+</code></pre><h3 id="-">默认值参数</h3><pre><code class="lang-js">//es6
+function person(name = "name"){
+    return name;
+}
+
+//es5
+function person(name){
+    name = name || "name";
+}
+</code></pre><p>上面是es5的一种常用的默认值赋值方式，但当传入的值为 false 的情况下则无法达到预想的结果。<h3 id="-args-arguments">...args 替代 arguments</h3><pre><code class="lang-js">/*es5*/
+function method01() {
+  var args = [].slice.apply(arguments)
+
+}
+function method02(name) {
+  var args = [].slice.apply(arguments, 1)
+
+}
+
+/*es6*/
+function method01(...args) {
+
+}
+function method02(name, ...args) {
+
+}
+</code></pre><h3 id="class">class</h3><p>本质还是函数<pre><code class="lang-js">class Cat{}
+/*
+* [Function: Cat]
+*/
+
+class Person {
+  constructor(name, height, age) {
+    this.name = name;
+    this.height = height;
+    this.age = age;
+  }
+
+  toStr() {
+    return `my name is ${this.name}`;
+  }
+}
+
+var  me = new Person('yangxiaofu', 180, 19)
+console.log(me.toStr()) /*my name is yangxiaofu*/
+</code></pre><p>不足：无法直接设置类变量，这在其他原生支持类的语言中是可以的<pre><code class="lang-js">class Person{
+    let parent = 'parents';    //wrong
+    constructor(name){
+        this.name = name;
+    }
+}
+</code></pre><p>上面给类添加一个parent变量的写法是错误的。<h3 id="-">类继承</h3><pre><code class="lang-js">
+class Animal{
+    eat(){
+        console.log('eating something');
+    }
+}
+
+class Cat extends Animal{
+    constructor(name){
+        super()
+        this.name = name;
+    }
+}
+
+var cat = new Cat('cat');
+cat.eat();
+</code></pre><p>使用extends关键字以及 super 方法，super方法必须在 this使用之前调用。<h3 id="-static-">可以通过static定义静态方法</h3><pre><code class="lang-js">class Animal{
+    eat(){
+        console.log('eating something');
+    }
+}
+
+class Cat extends Animal{
+    constructor(name){
+        super()
+        this.name = name;
+    }
+
+    static get fullname(){
+        return 'cat animal';
+    }
+}
+
+var cat = new Cat('cat');
+console.log(Cat.fullname);
+</code></pre><p>与c++这样的语言相比，类的特性还比较少。</div></div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"ES6 new features",date:"2016-01-23T15:06:36.000Z",tags:["js","pl"],id:"22",createTime:"2016-01-23",url:"2016-01-23-ES6 new features",strTag:"js、pl"},content:'<hr>\n<h2 id="es6-">ES6新语法</h2>\n<h3 id="let-const-">let、const、块级作用域</h3>\n<p>在这之前js中声明变量可以用var或是直接省略不写就可以声明一个变量，并且使用的是函数作用域。</p>\n<p>es6可以通过 let、const(常量)这两个关键字来声明变量，并且支持块级作用域。</p>\n<pre><code class="lang-js">var buttons = document.querySelectorAll(&#39;button&#39;)\n  var output = document.querySelector(&#39;#output&#39;)\n\n  for (var i = 0; i &lt; buttons.length; i++) {\n    buttons[i].addEventListener(&#39;click&#39;, function() {\n      output.innerText = buttons[i].innerText\n    })\n  }\n</code></pre>\n<p>上面这段代码会报错，因为点击事件的回调函数中的i的值都是buttons.length而不是当前循环的i.但\n如果使用 let i 的话就不会出现这个问题。</p>\n<h3 id="-">=&gt; 箭头函数</h3>\n<p>箭头函数可以把它当做匿名函数，优点就是语法简洁。</p>\n<pre><code class="lang-js">x =&gt; x\n\n(x, y) =&gt; x + y\n\nx =&gt; {\n    return x\n}\n\n(x, y) =&gt; {\n    return x + y\n}\n</code></pre>\n<h3 id="-">函数上下文</h3>\n<p>箭头函数带来的另外一个改变是函数上下文的绑定(this)，this不再是随着调用者而改变，即使使用\ncall、apply也不会改变。即函数的上下文一直都是函数声明时的上下文。</p>\n<pre><code class="lang-js">name = &quot;xiaofu&quot;;\nage = 20;\nvar obj = {\n        name: &quot;yang&quot;,\n        age: 17,\n        getName: function(){\n            var name = () =&gt; {\n                return this.name;\n            }\n            return name;\n        },\n        getAge: function(){\n            var age = function(){\n                return this.age;\n            }\n            return age;\n        }\n    }\nvar person = {\n    name: &#39;cat&#39;,\n    age: 28\n}\nmyname = obj.getName();\nmyage = obj.getAge();\nconsole.log(myname());                /*yang*/\nconsole.log(myage())                /*20*/\nconsole.log(myname.call(person));    /*yang*/\nconsole.log(myage.call(person));    /*28*/\n</code></pre>\n<p>从上面我们可以发现箭头函数输出的一直都是声明的上下文即 obj 对象。</p>\n<p>注：let const 带来了变量的作用域改变，而箭头函数带来了this指向的改变。而且我觉得这两个改变使js\n与其它主流的语言更接近。</p>\n<h3 id="-">模板字符串</h3>\n<ul>\n<li>支持变量注入</li>\n<li>支持换行</li>\n</ul>\n<blockquote>\n<p>ruby中就很好的支持这个特性。</p>\n</blockquote>\n<p>模板使我们不在需要使用 &#39;+&#39; 来拼接字符串。</p>\n<pre><code class="lang-js">let name = &#39;yangxiaofu&#39;;\nlet company = &#39;jikexueyuan&#39;;\n\nlet greet = `Hi, I am ${name}, I am working at ${company}`\nconsole.log(greet) /* Hi, I am yangxiaofu, I am working at jikexueyuan*/\n</code></pre>\n<p>如果使用es5, 那么我们需要这样做：</p>\n<pre><code class="lang-js">var name = &#39;yangxiaofu&#39;;\nvar company = &#39;jikexueyuan&#39;;\n\nvar greet = &quot;Hi, I am &quot; + name &quot;, I am working at &quot;;\n    greet += company;\nconsole.log(greet) /* Hi, I am yangxiaofu, I am working at jikexueyuan*/\n</code></pre>\n<h3 id="-function-">函数作为属性时可用省略 function 关键字</h3>\n<pre><code class="lang-js">let person = {\n    //es5\n    getName: function(){\n        return &#39;person&#39;;\n    },\n    //es6\n    getAge(){\n        return &#39;age&#39;;\n    }\n}\n</code></pre>\n<p>不过我还是看着之前的写法比较习惯， function 关键字让我一眼就知道它是一个函数，\n不过省略的写法的确简洁不少。</p>\n<h3 id="-">多重赋值</h3>\n<pre><code class="lang-js">let [x, y] = [30, 20];\n</code></pre>\n<h3 id="-">默认值参数</h3>\n<pre><code class="lang-js">//es6\nfunction person(name = &quot;name&quot;){\n    return name;\n}\n\n//es5\nfunction person(name){\n    name = name || &quot;name&quot;;\n}\n</code></pre>\n<p>上面是es5的一种常用的默认值赋值方式，但当传入的值为 false 的情况下则无法达到预想的结果。</p>\n<h3 id="-args-arguments">...args 替代 arguments</h3>\n<pre><code class="lang-js">/*es5*/\nfunction method01() {\n  var args = [].slice.apply(arguments)\n\n}\nfunction method02(name) {\n  var args = [].slice.apply(arguments, 1)\n\n}\n\n/*es6*/\nfunction method01(...args) {\n\n}\nfunction method02(name, ...args) {\n\n}\n</code></pre>\n<h3 id="class">class</h3>\n<p>本质还是函数</p>\n<pre><code class="lang-js">class Cat{}\n/*\n* [Function: Cat]\n*/\n\nclass Person {\n  constructor(name, height, age) {\n    this.name = name;\n    this.height = height;\n    this.age = age;\n  }\n\n  toStr() {\n    return `my name is ${this.name}`;\n  }\n}\n\nvar  me = new Person(&#39;yangxiaofu&#39;, 180, 19)\nconsole.log(me.toStr()) /*my name is yangxiaofu*/\n</code></pre>\n<p>不足：无法直接设置类变量，这在其他原生支持类的语言中是可以的</p>\n<pre><code class="lang-js">class Person{\n    let parent = &#39;parents&#39;;    //wrong\n    constructor(name){\n        this.name = name;\n    }\n}\n</code></pre>\n<p>上面给类添加一个parent变量的写法是错误的。</p>\n<h3 id="-">类继承</h3>\n<pre><code class="lang-js">\nclass Animal{\n    eat(){\n        console.log(&#39;eating something&#39;);\n    }\n}\n\nclass Cat extends Animal{\n    constructor(name){\n        super()\n        this.name = name;\n    }\n}\n\nvar cat = new Cat(&#39;cat&#39;);\ncat.eat();\n</code></pre>\n<p>使用extends关键字以及 super 方法，super方法必须在 this使用之前调用。</p>\n<h3 id="-static-">可以通过static定义静态方法</h3>\n<pre><code class="lang-js">class Animal{\n    eat(){\n        console.log(&#39;eating something&#39;);\n    }\n}\n\nclass Cat extends Animal{\n    constructor(name){\n        super()\n        this.name = name;\n    }\n\n    static get fullname(){\n        return &#39;cat animal&#39;;\n    }\n}\n\nvar cat = new Cat(&#39;cat&#39;);\nconsole.log(Cat.fullname);\n</code></pre>\n<p>与c++这样的语言相比，类的特性还比较少。</p>\n',summary:'<hr>\n<h2 id="es6-">ES6新语法</h2>\n<h3 id="let-const-">let、const、块级作用域</h3>\n<p>在这之前js中声明变量可以用var或是直接省略不写就可以声明一个变量，并且使用的是函数作用域。</p>\n<p>es6可以通过 let、const(常量)这两个关键字来声明变量，并且支持块级作用域。</p>\n<p>```js\nvar buttons = document.querySelectorAll(&#39;button&#39;)\n  var output = document.querySelector(&#39;#output&#39;)</p>\n<p>  for (var i</p>\n'}}],error:null,serverRendered:!0}</script><script defer src="/nuxt-blog/_nuxt/vendor.bundle.js"></script><script defer src="/nuxt-blog/_nuxt/nuxt.bundle.js"></script>
