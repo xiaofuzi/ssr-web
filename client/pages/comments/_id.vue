@@ -2,14 +2,14 @@
    .ellipsis-l3 {
          -webkit-line-clamp: 3;
    }
-  .box {
+  .comment-page .box {
       background: #ffffff;
       box-shadow: 0 0 0 0 rgba(163,162,162,0.50);
       margin: 20px;
       padding: 20px;
       overflow: hidden;
       display: flex;
-      display: webkit-flex;
+      display: -webkit-flex;
 
       .box-title {
             padding-bottom: 10px;
@@ -23,7 +23,7 @@
 
       .comment-body {
             flex: 1;
-            webkit-flex: 1;
+            -webkit-flex: 1;
       }
 
       .avatar {
@@ -87,7 +87,7 @@
   }
 </style>
 <template>
-  <section class="page-wrapper container">
+  <section class="page-wrapper container comment-page">
     <h2 class="title">
         {{title}}
     </h2>

@@ -4325,7 +4325,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n.ellipsis-l3 {\n  -webkit-line-clamp: 3;\n}\n.box {\n  background: #ffffff;\n  box-shadow: 0 0 0 0 rgba(163, 162, 162, 0.5);\n  margin: 20px;\n  padding: 20px;\n  overflow: hidden;\n  display: -ms-flexbox;\n  display: flex;\n  display: webkit-flex;\n}\n.box .box-title {\n  padding-bottom: 10px;\n  margin-bottom: 10px;\n  border-bottom: 1px solid #ddd;\n}\n.box .user-info {\n  min-width: 70px;\n}\n.box .comment-body {\n  -ms-flex: 1;\n      flex: 1;\n  webkit-flex: 1;\n}\n.box .avatar {\n  width: 50px;\n  height: 50px;\n  margin: auto auto;\n  margin-bottom: 10px;\n}\n.box .avatar img {\n  width: 100%;\n  height: 100%;\n  border-radius: 50%;\n}\n.box:hover {\n  box-shadow: 0 4px 31px 0 rgba(163, 162, 162, 0.7);\n}\n.box a {\n  text-decoration: none;\n}\n.box a:hover {\n  color: #C12127;\n  transition: color 0.3s ease-in-out;\n}\n.box .post-summary {\n  overflow: scroll;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  max-height: 250px;\n}\n.box .post-meta {\n  color: #666666;\n  padding-left: 5px;\n}\n.box .post-meta span {\n  display: inline-block;\n  margin-right: 10px;\n}\n.main-wrap .no-data {\n  text-align: center;\n  padding: 20px;\n  margin-top: 30px;\n  background-color: #ffffff;\n}\n.main-wrap ul {\n  padding: 0;\n}\n.main-wrap li {\n  list-style: none;\n}\n", ""]);
+exports.push([module.i, "\n.ellipsis-l3 {\n  -webkit-line-clamp: 3;\n}\n.comment-page .box {\n  background: #ffffff;\n  box-shadow: 0 0 0 0 rgba(163, 162, 162, 0.5);\n  margin: 20px;\n  padding: 20px;\n  overflow: hidden;\n  display: -ms-flexbox;\n  display: flex;\n  display: -webkit-flex;\n}\n.comment-page .box .box-title {\n  padding-bottom: 10px;\n  margin-bottom: 10px;\n  border-bottom: 1px solid #ddd;\n}\n.comment-page .box .user-info {\n  min-width: 70px;\n}\n.comment-page .box .comment-body {\n  -ms-flex: 1;\n      flex: 1;\n  -webkit-flex: 1;\n}\n.comment-page .box .avatar {\n  width: 50px;\n  height: 50px;\n  margin: auto auto;\n  margin-bottom: 10px;\n}\n.comment-page .box .avatar img {\n  width: 100%;\n  height: 100%;\n  border-radius: 50%;\n}\n.box:hover {\n  box-shadow: 0 4px 31px 0 rgba(163, 162, 162, 0.7);\n}\n.box a {\n  text-decoration: none;\n}\n.box a:hover {\n  color: #C12127;\n  transition: color 0.3s ease-in-out;\n}\n.box .post-summary {\n  overflow: scroll;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  max-height: 250px;\n}\n.box .post-meta {\n  color: #666666;\n  padding-left: 5px;\n}\n.box .post-meta span {\n  display: inline-block;\n  margin-right: 10px;\n}\n.main-wrap .no-data {\n  text-align: center;\n  padding: 20px;\n  margin-top: 30px;\n  background-color: #ffffff;\n}\n.main-wrap ul {\n  padding: 0;\n}\n.main-wrap li {\n  list-style: none;\n}\n", ""]);
 
 // exports
 
@@ -5590,7 +5590,7 @@ module.exports.render._withStripped = true
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('section', {
-    staticClass: "page-wrapper container"
+    staticClass: "page-wrapper container comment-page"
   }, [_c('h2', {
     staticClass: "title"
   }, [_vm._v("\n      " + _vm._s(_vm.title) + "\n  ")]), _c('div', {
