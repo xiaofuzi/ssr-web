@@ -21,7 +21,7 @@ router.get('/ask/:id', function (req, res, next) {
     if (pageNum < 0) {
         res.sendStatus(404)
     } else {
-        getIssueList((arr)=>{
+        getIssueList((err, arr)=>{
         	res.json(arr);
         })
     }
@@ -49,6 +49,7 @@ function getIssueList (cb=()=>{}) {
 		//labels: 'post'
 	}, (err, issues)=>{
 		let arr = [];
+        issues = issues || [];
 		issues.forEach((issue)=>{
 			arr.push({
 				title: issue.title,
@@ -61,7 +62,7 @@ function getIssueList (cb=()=>{}) {
 			});
 		})
 
-		cb(arr);
+		cb(err, arr);
 	})
 }
 
@@ -87,5 +88,5 @@ function getIssueComments (id, cb=()=>{}) {
 	})
 }
 
-module.exports = router
+exports.router = router
 exports.getIssueList = getIssueList

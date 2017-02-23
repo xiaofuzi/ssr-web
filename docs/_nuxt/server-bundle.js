@@ -423,13 +423,13 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(68),
   /* template */
-  __webpack_require__(164),
+  __webpack_require__(157),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/client/components/Link.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/client/components/Link.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Link.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -1667,28 +1667,28 @@ module.exports = require("querystring");
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router___default.a);
 
-var _75cca557 =  false ? function () {
-		return System.import('/Users/xiaofu/work/doc/blog/nuxt-blog/client/pages/index.vue');
+var _121a435f =  false ? function () {
+		return System.import('/Users/yangxiaofu/work/opensource/nuxt/iweb/client/pages/index.vue');
 } : __webpack_require__(150);
 
-var _5614ca92 =  false ? function () {
-		return System.import('/Users/xiaofu/work/doc/blog/nuxt-blog/client/pages/about.vue');
+var _1b3b2ecc =  false ? function () {
+		return System.import('/Users/yangxiaofu/work/opensource/nuxt/iweb/client/pages/about.vue');
 } : __webpack_require__(147);
 
-var _0e213183 =  false ? function () {
-		return System.import('/Users/xiaofu/work/doc/blog/nuxt-blog/client/pages/posts/_id.vue');
+var _6ee08b8b =  false ? function () {
+		return System.import('/Users/yangxiaofu/work/opensource/nuxt/iweb/client/pages/posts/_id.vue');
 } : __webpack_require__(152);
 
-var _502d0950 =  false ? function () {
-		return System.import('/Users/xiaofu/work/doc/blog/nuxt-blog/client/pages/asks/_id.vue');
+var _7c964e48 =  false ? function () {
+		return System.import('/Users/yangxiaofu/work/opensource/nuxt/iweb/client/pages/asks/_id.vue');
 } : __webpack_require__(148);
 
-var _cfdd32ac =  false ? function () {
-		return System.import('/Users/xiaofu/work/doc/blog/nuxt-blog/client/pages/comments/_id.vue');
+var _33df6fa2 =  false ? function () {
+		return System.import('/Users/yangxiaofu/work/opensource/nuxt/iweb/client/pages/comments/_id.vue');
 } : __webpack_require__(149);
 
-var _5e9d51c5 =  false ? function () {
-		return System.import('/Users/xiaofu/work/doc/blog/nuxt-blog/client/pages/page/_id.vue');
+var _e9f2d286 =  false ? function () {
+		return System.import('/Users/yangxiaofu/work/opensource/nuxt/iweb/client/pages/page/_id.vue');
 } : __webpack_require__(151);
 
 var scrollBehavior = function scrollBehavior(to, from, savedPosition) {
@@ -1722,27 +1722,27 @@ var scrollBehavior = function scrollBehavior(to, from, savedPosition) {
 		scrollBehavior: scrollBehavior,
 		routes: [{
 				path: "/",
-				component: _75cca557,
+				component: _121a435f,
 				name: "index"
 		}, {
 				path: "/about",
-				component: _5614ca92,
+				component: _1b3b2ecc,
 				name: "about"
 		}, {
 				path: "/posts/:id?",
-				component: _0e213183,
+				component: _6ee08b8b,
 				name: "posts-id"
 		}, {
 				path: "/asks/:id?",
-				component: _502d0950,
+				component: _7c964e48,
 				name: "asks-id"
 		}, {
 				path: "/comments/:id?",
-				component: _cfdd32ac,
+				component: _33df6fa2,
 				name: "comments-id"
 		}, {
 				path: "/page/:id?",
-				component: _5e9d51c5,
+				component: _e9f2d286,
 				name: "page-id"
 		}]
 });
@@ -1787,7 +1787,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var layouts = {
 
   "_default":  false ? function () {
-    return System.import('/Users/xiaofu/work/doc/blog/nuxt-blog/client/layouts/default.vue');
+    return System.import('/Users/yangxiaofu/work/opensource/nuxt/iweb/client/layouts/default.vue');
   } : __webpack_require__(145)
 
 };
@@ -1948,8 +1948,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__nuxt_child__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Users_xiaofu_work_doc_blog_nuxt_blog_client_layouts_error_vue__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Users_xiaofu_work_doc_blog_nuxt_blog_client_layouts_error_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Users_xiaofu_work_doc_blog_nuxt_blog_client_layouts_error_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Users_yangxiaofu_work_opensource_nuxt_iweb_client_layouts_error_vue__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Users_yangxiaofu_work_opensource_nuxt_iweb_client_layouts_error_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Users_yangxiaofu_work_opensource_nuxt_iweb_client_layouts_error_vue__);
 //
 //
 //
@@ -1999,7 +1999,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   components: {
     NuxtChild: __WEBPACK_IMPORTED_MODULE_1__nuxt_child__["a" /* default */],
-    NuxtError: __WEBPACK_IMPORTED_MODULE_2__Users_xiaofu_work_doc_blog_nuxt_blog_client_layouts_error_vue___default.a
+    NuxtError: __WEBPACK_IMPORTED_MODULE_2__Users_yangxiaofu_work_opensource_nuxt_iweb_client_layouts_error_vue___default.a
   }
 };
 
@@ -2140,6 +2140,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -2154,7 +2155,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 text: 'Posts',
                 url: '/page/1'
             }, {
-                text: 'Ask',
+                text: 'Asks',
                 url: '/asks/1?currentPage=1'
             }, {
                 text: 'About',
@@ -2445,7 +2446,7 @@ var LinkTo = void 0;
 
     watch: {},
     mounted: function mounted() {
-        this.currentPage = Number(this.$route.query.currentPage);
+        this.currentPage = Number(this.$route.query.currentPage || 1);
         this.path = window.location.pathname;
 
         LinkTo = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__plugins_router__["a" /* default */])(window);
@@ -4282,7 +4283,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n.navbar {\n\tbackground: #ffffff;\n\tborder-bottom: 2px solid #C12127;\n}\n.container .logo{\n\tfloat: left;\n}\n.container .logo h2 {\n\tmargin-top: 10px;\n\tfont-weight: 900;\n}\n.container .logo a {\n\ttext-decoration: none;\n\tfont-weight: 900;\n}\n", ""]);
+exports.push([module.i, "\n.ellipsis-l3 {\n       -webkit-line-clamp: 3;\n}\n.box {\n    background: #ffffff;\n    box-shadow: 0 0 0 0 rgba(163,162,162,0.50);\n    margin: 20px;\n    padding: 20px;\n}\n.box:hover {\n    box-shadow: 0 4px 31px 0 rgba(163,162,162,0.70);\n}\n.box a {\n      text-decoration: none;\n}\n.box a:hover {\n      color: #C12127;\n      transition: color 0.3s ease-in-out;\n}\n.box .post-summary {\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n      height: 150px;\n}\n.box .post-meta {\n      color: #666666;\n      padding-left: 5px;\n}\n.box .post-meta span {\n      display: inline-block;\n      margin-right: 10px;\n}\n.main-wrap ul {\n      padding: 0;\n}\n.main-wrap li {\n      list-style: none;\n}\n", ""]);
 
 // exports
 
@@ -4296,7 +4297,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n.ellipsis-l3 {\n  -webkit-line-clamp: 3;\n}\n.box {\n  background: #ffffff;\n  box-shadow: 0 0 0 0 rgba(163, 162, 162, 0.5);\n  margin: 20px;\n  padding: 20px;\n}\n.box .box-title {\n  padding-bottom: 10px;\n  margin-bottom: 10px;\n  border-bottom: 1px solid #ddd;\n}\n.box:hover {\n  box-shadow: 0 4px 31px 0 rgba(163, 162, 162, 0.7);\n}\n.box a {\n  text-decoration: none;\n}\n.box a:hover {\n  color: #C12127;\n  transition: color 0.3s ease-in-out;\n}\n.box .post-summary {\n  overflow: scroll;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  max-height: 250px;\n}\n.box .post-meta {\n  color: #666666;\n  padding-left: 5px;\n}\n.box .post-meta span {\n  display: inline-block;\n  margin-right: 10px;\n}\n.main-wrap ul {\n  padding: 0;\n}\n.main-wrap li {\n  list-style: none;\n}\n.main-wrap .footer {\n  margin: 20px;\n  padding: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.page-wrapper[data-v-282b9938] {\n    background: #ffffff;\n}\n.page-wrapper .pageWrap[data-v-282b9938] {\n  padding-bottom: 200px;\n}\n.page-wrapper .pageWrap ul[data-v-282b9938] {\n  padding-left: 40px;\n  margin-bottom: 40px;\n}\n.page-wrapper .pageWrap li[data-v-282b9938] {\n  margin-bottom: 10px;\n}\n.page-wrapper .pageWrap li a[data-v-282b9938]{\n  color: #777;\n  font-weight: 500;\n  text-decoration: none;\n}\n.page-wrapper .pageWrap li a[data-v-282b9938]:hover{\n  color: #333;\n}\n", ""]);
 
 // exports
 
@@ -4310,7 +4311,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n.progress[data-v-04b1682c] {\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  height: 2px;\n  width: 0%;\n  transition: width 0.2s, opacity 0.4s;\n  opacity: 1;\n  background-color: #efc14e;\n  z-index: 999999;\n}\n", ""]);
+exports.push([module.i, "\n.title[data-v-3b6bca64]\n{\n  margin-top: 15px;\n  font-size: 5em;\n}\n.info[data-v-3b6bca64]\n{\n  font-weight: 300;\n  color: #9aabb1;\n  margin: 0;\n}\n.button[data-v-3b6bca64]\n{\n  margin-top: 50px;\n}\n", ""]);
 
 // exports
 
@@ -4324,7 +4325,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n.page-wrapper[data-v-11d9cd28] {\n    background: #ffffff;\n}\n.page-wrapper .pageWrap[data-v-11d9cd28] {\n    padding-top: 20px;\n}\n.page-wrapper .pageWrap ul[data-v-11d9cd28] {\n  padding-left: 40px;\n  margin-bottom: 40px;\n}\n.page-wrapper .pageWrap li[data-v-11d9cd28] {\n  margin-bottom: 10px;\n}\n.page-wrapper .pageWrap li a[data-v-11d9cd28]{\n  color: #777;\n  font-weight: 500;\n  text-decoration: none;\n}\n.page-wrapper .pageWrap li a[data-v-11d9cd28]:hover{\n  color: #333;\n}\n", ""]);
+exports.push([module.i, "\n.ellipsis-l3 {\n  -webkit-line-clamp: 3;\n}\n.box {\n  background: #ffffff;\n  box-shadow: 0 0 0 0 rgba(163, 162, 162, 0.5);\n  margin: 20px;\n  padding: 20px;\n  overflow: hidden;\n  display: -ms-flexbox;\n  display: flex;\n  display: webkit-flex;\n}\n.box .box-title {\n  padding-bottom: 10px;\n  margin-bottom: 10px;\n  border-bottom: 1px solid #ddd;\n}\n.box .user-info {\n  min-width: 70px;\n}\n.box .comment-body {\n  -ms-flex: 1;\n      flex: 1;\n  webkit-flex: 1;\n}\n.box .avatar {\n  width: 50px;\n  height: 50px;\n  margin: auto auto;\n  margin-bottom: 10px;\n}\n.box .avatar img {\n  width: 100%;\n  height: 100%;\n  border-radius: 50%;\n}\n.box:hover {\n  box-shadow: 0 4px 31px 0 rgba(163, 162, 162, 0.7);\n}\n.box a {\n  text-decoration: none;\n}\n.box a:hover {\n  color: #C12127;\n  transition: color 0.3s ease-in-out;\n}\n.box .post-summary {\n  overflow: scroll;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  max-height: 250px;\n}\n.box .post-meta {\n  color: #666666;\n  padding-left: 5px;\n}\n.box .post-meta span {\n  display: inline-block;\n  margin-right: 10px;\n}\n.main-wrap .no-data {\n  text-align: center;\n  padding: 20px;\n  margin-top: 30px;\n  background-color: #ffffff;\n}\n.main-wrap ul {\n  padding: 0;\n}\n.main-wrap li {\n  list-style: none;\n}\n", ""]);
 
 // exports
 
@@ -4338,7 +4339,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n.ellipsis-l3 {\n  -webkit-line-clamp: 3;\n}\n.box {\n  background: #ffffff;\n  box-shadow: 0 0 0 0 rgba(163, 162, 162, 0.5);\n  margin: 20px;\n  padding: 20px;\n  overflow: hidden;\n  display: -ms-flexbox;\n  display: flex;\n  display: webkit-flex;\n}\n.box .box-title {\n  padding-bottom: 10px;\n  margin-bottom: 10px;\n  border-bottom: 1px solid #ddd;\n}\n.box .user-info {\n  min-width: 70px;\n}\n.box .comment-body {\n  -ms-flex: 1;\n      flex: 1;\n  webkit-flex: 1;\n}\n.box .avatar {\n  width: 50px;\n  height: 50px;\n  margin: auto auto;\n  margin-bottom: 10px;\n}\n.box .avatar img {\n  width: 100%;\n  height: 100%;\n  border-radius: 50%;\n}\n.box:hover {\n  box-shadow: 0 4px 31px 0 rgba(163, 162, 162, 0.7);\n}\n.box a {\n  text-decoration: none;\n}\n.box a:hover {\n  color: #C12127;\n  transition: color 0.3s ease-in-out;\n}\n.box .post-summary {\n  overflow: scroll;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  max-height: 250px;\n}\n.box .post-meta {\n  color: #666666;\n  padding-left: 5px;\n}\n.box .post-meta span {\n  display: inline-block;\n  margin-right: 10px;\n}\n.main-wrap .no-data {\n  text-align: center;\n  padding: 20px;\n  margin-top: 30px;\n  background-color: #ffffff;\n}\n.main-wrap ul {\n  padding: 0;\n}\n.main-wrap li {\n  list-style: none;\n}\n", ""]);
+exports.push([module.i, "\n.progress[data-v-739c3fb7] {\n  position: fixed;\n  top: 0px;\n  left: 0px;\n  right: 0px;\n  height: 2px;\n  width: 0%;\n  transition: width 0.2s, opacity 0.4s;\n  opacity: 1;\n  background-color: #efc14e;\n  z-index: 999999;\n}\n", ""]);
 
 // exports
 
@@ -4352,7 +4353,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n.title[data-v-3eb25a4f]\n{\n  margin-top: 15px;\n  font-size: 5em;\n}\n.info[data-v-3eb25a4f]\n{\n  font-weight: 300;\n  color: #9aabb1;\n  margin: 0;\n}\n.button[data-v-3eb25a4f]\n{\n  margin-top: 50px;\n}\n", ""]);
+exports.push([module.i, "\n.post-wrapper {\n    padding: 20px;\n    background-color: #ffffff;\n}\n.post-wrapper a {\n    text-decoration: none;\n}\n.post-wrapper .post-meta {\n    color: #666666;\n    padding-left: 5px;\n}\n.post-wrapper .post-meta > span {\n  margin-right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -4366,7 +4367,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\nhtml, body\n{\n  background-color: #fff;\n  color: #000;\n  letter-spacing: 0.5px;\n  font-family: \"Source Sans Pro\", Arial, sans-serif;\n  height: 100vh;\n  margin: 0;\n}\nfooter\n{\n  padding: 20px;\n  text-align: center;\n  border-top: 1px solid #ddd;\n}\na, a:hover, a:focus, a:visited\n{\n  color: #000;\n}\n.logo {\n  width: 100%;\n  height: auto;\n  max-width: 400px;\n  max-height: 289px;\n}\n", ""]);
+exports.push([module.i, "\n* {\n  padding: 0;\n  margin: 0;\n}\na {\n  text-decoration: none;\n}\nbody {\n    color: #3E3E41;\n    font-weight: 300;\n    font-family: \"Helvetica Neue\", Helvetica, Tahoma, Arial, STXihei, \"Microsoft YaHei\", 微软雅黑, sans-serif;\n}\nul {\n    padding-left: 40px;\n}\n.wrapper {\n  background: #f5f5f5;\n}\n\n", ""]);
 
 // exports
 
@@ -4380,7 +4381,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n.page-wrapper[data-v-6cd9c20f] {\n    background: #ffffff;\n}\n.page-wrapper .pageWrap[data-v-6cd9c20f] {\n  padding-bottom: 200px;\n}\n.page-wrapper .pageWrap ul[data-v-6cd9c20f] {\n  padding-left: 40px;\n  margin-bottom: 40px;\n}\n.page-wrapper .pageWrap li[data-v-6cd9c20f] {\n  margin-bottom: 10px;\n}\n.page-wrapper .pageWrap li a[data-v-6cd9c20f]{\n  color: #777;\n  font-weight: 500;\n  text-decoration: none;\n}\n.page-wrapper .pageWrap li a[data-v-6cd9c20f]:hover{\n  color: #333;\n}\n", ""]);
+exports.push([module.i, "\n.page-wrapper[data-v-a763409a] {\n    background: #ffffff;\n}\n.page-wrapper .pageWrap[data-v-a763409a] {\n    padding-top: 20px;\n}\n.page-wrapper .pageWrap ul[data-v-a763409a] {\n  padding-left: 40px;\n  margin-bottom: 40px;\n}\n.page-wrapper .pageWrap li[data-v-a763409a] {\n  margin-bottom: 10px;\n}\n.page-wrapper .pageWrap li a[data-v-a763409a]{\n  color: #777;\n  font-weight: 500;\n  text-decoration: none;\n}\n.page-wrapper .pageWrap li a[data-v-a763409a]:hover{\n  color: #333;\n}\n", ""]);
 
 // exports
 
@@ -4394,7 +4395,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n.footer {\n    margin-top: 30px;\n    background-color: #ffffff;\n    border-width: 0;\n}\n", ""]);
+exports.push([module.i, "\nhtml, body\n{\n  background-color: #fff;\n  color: #000;\n  letter-spacing: 0.5px;\n  font-family: \"Source Sans Pro\", Arial, sans-serif;\n  height: 100vh;\n  margin: 0;\n}\nfooter\n{\n  padding: 20px;\n  text-align: center;\n  border-top: 1px solid #ddd;\n}\na, a:hover, a:focus, a:visited\n{\n  color: #000;\n}\n.logo {\n  width: 100%;\n  height: auto;\n  max-width: 400px;\n  max-height: 289px;\n}\n", ""]);
 
 // exports
 
@@ -4408,7 +4409,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n* {\n  padding: 0;\n  margin: 0;\n}\na {\n  text-decoration: none;\n}\nbody {\n    color: #3E3E41;\n    font-weight: 300;\n}\nul {\n    padding-left: 40px;\n}\n.wrapper {\n  background: #f5f5f5;\n}\n\n", ""]);
+exports.push([module.i, "\n.ellipsis-l3 {\n  -webkit-line-clamp: 3;\n}\n.box {\n  background: #ffffff;\n  box-shadow: 0 0 0 0 rgba(163, 162, 162, 0.5);\n  margin: 20px;\n  padding: 20px;\n}\n.box .box-title {\n  padding-bottom: 10px;\n  margin-bottom: 10px;\n  border-bottom: 1px solid #ddd;\n}\n.box:hover {\n  box-shadow: 0 4px 31px 0 rgba(163, 162, 162, 0.7);\n}\n.box a {\n  text-decoration: none;\n}\n.box a:hover {\n  color: #C12127;\n  transition: color 0.3s ease-in-out;\n}\n.box .post-summary {\n  overflow: scroll;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  max-height: 250px;\n}\n.box .post-meta {\n  color: #666666;\n  padding-left: 5px;\n}\n.box .post-meta span {\n  display: inline-block;\n  margin-right: 10px;\n}\n.main-wrap ul {\n  padding: 0;\n}\n.main-wrap li {\n  list-style: none;\n}\n.main-wrap .footer {\n  margin: 20px;\n  padding: 10px;\n}\n", ""]);
 
 // exports
 
@@ -4422,7 +4423,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n.post-wrapper {\n    padding: 20px;\n    background-color: #ffffff;\n}\n.post-wrapper a {\n    text-decoration: none;\n}\n.post-wrapper .post-meta {\n    color: #666666;\n    padding-left: 5px;\n}\n.post-wrapper .post-meta > span {\n  margin-right: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.navbar {\n\tbackground: #ffffff;\n\tborder-bottom: 2px solid #C12127;\n}\n.container .logo{\n\tfloat: left;\n}\n.container .logo h2 {\n\tmargin-top: 10px;\n\tfont-weight: 900;\n}\n.container .logo a {\n\ttext-decoration: none;\n\tfont-weight: 900;\n}\n", ""]);
 
 // exports
 
@@ -4436,7 +4437,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "\n.ellipsis-l3 {\n       -webkit-line-clamp: 3;\n}\n.box {\n    background: #ffffff;\n    box-shadow: 0 0 0 0 rgba(163,162,162,0.50);\n    margin: 20px;\n    padding: 20px;\n}\n.box:hover {\n    box-shadow: 0 4px 31px 0 rgba(163,162,162,0.70);\n}\n.box a {\n      text-decoration: none;\n}\n.box a:hover {\n      color: #C12127;\n      transition: color 0.3s ease-in-out;\n}\n.box .post-summary {\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n      height: 150px;\n}\n.box .post-meta {\n      color: #666666;\n      padding-left: 5px;\n}\n.box .post-meta span {\n      display: inline-block;\n      margin-right: 10px;\n}\n.main-wrap ul {\n      padding: 0;\n}\n.main-wrap li {\n      list-style: none;\n}\n", ""]);
+exports.push([module.i, "\n.footer {\n    margin-top: 30px;\n    background-color: #ffffff;\n    border-width: 0;\n}\n", ""]);
 
 // exports
 
@@ -5173,19 +5174,19 @@ if (hadRuntime) {
 
 
 /* styles */
-__webpack_require__(173)
+__webpack_require__(175)
 
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(65),
   /* template */
-  __webpack_require__(159),
+  __webpack_require__(163),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/.nuxt/App.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/.nuxt/App.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] App.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5198,19 +5199,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(169)
+__webpack_require__(171)
 
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(66),
   /* template */
-  __webpack_require__(155),
+  __webpack_require__(159),
   /* scopeId */
-  "data-v-04b1682c",
+  "data-v-739c3fb7",
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/.nuxt/components/nuxt-loading.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/.nuxt/components/nuxt-loading.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] nuxt-loading.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5225,13 +5226,13 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(67),
   /* template */
-  __webpack_require__(166),
+  __webpack_require__(154),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/.nuxt/components/nuxt.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/.nuxt/components/nuxt.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] nuxt.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5244,19 +5245,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(175)
+__webpack_require__(178)
 
 var Component = __webpack_require__(0)(
   /* script */
   null,
   /* template */
-  __webpack_require__(161),
+  __webpack_require__(166),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/client/components/Footer.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/client/components/Footer.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Footer.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5269,19 +5270,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(167)
+__webpack_require__(177)
 
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(69),
   /* template */
-  __webpack_require__(153),
+  __webpack_require__(165),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/client/components/Nav.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/client/components/Nav.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Nav.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5294,19 +5295,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(176)
+__webpack_require__(173)
 
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(70),
   /* template */
-  __webpack_require__(162),
+  __webpack_require__(161),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/client/layouts/default.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/client/layouts/default.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] default.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5319,19 +5320,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(172)
+__webpack_require__(169)
 
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(71),
   /* template */
-  __webpack_require__(158),
+  __webpack_require__(156),
   /* scopeId */
-  "data-v-3eb25a4f",
+  "data-v-3b6bca64",
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/client/layouts/error.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/client/layouts/error.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] error.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5344,19 +5345,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(174)
+__webpack_require__(168)
 
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(72),
   /* template */
-  __webpack_require__(160),
+  __webpack_require__(155),
   /* scopeId */
-  "data-v-6cd9c20f",
+  "data-v-282b9938",
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/client/pages/about.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/client/pages/about.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] about.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5369,19 +5370,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(168)
+__webpack_require__(176)
 
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(73),
   /* template */
-  __webpack_require__(154),
+  __webpack_require__(164),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/client/pages/asks/_id.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/client/pages/asks/_id.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] _id.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5394,19 +5395,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(171)
+__webpack_require__(170)
 
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(74),
   /* template */
-  __webpack_require__(157),
+  __webpack_require__(158),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/client/pages/comments/_id.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/client/pages/comments/_id.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] _id.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5419,19 +5420,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(178)
+__webpack_require__(167)
 
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(75),
   /* template */
-  __webpack_require__(165),
+  __webpack_require__(153),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/client/pages/index.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/client/pages/index.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5444,19 +5445,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(170)
+__webpack_require__(174)
 
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(76),
   /* template */
-  __webpack_require__(156),
+  __webpack_require__(162),
   /* scopeId */
-  "data-v-11d9cd28",
+  "data-v-a763409a",
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/client/pages/page/_id.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/client/pages/page/_id.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] _id.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5469,19 +5470,19 @@ module.exports = Component.exports
 
 
 /* styles */
-__webpack_require__(177)
+__webpack_require__(172)
 
 var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(77),
   /* template */
-  __webpack_require__(163),
+  __webpack_require__(160),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/xiaofu/work/doc/blog/nuxt-blog/client/pages/posts/_id.vue"
+Component.options.__file = "/Users/yangxiaofu/work/opensource/nuxt/iweb/client/pages/posts/_id.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] _id.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -5493,32 +5494,221 @@ module.exports = Component.exports
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('nav', {
-    staticClass: "navbar navbar-default main-menu"
-  }, [_c('div', {
-    staticClass: "container"
-  }, [_c('div', {
-    staticClass: "logo"
-  }, [_c('a-link', {
-    attrs: {
-      "to": "/"
-    }
-  }, [_c('h2', [_vm._v("ffe")])])], 1), _c('div', {
-    staticClass: "nav-item"
-  }, [_c('ul', {
-    staticClass: "nav navbar-nav navbar-right"
-  }, _vm._l((_vm.navItems), function(item) {
-    return _c('li', [_c('a-link', {
+  return _c('section', {
+    staticClass: "page-wrapper container"
+  }, [_c('h2', {
+    staticClass: "title"
+  }, [_vm._v("\n      A place to share news and updates about ffe.\n  ")]), _c('div', {
+    staticClass: "main-wrap"
+  }, [_c('ul', _vm._l((_vm.newPosts.data), function(post) {
+    return _c('li', {
+      staticClass: "col-md-6"
+    }, [_c('div', {
+      staticClass: "box"
+    }, [_c('div', [_c('a-link', {
       attrs: {
-        "to": item.url
+        "to": "/posts/" + post.meta.id
       }
-    }, [_vm._v(_vm._s(item.text))])], 1)
-  }))])])])
+    }, [_c('h3', [_vm._v(_vm._s(post.meta.title))])])], 1), _c('div', {
+      staticClass: "post-meta"
+    }, [_c('span', [_vm._v(_vm._s(post.meta.strTag))]), _c('span', [_vm._v(_vm._s(post.meta.createTime))])]), _c('div', {
+      staticClass: "post-summary",
+      domProps: {
+        "innerHTML": _vm._s(post.summary)
+      }
+    })])])
+  }))])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 
 /***/ }),
 /* 154 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return (_vm.nuxt.err) ? _c('nuxt-error', {
+    attrs: {
+      "error": _vm.nuxt.err
+    }
+  }) : _c('nuxt-child')
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+/* 155 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "container page-wrapper"
+  }, [_c('h2', {
+    staticClass: "title"
+  }, [_vm._v("\n    Who am I?\n  ")]), _c('div', {
+    staticClass: "pageWrap"
+  }, [_c('p', [_vm._v("\n      近距离的了解当前行业各公司、团队、开发者的开发情况，加强了解，共同成长，为混乱的行业注入一股清流。\n    ")])])])
+}]}
+module.exports.render._withStripped = true
+
+/***/ }),
+/* 156 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "container"
+  }, [_c('h1', {
+    staticClass: "title"
+  }, [_vm._v("\n    " + _vm._s(_vm.error.statusCode) + "\n  ")]), _c('h2', {
+    staticClass: "info"
+  }, [_vm._v("\n    " + _vm._s(_vm.error.message) + "\n  ")]), (_vm.error.statusCode === 404) ? _c('nuxt-link', {
+    staticClass: "button",
+    attrs: {
+      "to": "/"
+    }
+  }, [_vm._v("\n    Homepage\n  ")]) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+/* 157 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    attrs: {
+      "href": _vm.path
+    }
+  }, [_vm._t("default")], 2)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+/* 158 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "page-wrapper container"
+  }, [_c('h2', {
+    staticClass: "title"
+  }, [_vm._v("\n      " + _vm._s(_vm.title) + "\n  ")]), _c('div', {
+    staticClass: "main-wrap"
+  }, [_c('ul', [_c('li', {}, _vm._l((_vm.comments), function(comment) {
+    return _c('div', {
+      staticClass: "box"
+    }, [_c('div', {
+      staticClass: "user-info"
+    }, [_c('div', {
+      staticClass: "avatar"
+    }, [_c('img', {
+      attrs: {
+        "src": comment.user.avatar_url
+      }
+    })]), _c('p', [_vm._v(_vm._s(comment.user.login))])]), _c('div', {
+      staticClass: "comment-body",
+      domProps: {
+        "innerHTML": _vm._s(comment.body)
+      }
+    })])
+  }))]), (!_vm.hasData) ? _c('div', {
+    staticClass: "no-data"
+  }, [_vm._v("\n          暂无数据\n      ")]) : _vm._e()])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+/* 159 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "progress",
+    style: ({
+      'width': _vm.percent + '%',
+      'height': _vm.height,
+      'background-color': _vm.canSuccess ? _vm.color : _vm.failedColor,
+      'opacity': _vm.show ? 1 : 0
+    })
+  })
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+/* 160 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "post-wrapper container"
+  }, [_c('div', [_c('a-link', {
+    attrs: {
+      "to": "/posts/" + _vm.post.meta.id
+    }
+  }, [_c('h2', [_vm._v(_vm._s(_vm.post.meta.title))])])], 1), _c('div', {
+    staticClass: "post-meta"
+  }, [_c('span', [_vm._v(_vm._s(_vm.post.meta.strTag))]), _c('span', [_vm._v(_vm._s(_vm.post.meta.createTime))])]), _c('div', [_c('div', {
+    domProps: {
+      "innerHTML": _vm._s(_vm.post.content)
+    }
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+/* 161 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "wrapper"
+  }, [_c('web-nav', {
+    attrs: {
+      "nav-items": _vm.navItems
+    }
+  }), _c('nuxt'), _c('my-footer')], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "container page-wrapper"
+  }, [_c('div', {
+    staticClass: "pageWrap"
+  }, [_c('ul', _vm._l((_vm.posts.data), function(post) {
+    return _c('li', [_c('a-link', {
+      attrs: {
+        "to": "/posts/" + post.meta.id
+      }
+    }, [_vm._v(_vm._s(post.meta.title))])], 1)
+  }))])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    attrs: {
+      "id": "__nuxt"
+    }
+  }, [_c('nuxt-loading', {
+    ref: "loading"
+  }), (_vm.layout) ? _c(_vm.layout, {
+    tag: "component"
+  }) : _vm._e()], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+/* 164 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -5584,131 +5774,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 155 */
+/* 165 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "progress",
-    style: ({
-      'width': _vm.percent + '%',
-      'height': _vm.height,
-      'background-color': _vm.canSuccess ? _vm.color : _vm.failedColor,
-      'opacity': _vm.show ? 1 : 0
-    })
-  })
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 156 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "container page-wrapper"
+  return _c('nav', {
+    staticClass: "navbar navbar-default main-menu"
   }, [_c('div', {
-    staticClass: "pageWrap"
-  }, [_c('ul', _vm._l((_vm.posts.data), function(post) {
-    return _c('li', [_c('a-link', {
-      attrs: {
-        "to": "/posts/" + post.meta.id
-      }
-    }, [_vm._v(_vm._s(post.meta.title))])], 1)
-  }))])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 157 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "page-wrapper container"
-  }, [_c('h2', {
-    staticClass: "title"
-  }, [_vm._v("\n      " + _vm._s(_vm.title) + "\n  ")]), _c('div', {
-    staticClass: "main-wrap"
-  }, [_c('ul', [_c('li', {}, _vm._l((_vm.comments), function(comment) {
-    return _c('div', {
-      staticClass: "box"
-    }, [_c('div', {
-      staticClass: "user-info"
-    }, [_c('div', {
-      staticClass: "avatar"
-    }, [_c('img', {
-      attrs: {
-        "src": comment.user.avatar_url
-      }
-    })]), _c('p', [_vm._v(_vm._s(comment.user.login))])]), _c('div', {
-      staticClass: "comment-body",
-      domProps: {
-        "innerHTML": _vm._s(comment.body)
-      }
-    })])
-  }))]), (!_vm.hasData) ? _c('div', {
-    staticClass: "no-data"
-  }, [_vm._v("\n          暂无数据\n      ")]) : _vm._e()])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 158 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
     staticClass: "container"
-  }, [_c('h1', {
-    staticClass: "title"
-  }, [_vm._v("\n    " + _vm._s(_vm.error.statusCode) + "\n  ")]), _c('h2', {
-    staticClass: "info"
-  }, [_vm._v("\n    " + _vm._s(_vm.error.message) + "\n  ")]), (_vm.error.statusCode === 404) ? _c('nuxt-link', {
-    staticClass: "button",
+  }, [_c('div', {
+    staticClass: "logo"
+  }, [_c('a-link', {
     attrs: {
       "to": "/"
     }
-  }, [_vm._v("\n    Homepage\n  ")]) : _vm._e()], 1)
+  }, [_c('h2', [_vm._v("ffe")])])], 1), _c('div', {
+    staticClass: "nav-item"
+  }, [_c('ul', {
+    staticClass: "nav navbar-nav navbar-right"
+  }, _vm._l((_vm.navItems), function(item) {
+    return _c('li', [_c('a-link', {
+      attrs: {
+        "to": item.url
+      }
+    }, [_vm._v(_vm._s(item.text))])], 1)
+  }))])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 159 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    attrs: {
-      "id": "__nuxt"
-    }
-  }, [_c('nuxt-loading', {
-    ref: "loading"
-  }), (_vm.layout) ? _c(_vm.layout, {
-    tag: "component"
-  }) : _vm._e()], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 160 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "container page-wrapper"
-  }, [_c('h2', {
-    staticClass: "title"
-  }, [_vm._v("\n    Who am I?\n  ")]), _c('div', {
-    staticClass: "pageWrap"
-  }, [_c('p', [_vm._v("\n      近距离的了解当前行业各公司、团队、开发者的开发情况，加强了解，共同成长，为混乱的行业注入一股鲜泉。\n    ")])])])
-}]}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 161 */
+/* 166 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -5726,100 +5821,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 162 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "wrapper"
-  }, [_c('web-nav', {
-    attrs: {
-      "nav-items": _vm.navItems
-    }
-  }), _c('nuxt'), _c('my-footer')], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 163 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "post-wrapper container"
-  }, [_c('div', [_c('a-link', {
-    attrs: {
-      "to": "/posts/" + _vm.post.meta.id
-    }
-  }, [_c('h2', [_vm._v(_vm._s(_vm.post.meta.title))])])], 1), _c('div', {
-    staticClass: "post-meta"
-  }, [_c('span', [_vm._v(_vm._s(_vm.post.meta.strTag))]), _c('span', [_vm._v(_vm._s(_vm.post.meta.createTime))])]), _c('div', [_c('div', {
-    domProps: {
-      "innerHTML": _vm._s(_vm.post.content)
-    }
-  })])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 164 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    attrs: {
-      "href": _vm.path
-    }
-  }, [_vm._t("default")], 2)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 165 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('section', {
-    staticClass: "page-wrapper container"
-  }, [_c('h2', {
-    staticClass: "title"
-  }, [_vm._v("\n      A place to share news and updates about ffe.\n  ")]), _c('div', {
-    staticClass: "main-wrap"
-  }, [_c('ul', _vm._l((_vm.newPosts.data), function(post) {
-    return _c('li', {
-      staticClass: "col-md-6"
-    }, [_c('div', {
-      staticClass: "box"
-    }, [_c('div', [_c('a-link', {
-      attrs: {
-        "to": "/posts/" + post.meta.id
-      }
-    }, [_c('h3', [_vm._v(_vm._s(post.meta.title))])])], 1), _c('div', {
-      staticClass: "post-meta"
-    }, [_c('span', [_vm._v(_vm._s(post.meta.strTag))]), _c('span', [_vm._v(_vm._s(post.meta.createTime))])]), _c('div', {
-      staticClass: "post-summary",
-      domProps: {
-        "innerHTML": _vm._s(post.summary)
-      }
-    })])])
-  }))])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 166 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.nuxt.err) ? _c('nuxt-error', {
-    attrs: {
-      "error": _vm.nuxt.err
-    }
-  }) : _c('nuxt-child')
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
 /* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5830,7 +5831,7 @@ var content = __webpack_require__(126);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-__webpack_require__(4)("b54d3e3e", content, false);
+__webpack_require__(4)("cfb93d4a", content, false);
 
 /***/ }),
 /* 168 */
@@ -5843,7 +5844,7 @@ var content = __webpack_require__(127);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-__webpack_require__(4)("2db91eb1", content, false);
+__webpack_require__(4)("1a7c3b6f", content, false);
 
 /***/ }),
 /* 169 */
@@ -5856,7 +5857,7 @@ var content = __webpack_require__(128);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-__webpack_require__(4)("5fe3c5d1", content, false);
+__webpack_require__(4)("63f0d138", content, false);
 
 /***/ }),
 /* 170 */
@@ -5869,7 +5870,7 @@ var content = __webpack_require__(129);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-__webpack_require__(4)("2f6067ac", content, false);
+__webpack_require__(4)("6d69b956", content, false);
 
 /***/ }),
 /* 171 */
@@ -5882,7 +5883,7 @@ var content = __webpack_require__(130);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-__webpack_require__(4)("33c28d7e", content, false);
+__webpack_require__(4)("dbdd08ce", content, false);
 
 /***/ }),
 /* 172 */
@@ -5895,7 +5896,7 @@ var content = __webpack_require__(131);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-__webpack_require__(4)("2ccc9e0f", content, false);
+__webpack_require__(4)("173bf0bc", content, false);
 
 /***/ }),
 /* 173 */
@@ -5908,7 +5909,7 @@ var content = __webpack_require__(132);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-__webpack_require__(4)("3fefb4bb", content, false);
+__webpack_require__(4)("14a0069e", content, false);
 
 /***/ }),
 /* 174 */
@@ -5921,7 +5922,7 @@ var content = __webpack_require__(133);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-__webpack_require__(4)("24520303", content, false);
+__webpack_require__(4)("0279c705", content, false);
 
 /***/ }),
 /* 175 */
@@ -5934,7 +5935,7 @@ var content = __webpack_require__(134);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-__webpack_require__(4)("01ed04f8", content, false);
+__webpack_require__(4)("a1016ca6", content, false);
 
 /***/ }),
 /* 176 */
@@ -5947,7 +5948,7 @@ var content = __webpack_require__(135);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-__webpack_require__(4)("54163706", content, false);
+__webpack_require__(4)("0ce55c8b", content, false);
 
 /***/ }),
 /* 177 */
@@ -5960,7 +5961,7 @@ var content = __webpack_require__(136);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-__webpack_require__(4)("5ed892aa", content, false);
+__webpack_require__(4)("fc26e738", content, false);
 
 /***/ }),
 /* 178 */
@@ -5973,7 +5974,7 @@ var content = __webpack_require__(137);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-__webpack_require__(4)("7af85e58", content, false);
+__webpack_require__(4)("5c5e8920", content, false);
 
 /***/ }),
 /* 179 */

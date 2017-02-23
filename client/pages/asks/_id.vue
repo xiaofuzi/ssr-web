@@ -174,7 +174,7 @@ export default {
 
   },
   mounted () {
-      this.currentPage = Number(this.$route.query.currentPage);
+      this.currentPage = Number(this.$route.query.currentPage || 1);
       this.path = window.location.pathname;
 
       LinkTo = router(window);

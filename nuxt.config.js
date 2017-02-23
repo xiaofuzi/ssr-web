@@ -1,4 +1,4 @@
-var getIssueList = require('./api/github/ffe.js');
+var getIssueList = require('./api/github/ffe.js').getIssueList;
 
 var getPosts = require('./lib/mdToJson.js').parsedFiles;
 
@@ -19,19 +19,19 @@ for( let i = 0; i < total; i++) {
     })
 }
 
-var getIssueListPromise = new Promise(function(res, rej){
-    getIssueList(function(err, arr){
-        if (err) {
-            rej(err);
-        } else {
-            res(arr);
-        }
+var getIssueListPromise = function () {
+    return new Promise(function(res, rej){
+        getIssueList(function(err, arr){
+            if (err) {
+                rej(err);
+            } else {
+                res(arr);
+            }
+        })
     })
-})
+}
 
-getIssueListPromise.then(function(arr){
-  console.log('aaa',arr);
-})
+
 module.exports = {
   srcDir: 'client/',
   /*
@@ -63,7 +63,10 @@ module.exports = {
         test: /\.(css|less)$/,
         loader: 'less-loader'
       }
-    ]
+    ],
+    babel: {
+      //presets: ['es2015', 'stage-0']
+    }
   },
   router: {
     base: '/nuxt-blog/'
@@ -74,7 +77,16 @@ module.exports = {
           '/page/:id': pageIds,
           '/posts/:id': postsIds,
           '/asks/:id': [{id: 1}],
-          '/comments/:id': [{id: 1}]
+          '/comments/:id': function (callback) {
+              getIssueListPromise()
+              .then((res) => {
+                var params = res.map((comment) => {
+                  return { id: comment.number }
+                })
+                callback(null, params)
+              })
+              .catch(callback)
+          }
       }
   }
 }

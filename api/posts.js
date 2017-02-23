@@ -3,7 +3,7 @@ var router = require('express').Router(),
 	getPosts = require('../lib/mdToJson.js').parsedFiles;
 
 
-var pageSize = 10,
+var pageSize = 20,
 	posts = getPosts();
 
 router.get('/page/:id', function (req, res, next) {    
@@ -22,7 +22,7 @@ router.get('/page/:id', function (req, res, next) {
  */
 router.get('/posts/new', function (req, res, next) {  
 	let _posts = copy(posts);  
-    _posts['data'] = _posts.data.slice(0, 6);
+    _posts['data'] = _posts.data.slice(0, 4);
     res.json(_posts);
 })
 

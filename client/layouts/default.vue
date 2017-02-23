@@ -11,6 +11,7 @@
   body {
       color: #3E3E41;
       font-weight: 300;
+      font-family: "Helvetica Neue", Helvetica, Tahoma, Arial, STXihei, "Microsoft YaHei", 微软雅黑, sans-serif;
   }
 
   ul {
@@ -47,7 +48,7 @@ export default {
                     url: '/page/1'
                 },
                 {
-                    text: 'Ask',
+                    text: 'Asks',
                     url: '/asks/1?currentPage=1'
                 },
                 {
