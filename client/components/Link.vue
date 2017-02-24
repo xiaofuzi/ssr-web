@@ -4,9 +4,6 @@
 	</a>
 </template>
 <script>
-var config = {
-	baseUrl: '/nuxt-blog'
-}
 	export default {
 		data () {
 			return {}
@@ -16,7 +13,7 @@ var config = {
 		},
 		computed: {
 			path () {
-				return config.baseUrl + this.to;
+				return this.to;
 			}
 		},
 		mounted () {

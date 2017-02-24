@@ -1,23 +1,271 @@
-<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><base href="/nuxt-blog/"><link href="/nuxt-blog/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-739c3fb7 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/nuxt-blog/"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/nuxt-blog/">Home</a><li><a href="/nuxt-blog/page/1">Posts</a><li><a href="/nuxt-blog/asks/1?currentPage=1">Asks</a><li><a href="/nuxt-blog/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><a href="/nuxt-blog/posts/25"><h2>javascript 闭包、this</h2></a></div><div class="post-meta"><span>js、pl</span><span>2016-01-25</span></div><div><div><hr><blockquote><p>闭包其实很好理解，但是由于经常把this和闭包绑在一起，从而加大了理解的难度，如果将他们分开考虑，那就清晰多了。</blockquote><h2 id="-">闭包</h2><p>闭包并不是js首创，在许多语言中都支持闭包，如schemer、ruby等。如果没有闭包，像js这样的支持高阶函数特性的语言将是一个噩梦。<ul><li>静态作用域<li>动态作用域</ul><pre><code class="lang-js">var name = "xiaofu";
-var person = function(lastname){
-    var name = 'yang';
+<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><link href="/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"style="width:0;height:2px;background-color:#000;opacity:0"data-v-1ef32859></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/">Home</a><li><a href="/page/1">Posts</a><li><a href="/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><a href="/posts/25"><h2>Javascript-类-模块化</h2></a></div><div class="post-meta"><span>js</span><span>2015-12-08</span></div><div><div><hr><div class="text-center"style="background:#414141;font-size:48px;padding:40px 0;color:#fff">Learn OOP -prototype<p style="font-size:16px">这里并不吹嘘面向对象有多牛，但作为现在主流的一种编程范式，我们有必要去了解。</div><h2 id="-">目录</h2><ul><li><a href="#Javascript面向对象实现">Javascript面向对象实现</a><ul><li><a href="#封装">封装</a><li><a href="#继承">继承</a><li><a href="#原始类型与复合类型说明">原始类型与复合类型说明</a><li><a href="#继承实现">继承实现</a><li><a href="#Mix-in">Mix-in</a></ul><li><a href="#模块化">模块化</a></ul><p>Javascript是基于原型的编程语言，并不是面向对象的语言。<p class="text-important">ES6已实现class关键字，这让js看起来更像一门面向对象的语言<p>主流语言类型：<ul><li>基于原型的语言<li>面向过程的语言<li>面向对象的语言<li>函数式的语言</ul><p>每一种语言的编程方式以及语法都会有所不同。<p>虽然Javascript并没有内置的类的实现，但可以模拟。Javascript有构造函数和new运算符，我们可以通过构造函数来实例化一个对象。<p>当使用new关键字来调用构造函数时，执行上下文变成一个空的上下文，这个上下文代表了新生成的实例，所以this指向当前创建的实例。<p>面向对象应该是现在使用最广的一种编程思想<a href="https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1">不了解的点此，需自备梯子</a><p>说到面向对象，首先让我想起的是C++，在我的印象里，C++是一门严格遵循面向对象思想的一门语言，封装、继承、多态。不仅如此，还支持多继承，这是其它很多语言没有做到的。<h2 id="javascript-">Javascript面向对象实现</h2><p>说到面向对象，最直观的就是通过 class 关键字来声明，因为js还没实现该关键字(ES6已实现)，在这里我们直接用构造函数来模拟即可。(以C++为例，在生成一个对象的时候也是去调用构造函数来创建对象的)<p>面向对象的三个特点：<ul><li>封装<li>继承<li>多态</ul><h3 id="-animal-">创建一个Animal类</h3><pre><code class="lang-javascript">var Animal = function(){
+    /*属性*/
+    this.name = "animal";
 
-    function personName(){
-        return name + lastname;
-    }
-    return personName;
-}
-var pName = person();
-pName("xiaoming");
-</code></pre><p>js是函数作用域的，即一个function就是一个作用域，所以personName在person这个函数的作用域里面。但是调用的是在这个作用域的外面，那么当personName执行的时候，它里面的name取的是person这个作用域还是最外层的作用域呢？<p>如果是静态作用域则调用的是person里面的 name, 如果是动态作用域则调用的是外层的name("xiaofu");而不是"yang"。<p>而闭包就是用来实现静态作用域的一种方式，即通过闭包将函数和它声明时的作用域保存下来，这样在调用的时候取到的就是声明时所在的作用域而不是调用时的作用域。<h2 id="this">this</h2><p>this则与变量有点不同，即this采用的是类似于动态作用域的情况。js里面一切都是对象，所以函数也都是某个对象的方法，如果没有显示指定则是全局对象。<pre><code class="lang-js">var person = {
-    fullname: function{
-        console.log(this);
-    },
-    printAge: function(){
-        console.log(this);
+    /*方法[函数、方法，在这里为什么不称为函数而称之为方法？]*/
+    this.talk = function(){
+        console.log("what's your name?");
     }
 }
-person.fullname();        //this指向person
-var age = person.printAge;
-age();                    //this指向window(浏览器中)
-</code></pre><p>将person.printAge赋值给age之后，再执行age(),此时age没有显示指定调用对象则默认是window(浏览器环境)。所以this并不是声明所在的环境。<h2 id="-es6-">箭头函数（es6)</h2><p>es6中新增了箭头函数，箭头函数与通过function声明的函数不同，它的this是使用的声明时上下文中的this.并且不可通过apply, call等改变。</div></div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"javascript 闭包、this",date:"2016-01-25T15:06:36.000Z",tags:["js","pl"],id:"25",createTime:"2016-01-25",url:"2016-01-25-javascript 闭包、this",strTag:"js、pl"},content:'<hr>\n<blockquote>\n<p>闭包其实很好理解，但是由于经常把this和闭包绑在一起，从而加大了理解的难度，如果将他们分开考虑，那就清晰多了。</p>\n</blockquote>\n<h2 id="-">闭包</h2>\n<p>闭包并不是js首创，在许多语言中都支持闭包，如schemer、ruby等。如果没有闭包，像js这样的支持高阶函数特性的语言将是一个噩梦。</p>\n<ul>\n<li>静态作用域</li>\n<li>动态作用域</li>\n</ul>\n<pre><code class="lang-js">var name = &quot;xiaofu&quot;;\nvar person = function(lastname){\n    var name = &#39;yang&#39;;\n\n    function personName(){\n        return name + lastname;\n    }\n    return personName;\n}\nvar pName = person();\npName(&quot;xiaoming&quot;);\n</code></pre>\n<p>js是函数作用域的，即一个function就是一个作用域，所以personName在person这个函数的作用域里面。但是调用的是在这个作用域的外面，那么当personName执行的时候，它里面的name取的是person这个作用域还是最外层的作用域呢？</p>\n<p>如果是静态作用域则调用的是person里面的 name, 如果是动态作用域则调用的是外层的name(&quot;xiaofu&quot;);而不是&quot;yang&quot;。</p>\n<p>而闭包就是用来实现静态作用域的一种方式，即通过闭包将函数和它声明时的作用域保存下来，这样在调用的时候取到的就是声明时所在的作用域而不是调用时的作用域。</p>\n<h2 id="this">this</h2>\n<p>this则与变量有点不同，即this采用的是类似于动态作用域的情况。js里面一切都是对象，所以函数也都是某个对象的方法，如果没有显示指定则是全局对象。</p>\n<pre><code class="lang-js">var person = {\n    fullname: function{\n        console.log(this);\n    },\n    printAge: function(){\n        console.log(this);\n    }\n}\nperson.fullname();        //this指向person\nvar age = person.printAge;\nage();                    //this指向window(浏览器中)\n</code></pre>\n<p>将person.printAge赋值给age之后，再执行age(),此时age没有显示指定调用对象则默认是window(浏览器环境)。所以this并不是声明所在的环境。</p>\n<h2 id="-es6-">箭头函数（es6)</h2>\n<p>es6中新增了箭头函数，箭头函数与通过function声明的函数不同，它的this是使用的声明时上下文中的this.并且不可通过apply, call等改变。</p>\n',summary:'<hr>\n<blockquote>\n<p>闭包其实很好理解，但是由于经常把this和闭包绑在一起，从而加大了理解的难度，如果将他们分开考虑，那就清晰多了。</p>\n</blockquote>\n<h2 id="-">闭包</h2>\n<p>闭包并不是js首创，在许多语言中都支持闭包，如schemer、ruby等。如果没有闭包，像js这样的支持高阶函数特性的语言将是一个噩梦。</p>\n<ul>\n<li>静态作用域</li>\n<li>动态作用域</li>\n</ul>\n<pre><code class="lang-js">var name = &quot;xiaofu&quot;;\nvar person = function(lastname){\n    var name = &#39;yang&#39;;\n\n    function personName(){\n        return name + lastname;\n    }\n    return personName;\n}\nvar pName = person();\npName(&quot;xiaoming&quot;);\n</code></pre>\n<p>js是函数作用域的，即一个function就是一个作用域，所以personName在person这个函数的作用域里面。但是调用的是在这个作用域的外面，那么当personName执行的时候，它里面的name取的是person这个作用域还是最外层的作用域呢？</p>\n<p>如果是静态作用域则调用的是person里面的 name, 如果是动态作用域则调用的是外层的name(&quot;xiaofu&quot;);而不是&quot;yang&quot;。</p>\n<p>而闭包就是用来实现静态作用域的一种方式，即通过闭包将函数和它声明时的作用域保存下来，这样在调用的时候取到的就是声明时所在的作用域而不是调用时的作用域。</p>\n'}}],error:null,serverRendered:!0}</script><script defer src="/nuxt-blog/_nuxt/vendor.bundle.js"></script><script defer src="/nuxt-blog/_nuxt/nuxt.bundle.js"></script>
+</code></pre><h3 id="-">实例化对象</h3><pre><code class="lang-javascript">var Cat = new Animal;
+var Dog = new Animal;
+</code></pre><p>实例化一个对象时一般会需要进行初始化设置，这里可以通过构造函数传参实现<pre><code class="lang-javascript">var Animal = function(name){
+    /*属性*/
+    this.name = name || "Animal";
+
+    /*方法*/
+    this.talk = function(){
+        console.log("My name is: ", name);
+    }
+}
+
+var cat = new Animal("Cat");    /*名字是Cat*/
+var dog = new Animal("Dog");    /*名字是Dog*/
+</code></pre><p class="text-important">说明:<pre><code class="lang-javascript">var name;
+name = pname || "Animal";
+/*与下面的功能等同*/
+var name;
+if(pname){
+    name = pname;
+}else{
+    name = "Animal";
+}
+</code></pre><p>这是js的一种默认值设置技巧，当pname == undefined时，name赋值为 "Animal",否则name等于pname<h3 id="-">封装</h3><p>封装也叫数据抽象，将数据和处理数据的方法结合起来，对数据的处理和操作只能通过事先定义好的方法来进行。<pre><code class="lang-javascript">var Animal = function(name, age, weight, height){
+    /*属性:名字、年龄、体重、身高*/
+    this.name = name || "Animal";
+    this.age = age || 0;
+    this.weight = weight || 0;
+    this.height = height || 0;
+
+
+    /*方法*/
+    /*输出对象信息*/
+    this.introduce = function(){
+        console.log("name: ", this.name, "age: ", this.age, "weight: ", this.weight, "height: ", this.height);
+    }
+    /*设置对象属性*/
+    this.setMyself = function(name, age, weight, height){
+        this.name = name || this.name;
+        this.age = age || this.age;
+        this.weight = weight || this.weight;
+        this.height = height || this.height;
+    }
+}
+/*实例化的对象自带的方法*/
+var cat = new Animal("Cat");    /*名字是Cat*/
+
+cat.introduce();        /*输出：name:  Cat age:  0 weight:  0 height:  0*/
+cat.setMyself("cat", "18", "50kg", "170cm");
+cat.introduce();        /*这时输出: name:  cat age:  18 weight:  50kg height:  170cm*/
+</code></pre><p>上面我们给Animal设置了四个属性：名字、年龄、体重、身高;两个个方法：introduce(), setMyself(); 在这里我们对Animal做了封装即数据的抽象,类的数据部分由四个属性构成，方法则是处理部分.这里我们通过introduce()和setMyself()方法来输出、设置属性的值。<p class="text-important">注(javasript语言自身的一些特点)：<ul><li><p>1.从上面的代码我们可以看到，this无处不在，也正是通过this才实现了类到对象的传递。Does it must？<li><p>2.主流的边长语言中都会有private/protect/public这三个参数来控制继承关系中变量的作用域，但是js中没有，对此我们需要进行一定的处理<li><p>3.js函数的参数是灵活可变[声明的参数与传入的参数不强制要求相同] 因为js函数参数的这种特点，一般我们传入一个对象作为参数，如：{name: "cat", age: "18", wight: "50kg", height: "170cm"}</ul><h4 id="-this">无处不在的this</h4><p>这里为了更清晰，我们将代码稍稍简化一下(从程序的健壮性来说，对参数的合法性进行验证是很有必要的)：<pre><code class="lang-javascript">var Animal = function(name, age, weight, height){
+    /*属性:名字、年龄、体重、身高*/
+    this.name = name;
+    this.age = age;
+
+    /*这里我们使用局部变量来声明体重和身高属性*/
+    var weight = weight;
+    var height = height;
+
+
+    /*方法*/
+    /*输出对象信息*/
+    this.introduce = function(){
+        /*这里的weight和height不需要用this.weight/this/height的形式来调用*/
+        console.log(this);    /*谁调用，this就指向谁,这里是实例化的对象调用，则指向该对象*/
+        /*这里的weight和height不需要用this.weight/this/height的形式来调用*/
+        console.log("name: ", this.name, "age: ", this.age, "weight: ", weight, "height: ", height);
+    }
+    /*设置对象属性*/
+    this.setMyself = function(name, age, pweight, pheight){
+        this.name = name;
+        this.age = age;
+        /*为什么改成pweight, pheight,当形参和函数所在上下文的变量冲突时，函数内部是取不到变量的
+        这种情况下，这两个都是形参，而不是我们上面声明的局部变量，所以在此将变量名称更改为不同的值。
+        weight = weight;
+        height = height;
+        */
+        weight = pweight;
+        height = pheight;
+    }
+}
+
+/*实例化的对象自带的方法*/
+var cat = new Animal("cat", "18", "50kg", "170cm");    /*名字是Cat*/
+
+cat.introduce();
+cat.setMyself("cat", "28", "70kg", "180cm");
+cat.introduce();
+</code></pre><p>输出结果：<pre><code class="lang-javascript">name:  cat age:  18 weight:  50kg height:  170cm
+name:  cat age:  28 weight:  70kg height:  180cm
+
+/*cat对象的值,并没有包括weight和height*/
+{
+    name: "cat", 
+    age: "28",
+    this.introduce: function(){...},
+    this.setMyself: function(){...}
+}
+</code></pre><p>从这里我们可以得出结论：<ul><li>实例化的对象得到的是挂载在构造函数this下的属性和方法(new 关键字的作用是返回一个新的对象并将this指向该对象)。所以为了将属性和方法传递给实例化的对象，我们就需要将属性和方法挂在this下。<li>闭包,这里虽然weight和height并没有挂在构造函数的this下，但实例化的对象cat却能够通过introduce()方法访问到,这就是闭包的作用，要理解闭包，需要清除两点。<ul><li>函数调用时上下文是声明时所在的上下文(introduce()声明的作用域是Animal构造函数，可以访问局部变量weight/height)<li>函数内部的this指向的是调用者(调用cat.introduce():所以introduce内部的this指向cat对象) 这样虽然实力话的对象(cat)不能访问weight和height变量，却可以通过introcuce方法来访问。</ul></ul><h3 id="-private-protect-public-">继承作用域限制(private/protect/public)</h3><ul><li>private声明：类本身可以访问<li>protect声明：子类可以访问<li>public声明：对象可以访问</ul><p>从上面this的分析我们可以知道，因为构造函数的this即指向实例化的对象，所以对象是可以直接访问属性的，即可以这样写:<pre><code class="lang-javascript">cat.name;
+cat.age;
+</code></pre><p>那么挂载在this下的即相当于public声明，通过闭包形式实现的则类似于privite,对象只能通过继承而来的方法来访问变量。这样我们就可以简单的模拟公共变量和私有变量。<p>注：闭包会造成作用域不能及时的释放，所以不易大量的使用。<p>一种比较简单的做法是通过"_"的形式来声明私有变量，这需要人为的约定遵从。如：<pre><code class="lang-javasript">this._name;
+this._age;
+</code></pre><p>并不是真正意义上的私有变量，只是让它看起来像私有变量。我们依然可以通过cat._name的形式来访问。<p>protect形式的用得并不太多，这里就不考虑了。<h4 id="-">参数说明</h4><p>javascript是一门动态、弱类型的语言。我们不需要预先声明变量的类型，这非常的灵活但有时也会造成类型的混乱。同时javascript函数的参数非常的灵活， 形参和实参并不需要一一对应的关系。所以为确保程序能够正确的运行，我们往往需要对参数进行验证。<p>在此基础上，我们可以通过传递Object对象作为参数的方式来编写，<pre><code class="lang-javascript">var Animal = function(obj){
+    /*属性:名字、年龄、体重、身高*/
+    this.name = "Animal";
+    this.age = 0;
+    this.weight = 0;
+    this.height = 0;
+
+    /*初始化方法*/
+    this.initial = function(obj){
+        this.name = obj['name'] || this.name;
+        this.age = obj['age'] || this.age;
+        this.weight = obj['weight'] || this.weight;
+        this.height = obj['height'] || this.height;
+    }
+
+    /*方法*/
+    /*输出对象信息*/
+    this.introduce = function(){
+        console.log("name: ", this.name, "age: ", this.age, "weight: ", this.weight, "height: ", this.height);
+    }
+}
+/*实例化的对象自带的方法*/
+var cat = new Animal({name: 'Cat'});    /*名字是Cat*/
+
+cat.introduce();
+cat.initial({name:"cat",age: "18",weight: "50kg",height: "170cm"});
+</code></pre><h3 id="-">继承</h3><p>类和对象的关系已经实现了继承，即对象会继承类的特性。更进一步，因为都是对象，所以可以直接赋值<pre><code class="lang-javascript">/*新建一个cat对象*/
+cat = new Animal;
+/*将cat对象拷贝给redCat,这样redCat也具有了cat的属性和方法*/
+redCat = cat;
+</code></pre><p>这种方式只是更改了名字而已，它们其实还是同一个对象，redCat的操作等同于cat进行的操作<h3 id="-">原始类型与复合类型说明</h3><ul><li>原始值：按值传递 string/number/boolean/null/undefined 注:null和undefine是不同的.<li>复合类型：按引用传递 object/array/function</ul><pre><code class="lang-javascript">/*原始类型*/
+var name = "yangxiaofu";
+var age = 18;
+
+/*复合类型*/
+var person = {
+    name: "yangxiaofu",
+    age: 18
+}
+var score = [100, 90, 80]
+
+var newName = name;
+var newAge = age;
+var newPerson = person;
+var newScore = score;
+
+newName = "xiaoyang";
+newAge = 20;
+
+newPerson.name = "newPerson";
+newPerson.age = '30';
+
+newScore[1] = 0;
+
+console.log(name, age);        /*yangxiaofu 18,说明改变newName和newAge并不影响到name,age的值*/
+console.log(person, score);    /*{name: "newPerson", age: "30"} [100, 0, 80]，对newPerson和newScore的修改影响到了person和score*/
+</code></pre><p>复合类型的这种引用传递方式有时很有用，但我们在实现继承的时候却不希望继承者的改变会影响到被继承者。这里可以通过拷贝的方式来实现。<ul><li>浅拷贝<li>深拷贝</ul><pre><code class="lang-javascript">var person = {
+    name: "yangxiaofu",
+    brother: {
+        name: "xiaoyang",
+        age: 12
+    }
+}
+
+/*浅拷贝，即只拷贝第一层*/
+var copy = function(obj){
+    var newObj = {};
+    for(var p in obj){
+        newObj[p] = obj[p];
+    }
+    return newObj;
+}
+
+var newPerson = copy(person);
+newPerson.name = "newPerson";
+newPerson.brother.name = "newBrother";
+
+console.log(person, newPerson);
+
+/*深拷贝，检测对象属性是否是复合类型，若是则递归拷贝*/
+var deepCopy = function(obj){
+    if(typeof obj != 'object'){
+        return obj;
+    }else{
+        /*var newObj = {};*/
+        var newObj = obj.constructor === Array?[]:{}; /*增加对数组的支持*/
+        for(var p in obj){
+            newObj[p] = deepCopy(obj[p])/*递归拷贝*/
+        }
+        return newObj;
+    }
+}
+
+var deepPerson = deepCopy(person);
+deepPerson.name = "deepPerson";
+deepPerson.brother.name = "deepBrother";
+console.log(person, newPerson, deepPerson);
+</code></pre><p><img alt="浅拷贝、深拷贝"src="/img/prototype/deepCopy.png"> 从上图可以知道使用浅拷贝时，拷贝所得新对象的属性brother(也是一个对象)的修改操作会影响到原对象的brother属性，而使用深拷贝已不会影响。<p>继承也可通过上面的拷贝函数来实现。<h3 id="-">继承实现</h3><ul><li>构造函数实现</ul><p>上面我们已经用构造函数实现了类，并实现了继承。实例对象会继承类的属性和方法<ul><li>拷贝实现</ul><pre><code class="lang-javascript">function extend(subObj, obj){
+    if(typeof obj != 'object'){
+        subObj = obj;
+    }else{
+        /*var newObj = {};*/
+        var newObj = obj.constructor === Array?[]:{}; /*增加对数组的支持*/
+        for(var p in obj){
+            newObj[p] = extend(obj[p])/*递归拷贝*/
+        }
+        subObj = newObj;
+    }
+}
+</code></pre><p>subObj会继承obj对象的属性方法，如果有同样的属性方法会被obj的替代。<p>在ruby中有一种实现类似多继承的功能，是mix-in,使用模块继承方式，其实类似于我们这里的拷贝继承，将一个对象[注意这里不是类]的方法属性继承到一个新的对象中。<ul><li>prototype实现</ul><p>prototype即原型，通过原型链，可以实现层次关系，这是拷贝的方式所不能达到的。<pre><code class="lang-javascript">var Animal = function(obj){
+    /*属性:名字、年龄、体重、身高*/
+    this.name = "Animal";
+    this.age = 0;
+    this.weight = 0;
+    this.height = 0;
+
+    /*初始化方法*/
+    this.initial = function(obj){
+        this.name = obj['name'] || this.name;
+        this.age = obj['age'] || this.age;
+        this.weight = obj['weight'] || this.weight;
+        this.height = obj['height'] || this.height;
+    }
+
+    /*方法*/
+    /*输出对象信息*/
+    this.introduce = function(){
+        console.log("name: ", this.name, "age: ", this.age, "weight: ", this.weight, "height: ", this.height);
+    }
+}
+
+Animal.prototype.fly = function(){
+    console.log("I can fly!");
+}
+/*实例化的对象自带的方法*/
+var cat = new Animal({name: 'Cat'});    /*名字是Cat*/
+cat.fly();    /*I can fly!*/
+cat.fly = function(){
+    console.log("I can't fly!");
+}
+cat.fly();    /*I can't fly!*/
+</code></pre><p>对象在调用它的方法的时候会先去查找自己是否有这个方法，若没有则通过<strong>proto</strong>找到原型对象，从原型对象上查找该方法，如果还没找到则会继续往上找即js原型链。挂在prototype对象下的好处是所有的实例对象公用，不会每一个对象保存一份拷贝，这样会节省不少内存.<h3 id="mix-in">Mix-in</h3><p>拷贝继承会将一个对象的方法属性加到我们的对象中，这样出现冲突则会覆盖，并且没有层级关系，我们可以通过prototype来解决。<pre><code class="lang-javascript">function extended(sub, parent){
+    if(typeof sub.__proto__ === 'object'){
+        /*如果sub对象的__proto__对象是object，则直接赋值，否则在sub上多加一层__proto__*/
+        sub.__proto__ = parent;
+    }else{
+        var temp = sub.__proto__;
+        sub.__proto__ = parent;
+        parent.__proto__ = temp;
+    }
+}
+</code></pre><p>如我们现在的继承关系是这样的：<ul><li>1.动物[类|Animal]——>猫[实例对象|cat]<li>2.给猫增加咖菲猫的功能[coffeCat]<li>3.extended(cat, coffeCat)</ul><p>这时我们得到的继承关系是这样的：<ul><li>cat.<strong>proto</strong>: 指向coffeCat<li>coffeCat.<strong>proto</strong>: 指向Animal</ul><p>即cat->Animal变成了cat->coffeCat->Animal<p>上面这种继承方式会优先调用通过extended继承来的属性。<p>如果想要优先继承自己的类的可以这样做：<pre><code class="lang-javascript">function extended(sub, parent){
+    if(typeof sub.__proto__ === 'object'){
+        /*如果sub对象的__proto__对象是object，则直接赋值，否则在sub上多加一层__proto__*/
+        sub.__proto__ = parent;
+    }else{
+        sub.__proto__.__proto__ = parent;
+    }
+}
+</code></pre><p>即cat->Animal变成了cat->Animal->coffeCat这样的继承关系<h3 id="-">多态</h3><p>在动态类型的语言里面一般较少的提到多态，所以这里不提及。<h2 id="-">模块化</h2><p>模块化即抽象，我们前面的封装操作即模块化的过程，一个函数可以作为一个模块，一个类可以作为一个模块，一个对象可以作为一个模块，一个文件也可以作为一个模块。<p>当我们谈到js的模块化的时候更多的是从文件层次，即一个文件代表一个模块。seaJS就是出于这样的目的来的，因为js自身没有这样的功能(ES6已具备这样的功能)。<ul><li>cmd<li>amd<li>Es6</ul></div></div></div><footer class="footer">Visit our website for more documentation : <a href="https://nuxtjs.org"target="_blank">nuxtjs.org</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"Javascript-类-模块化",date:"2015-12-08T15:06:36.000Z",tags:["js"],id:"25",createTime:"2015-12-08",url:"2015-12-08-Javascript-类-模块化",strTag:"js"},content:'<hr>\n<div class="text-center" style="background:#414141;font-size: 48px;padding:40px 0;color:#ffffff;">Learn OOP -prototype<p style="font-size: 16px;">这里并不吹嘘面向对象有多牛，但作为现在主流的一种编程范式，我们有必要去了解。</p></div>\n\n<h2 id="-">目录</h2>\n<ul>\n<li><a href="#Javascript面向对象实现">Javascript面向对象实现</a><ul>\n<li><a href="#封装">封装</a></li>\n<li><a href="#继承">继承</a></li>\n<li><a href="#原始类型与复合类型说明">原始类型与复合类型说明</a></li>\n<li><a href="#继承实现">继承实现</a></li>\n<li><a href="#Mix-in">Mix-in</a></li>\n</ul>\n</li>\n<li><a href="#模块化">模块化</a></li>\n</ul>\n<p>Javascript是基于原型的编程语言，并不是面向对象的语言。</p>\n<p class="text-important">ES6已实现class关键字，这让js看起来更像一门面向对象的语言</p>\n\n\n\n\n<p>主流语言类型：</p>\n<ul>\n<li>基于原型的语言</li>\n<li>面向过程的语言</li>\n<li>面向对象的语言</li>\n<li>函数式的语言</li>\n</ul>\n<p>每一种语言的编程方式以及语法都会有所不同。</p>\n<p>虽然Javascript并没有内置的类的实现，但可以模拟。Javascript有构造函数和new运算符，我们可以通过构造函数来实例化一个对象。</p>\n<p>当使用new关键字来调用构造函数时，执行上下文变成一个空的上下文，这个上下文代表了新生成的实例，所以this指向当前创建的实例。</p>\n<p>面向对象应该是现在使用最广的一种编程思想<a href="https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1">不了解的点此，需自备梯子</a></p>\n<p>说到面向对象，首先让我想起的是C++，在我的印象里，C++是一门严格遵循面向对象思想的一门语言，封装、继承、多态。不仅如此，还支持多继承，这是其它很多语言没有做到的。</p>\n<h2 id="javascript-">Javascript面向对象实现</h2>\n<p>说到面向对象，最直观的就是通过 class 关键字来声明，因为js还没实现该关键字(ES6已实现)，在这里我们直接用构造函数来模拟即可。(以C++为例，在生成一个对象的时候也是去调用构造函数来创建对象的)</p>\n<p>面向对象的三个特点：</p>\n<ul>\n<li>封装</li>\n<li>继承</li>\n<li>多态</li>\n</ul>\n<h3 id="-animal-">创建一个Animal类</h3>\n<pre><code class="lang-javascript">var Animal = function(){\n    /*属性*/\n    this.name = &quot;animal&quot;;\n\n    /*方法[函数、方法，在这里为什么不称为函数而称之为方法？]*/\n    this.talk = function(){\n        console.log(&quot;what&#39;s your name?&quot;);\n    }\n}\n</code></pre>\n<h3 id="-">实例化对象</h3>\n<pre><code class="lang-javascript">var Cat = new Animal;\nvar Dog = new Animal;\n</code></pre>\n<p>实例化一个对象时一般会需要进行初始化设置，这里可以通过构造函数传参实现</p>\n<pre><code class="lang-javascript">var Animal = function(name){\n    /*属性*/\n    this.name = name || &quot;Animal&quot;;\n\n    /*方法*/\n    this.talk = function(){\n        console.log(&quot;My name is: &quot;, name);\n    }\n}\n\nvar cat = new Animal(&quot;Cat&quot;);    /*名字是Cat*/\nvar dog = new Animal(&quot;Dog&quot;);    /*名字是Dog*/\n</code></pre>\n<p class="text-important">说明:</p>\n\n<pre><code class="lang-javascript">var name;\nname = pname || &quot;Animal&quot;;\n/*与下面的功能等同*/\nvar name;\nif(pname){\n    name = pname;\n}else{\n    name = &quot;Animal&quot;;\n}\n</code></pre>\n<p>这是js的一种默认值设置技巧，当pname == undefined时，name赋值为 &quot;Animal&quot;,否则name等于pname</p>\n<h3 id="-">封装</h3>\n<p>封装也叫数据抽象，将数据和处理数据的方法结合起来，对数据的处理和操作只能通过事先定义好的方法来进行。</p>\n<pre><code class="lang-javascript">var Animal = function(name, age, weight, height){\n    /*属性:名字、年龄、体重、身高*/\n    this.name = name || &quot;Animal&quot;;\n    this.age = age || 0;\n    this.weight = weight || 0;\n    this.height = height || 0;\n\n\n    /*方法*/\n    /*输出对象信息*/\n    this.introduce = function(){\n        console.log(&quot;name: &quot;, this.name, &quot;age: &quot;, this.age, &quot;weight: &quot;, this.weight, &quot;height: &quot;, this.height);\n    }\n    /*设置对象属性*/\n    this.setMyself = function(name, age, weight, height){\n        this.name = name || this.name;\n        this.age = age || this.age;\n        this.weight = weight || this.weight;\n        this.height = height || this.height;\n    }\n}\n/*实例化的对象自带的方法*/\nvar cat = new Animal(&quot;Cat&quot;);    /*名字是Cat*/\n\ncat.introduce();        /*输出：name:  Cat age:  0 weight:  0 height:  0*/\ncat.setMyself(&quot;cat&quot;, &quot;18&quot;, &quot;50kg&quot;, &quot;170cm&quot;);\ncat.introduce();        /*这时输出: name:  cat age:  18 weight:  50kg height:  170cm*/\n</code></pre>\n<p>上面我们给Animal设置了四个属性：名字、年龄、体重、身高;两个个方法：introduce(), setMyself();\n在这里我们对Animal做了封装即数据的抽象,类的数据部分由四个属性构成，方法则是处理部分.这里我们通过introduce()和setMyself()方法来输出、设置属性的值。</p>\n<p class="text-important">注(javasript语言自身的一些特点)：</p>\n\n<ul>\n<li><p>1.从上面的代码我们可以看到，this无处不在，也正是通过this才实现了类到对象的传递。Does it must？</p>\n</li>\n<li><p>2.主流的边长语言中都会有private/protect/public这三个参数来控制继承关系中变量的作用域，但是js中没有，对此我们需要进行一定的处理</p>\n</li>\n<li><p>3.js函数的参数是灵活可变[声明的参数与传入的参数不强制要求相同]\n  因为js函数参数的这种特点，一般我们传入一个对象作为参数，如：{name: &quot;cat&quot;, age: &quot;18&quot;, wight: &quot;50kg&quot;, height: &quot;170cm&quot;}</p>\n</li>\n</ul>\n<h4 id="-this">无处不在的this</h4>\n<p>这里为了更清晰，我们将代码稍稍简化一下(从程序的健壮性来说，对参数的合法性进行验证是很有必要的)：</p>\n<pre><code class="lang-javascript">var Animal = function(name, age, weight, height){\n    /*属性:名字、年龄、体重、身高*/\n    this.name = name;\n    this.age = age;\n\n    /*这里我们使用局部变量来声明体重和身高属性*/\n    var weight = weight;\n    var height = height;\n\n\n    /*方法*/\n    /*输出对象信息*/\n    this.introduce = function(){\n        /*这里的weight和height不需要用this.weight/this/height的形式来调用*/\n        console.log(this);    /*谁调用，this就指向谁,这里是实例化的对象调用，则指向该对象*/\n        /*这里的weight和height不需要用this.weight/this/height的形式来调用*/\n        console.log(&quot;name: &quot;, this.name, &quot;age: &quot;, this.age, &quot;weight: &quot;, weight, &quot;height: &quot;, height);\n    }\n    /*设置对象属性*/\n    this.setMyself = function(name, age, pweight, pheight){\n        this.name = name;\n        this.age = age;\n        /*为什么改成pweight, pheight,当形参和函数所在上下文的变量冲突时，函数内部是取不到变量的\n        这种情况下，这两个都是形参，而不是我们上面声明的局部变量，所以在此将变量名称更改为不同的值。\n        weight = weight;\n        height = height;\n        */\n        weight = pweight;\n        height = pheight;\n    }\n}\n\n/*实例化的对象自带的方法*/\nvar cat = new Animal(&quot;cat&quot;, &quot;18&quot;, &quot;50kg&quot;, &quot;170cm&quot;);    /*名字是Cat*/\n\ncat.introduce();\ncat.setMyself(&quot;cat&quot;, &quot;28&quot;, &quot;70kg&quot;, &quot;180cm&quot;);\ncat.introduce();\n</code></pre>\n<p>输出结果：</p>\n<pre><code class="lang-javascript">name:  cat age:  18 weight:  50kg height:  170cm\nname:  cat age:  28 weight:  70kg height:  180cm\n\n/*cat对象的值,并没有包括weight和height*/\n{\n    name: &quot;cat&quot;, \n    age: &quot;28&quot;,\n    this.introduce: function(){...},\n    this.setMyself: function(){...}\n}\n</code></pre>\n<p>从这里我们可以得出结论：</p>\n<ul>\n<li>实例化的对象得到的是挂载在构造函数this下的属性和方法(new 关键字的作用是返回一个新的对象并将this指向该对象)。所以为了将属性和方法传递给实例化的对象，我们就需要将属性和方法挂在this下。</li>\n<li>闭包,这里虽然weight和height并没有挂在构造函数的this下，但实例化的对象cat却能够通过introduce()方法访问到,这就是闭包的作用，要理解闭包，需要清除两点。<ul>\n<li>函数调用时上下文是声明时所在的上下文(introduce()声明的作用域是Animal构造函数，可以访问局部变量weight/height)</li>\n<li>函数内部的this指向的是调用者(调用cat.introduce():所以introduce内部的this指向cat对象)\n这样虽然实力话的对象(cat)不能访问weight和height变量，却可以通过introcuce方法来访问。</li>\n</ul>\n</li>\n</ul>\n<h3 id="-private-protect-public-">继承作用域限制(private/protect/public)</h3>\n<ul>\n<li>private声明：类本身可以访问</li>\n<li>protect声明：子类可以访问</li>\n<li>public声明：对象可以访问</li>\n</ul>\n<p>从上面this的分析我们可以知道，因为构造函数的this即指向实例化的对象，所以对象是可以直接访问属性的，即可以这样写:</p>\n<pre><code class="lang-javascript">cat.name;\ncat.age;\n</code></pre>\n<p>那么挂载在this下的即相当于public声明，通过闭包形式实现的则类似于privite,对象只能通过继承而来的方法来访问变量。这样我们就可以简单的模拟公共变量和私有变量。</p>\n<p>注：闭包会造成作用域不能及时的释放，所以不易大量的使用。</p>\n<p>一种比较简单的做法是通过&quot;_&quot;的形式来声明私有变量，这需要人为的约定遵从。如：</p>\n<pre><code class="lang-javasript">this._name;\nthis._age;\n</code></pre>\n<p>并不是真正意义上的私有变量，只是让它看起来像私有变量。我们依然可以通过cat._name的形式来访问。</p>\n<p>protect形式的用得并不太多，这里就不考虑了。</p>\n<h4 id="-">参数说明</h4>\n<p>javascript是一门动态、弱类型的语言。我们不需要预先声明变量的类型，这非常的灵活但有时也会造成类型的混乱。同时javascript函数的参数非常的灵活，\n形参和实参并不需要一一对应的关系。所以为确保程序能够正确的运行，我们往往需要对参数进行验证。</p>\n<p>在此基础上，我们可以通过传递Object对象作为参数的方式来编写，</p>\n<pre><code class="lang-javascript">var Animal = function(obj){\n    /*属性:名字、年龄、体重、身高*/\n    this.name = &quot;Animal&quot;;\n    this.age = 0;\n    this.weight = 0;\n    this.height = 0;\n\n    /*初始化方法*/\n    this.initial = function(obj){\n        this.name = obj[&#39;name&#39;] || this.name;\n        this.age = obj[&#39;age&#39;] || this.age;\n        this.weight = obj[&#39;weight&#39;] || this.weight;\n        this.height = obj[&#39;height&#39;] || this.height;\n    }\n\n    /*方法*/\n    /*输出对象信息*/\n    this.introduce = function(){\n        console.log(&quot;name: &quot;, this.name, &quot;age: &quot;, this.age, &quot;weight: &quot;, this.weight, &quot;height: &quot;, this.height);\n    }\n}\n/*实例化的对象自带的方法*/\nvar cat = new Animal({name: &#39;Cat&#39;});    /*名字是Cat*/\n\ncat.introduce();\ncat.initial({name:&quot;cat&quot;,age: &quot;18&quot;,weight: &quot;50kg&quot;,height: &quot;170cm&quot;});\n</code></pre>\n<h3 id="-">继承</h3>\n<p>类和对象的关系已经实现了继承，即对象会继承类的特性。更进一步，因为都是对象，所以可以直接赋值</p>\n<pre><code class="lang-javascript">/*新建一个cat对象*/\ncat = new Animal;\n/*将cat对象拷贝给redCat,这样redCat也具有了cat的属性和方法*/\nredCat = cat;\n</code></pre>\n<p>这种方式只是更改了名字而已，它们其实还是同一个对象，redCat的操作等同于cat进行的操作</p>\n<h3 id="-">原始类型与复合类型说明</h3>\n<ul>\n<li>原始值：按值传递 string/number/boolean/null/undefined 注:null和undefine是不同的.</li>\n<li>复合类型：按引用传递 object/array/function</li>\n</ul>\n<pre><code class="lang-javascript">/*原始类型*/\nvar name = &quot;yangxiaofu&quot;;\nvar age = 18;\n\n/*复合类型*/\nvar person = {\n    name: &quot;yangxiaofu&quot;,\n    age: 18\n}\nvar score = [100, 90, 80]\n\nvar newName = name;\nvar newAge = age;\nvar newPerson = person;\nvar newScore = score;\n\nnewName = &quot;xiaoyang&quot;;\nnewAge = 20;\n\nnewPerson.name = &quot;newPerson&quot;;\nnewPerson.age = &#39;30&#39;;\n\nnewScore[1] = 0;\n\nconsole.log(name, age);        /*yangxiaofu 18,说明改变newName和newAge并不影响到name,age的值*/\nconsole.log(person, score);    /*{name: &quot;newPerson&quot;, age: &quot;30&quot;} [100, 0, 80]，对newPerson和newScore的修改影响到了person和score*/\n</code></pre>\n<p>复合类型的这种引用传递方式有时很有用，但我们在实现继承的时候却不希望继承者的改变会影响到被继承者。这里可以通过拷贝的方式来实现。</p>\n<ul>\n<li>浅拷贝</li>\n<li>深拷贝</li>\n</ul>\n<pre><code class="lang-javascript">var person = {\n    name: &quot;yangxiaofu&quot;,\n    brother: {\n        name: &quot;xiaoyang&quot;,\n        age: 12\n    }\n}\n\n/*浅拷贝，即只拷贝第一层*/\nvar copy = function(obj){\n    var newObj = {};\n    for(var p in obj){\n        newObj[p] = obj[p];\n    }\n    return newObj;\n}\n\nvar newPerson = copy(person);\nnewPerson.name = &quot;newPerson&quot;;\nnewPerson.brother.name = &quot;newBrother&quot;;\n\nconsole.log(person, newPerson);\n\n/*深拷贝，检测对象属性是否是复合类型，若是则递归拷贝*/\nvar deepCopy = function(obj){\n    if(typeof obj != &#39;object&#39;){\n        return obj;\n    }else{\n        /*var newObj = {};*/\n        var newObj = obj.constructor === Array?[]:{}; /*增加对数组的支持*/\n        for(var p in obj){\n            newObj[p] = deepCopy(obj[p])/*递归拷贝*/\n        }\n        return newObj;\n    }\n}\n\nvar deepPerson = deepCopy(person);\ndeepPerson.name = &quot;deepPerson&quot;;\ndeepPerson.brother.name = &quot;deepBrother&quot;;\nconsole.log(person, newPerson, deepPerson);\n</code></pre>\n<p><img src="/img/prototype/deepCopy.png" alt="浅拷贝、深拷贝">\n从上图可以知道使用浅拷贝时，拷贝所得新对象的属性brother(也是一个对象)的修改操作会影响到原对象的brother属性，而使用深拷贝已不会影响。</p>\n<p>继承也可通过上面的拷贝函数来实现。</p>\n<h3 id="-">继承实现</h3>\n<ul>\n<li>构造函数实现</li>\n</ul>\n<p>上面我们已经用构造函数实现了类，并实现了继承。实例对象会继承类的属性和方法</p>\n<ul>\n<li>拷贝实现</li>\n</ul>\n<pre><code class="lang-javascript">function extend(subObj, obj){\n    if(typeof obj != &#39;object&#39;){\n        subObj = obj;\n    }else{\n        /*var newObj = {};*/\n        var newObj = obj.constructor === Array?[]:{}; /*增加对数组的支持*/\n        for(var p in obj){\n            newObj[p] = extend(obj[p])/*递归拷贝*/\n        }\n        subObj = newObj;\n    }\n}\n</code></pre>\n<p>subObj会继承obj对象的属性方法，如果有同样的属性方法会被obj的替代。</p>\n<p>在ruby中有一种实现类似多继承的功能，是mix-in,使用模块继承方式，其实类似于我们这里的拷贝继承，将一个对象[注意这里不是类]的方法属性继承到一个新的对象中。</p>\n<ul>\n<li>prototype实现</li>\n</ul>\n<p>prototype即原型，通过原型链，可以实现层次关系，这是拷贝的方式所不能达到的。</p>\n<pre><code class="lang-javascript">var Animal = function(obj){\n    /*属性:名字、年龄、体重、身高*/\n    this.name = &quot;Animal&quot;;\n    this.age = 0;\n    this.weight = 0;\n    this.height = 0;\n\n    /*初始化方法*/\n    this.initial = function(obj){\n        this.name = obj[&#39;name&#39;] || this.name;\n        this.age = obj[&#39;age&#39;] || this.age;\n        this.weight = obj[&#39;weight&#39;] || this.weight;\n        this.height = obj[&#39;height&#39;] || this.height;\n    }\n\n    /*方法*/\n    /*输出对象信息*/\n    this.introduce = function(){\n        console.log(&quot;name: &quot;, this.name, &quot;age: &quot;, this.age, &quot;weight: &quot;, this.weight, &quot;height: &quot;, this.height);\n    }\n}\n\nAnimal.prototype.fly = function(){\n    console.log(&quot;I can fly!&quot;);\n}\n/*实例化的对象自带的方法*/\nvar cat = new Animal({name: &#39;Cat&#39;});    /*名字是Cat*/\ncat.fly();    /*I can fly!*/\ncat.fly = function(){\n    console.log(&quot;I can&#39;t fly!&quot;);\n}\ncat.fly();    /*I can&#39;t fly!*/\n</code></pre>\n<p>对象在调用它的方法的时候会先去查找自己是否有这个方法，若没有则通过<strong>proto</strong>找到原型对象，从原型对象上查找该方法，如果还没找到则会继续往上找即js原型链。挂在prototype对象下的好处是所有的实例对象公用，不会每一个对象保存一份拷贝，这样会节省不少内存.</p>\n<h3 id="mix-in">Mix-in</h3>\n<p>拷贝继承会将一个对象的方法属性加到我们的对象中，这样出现冲突则会覆盖，并且没有层级关系，我们可以通过prototype来解决。</p>\n<pre><code class="lang-javascript">function extended(sub, parent){\n    if(typeof sub.__proto__ === &#39;object&#39;){\n        /*如果sub对象的__proto__对象是object，则直接赋值，否则在sub上多加一层__proto__*/\n        sub.__proto__ = parent;\n    }else{\n        var temp = sub.__proto__;\n        sub.__proto__ = parent;\n        parent.__proto__ = temp;\n    }\n}\n</code></pre>\n<p>如我们现在的继承关系是这样的：</p>\n<ul>\n<li>1.动物[类|Animal]——&gt;猫[实例对象|cat]</li>\n<li>2.给猫增加咖菲猫的功能[coffeCat]</li>\n<li>3.extended(cat, coffeCat)</li>\n</ul>\n<p>这时我们得到的继承关系是这样的：</p>\n<ul>\n<li>cat.<strong>proto</strong>: 指向coffeCat</li>\n<li>coffeCat.<strong>proto</strong>: 指向Animal</li>\n</ul>\n<p>即cat-&gt;Animal变成了cat-&gt;coffeCat-&gt;Animal</p>\n<p>上面这种继承方式会优先调用通过extended继承来的属性。</p>\n<p>如果想要优先继承自己的类的可以这样做：</p>\n<pre><code class="lang-javascript">function extended(sub, parent){\n    if(typeof sub.__proto__ === &#39;object&#39;){\n        /*如果sub对象的__proto__对象是object，则直接赋值，否则在sub上多加一层__proto__*/\n        sub.__proto__ = parent;\n    }else{\n        sub.__proto__.__proto__ = parent;\n    }\n}\n</code></pre>\n<p>即cat-&gt;Animal变成了cat-&gt;Animal-&gt;coffeCat这样的继承关系</p>\n<h3 id="-">多态</h3>\n<p>在动态类型的语言里面一般较少的提到多态，所以这里不提及。</p>\n<h2 id="-">模块化</h2>\n<p>模块化即抽象，我们前面的封装操作即模块化的过程，一个函数可以作为一个模块，一个类可以作为一个模块，一个对象可以作为一个模块，一个文件也可以作为一个模块。</p>\n<p>当我们谈到js的模块化的时候更多的是从文件层次，即一个文件代表一个模块。seaJS就是出于这样的目的来的，因为js自身没有这样的功能(ES6已具备这样的功能)。</p>\n<ul>\n<li>cmd</li>\n<li>amd</li>\n<li>Es6</li>\n</ul>\n',summary:'<hr>\n<div class="text-center" style="background:#414141;font-size: 48px;padding:40px 0;color:#ffffff;">Learn OOP -prototype<p style="font-size: 16px;">这里并不吹嘘面向对象有多牛，但作为现在主流的一种编程范式，我们有必要去了解。</p></div>\n\n<h2 id="-">目录</h2>\n<ul>\n<li><a href="#Javascript面向对象实现">Javascript面向对象实现</a><ul>\n<li><a href="#封装">封装</a></li>\n<li><a href="#继承">继承</a></li>\n<li><a href="#原始类型与复合类型说明">原始类型与复合类型说明</a></li>\n<li><a href="#继承实现">继承实现</a></li>\n<li><a href="#Mix-in">Mix-in</a></li>\n</ul>\n</li>\n<li><a href="#模块化">模块化</a></li>\n</ul>\n<p>Javascript是基于原型的编程语言，并不是面向对象的语言。</p>\n<p class="text-important">ES6已实现class关键字，这让js看起来更像一门面向对象的语言</p>\n\n'}}],error:null,serverRendered:!0}</script><script defer src="/_nuxt/vendor.bundle.js"></script><script defer src="/_nuxt/nuxt.bundle.js"></script>

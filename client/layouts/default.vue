@@ -48,10 +48,6 @@ export default {
                     url: '/page/1'
                 },
                 {
-                    text: 'Asks',
-                    url: '/asks/1?currentPage=1'
-                },
-                {
                     text: 'About',
                     url:  '/about'
                 }
