@@ -50,7 +50,7 @@ module.exports = {
     ]
   },
   router: {
-    base: '/'
+    base: '/ssr-web/'
   },
   generate: {
       dir: 'docs',
