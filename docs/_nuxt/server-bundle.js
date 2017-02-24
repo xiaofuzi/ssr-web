@@ -5132,7 +5132,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "container"
   }, [_c('div', {
     staticClass: "logo"
-  }, [_c('a-link', {
+  }, [_c('nuxt-link', {
     attrs: {
       "to": "/"
     }
@@ -5141,7 +5141,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('ul', {
     staticClass: "nav navbar-nav navbar-right"
   }, _vm._l((_vm.navItems), function(item) {
-    return _c('li', [_c('a-link', {
+    return _c('li', [_c('nuxt-link', {
       attrs: {
         "to": item.url
       }
@@ -5166,7 +5166,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "col-md-6"
     }, [_c('div', {
       staticClass: "box"
-    }, [_c('div', [_c('a-link', {
+    }, [_c('div', [_c('nuxt-link', {
       attrs: {
         "to": "/posts/" + post.meta.id
       }
@@ -5204,7 +5204,7 @@ module.exports.render._withStripped = true
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "post-wrapper container"
-  }, [_c('div', [_c('a-link', {
+  }, [_c('div', [_c('nuxt-link', {
     attrs: {
       "to": "/posts/" + _vm.post.meta.id
     }

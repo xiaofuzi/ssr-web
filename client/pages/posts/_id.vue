@@ -20,7 +20,7 @@
 <template>
     <div class="post-wrapper container">
         <div>
-            <a-link :to='"/posts/" + post.meta.id'><h2>{{post.meta.title}}</h2></a-link>
+            <nuxt-link :to='"/posts/" + post.meta.id'><h2>{{post.meta.title}}</h2></nuxt-link>
         </div> 
         <div class="post-meta">
             <span>{{ post.meta.strTag}}</span>
