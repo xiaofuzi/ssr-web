@@ -8,6 +8,8 @@ A fast, simple & powerful blog framework, powered by Node.js and Vue.
 * [express](https://github.com/expressjs/express)
 * [nuxt.js](https://github.com/nuxt/nuxt.js)
 
+##  五分钟搭建博客
+
 ## Build Setup
 
 ``` bash
@@ -40,3 +42,6 @@ $ npm start
     * 博客文档存放的目录，`source/_posts`目录下的会作为博文处理
 
 
+## Todo
+ * 插件功能
+ * 主题功能
