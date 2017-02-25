@@ -1983,6 +1983,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+/**
+ * fix nuxt-link generate error
+ */
+var baseUrl = '/ssr-web/';
+
 /* harmony default export */ __webpack_exports__["default"] = {
 	data: function data() {
 		return {};
@@ -1993,7 +1998,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	computed: {
 		path: function path() {
-			return this.to;
+			return baseUrl + this.to;
 		}
 	},
 	mounted: function mounted() {}

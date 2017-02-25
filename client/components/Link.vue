@@ -4,7 +4,10 @@
 	</a>
 </template>
 <script>
-import config from '../../nuxt.config.js';
+/**
+ * fix nuxt-link generate error
+ */
+let baseUrl = '/ssr-web/';
 
 	export default {
 		data () {
@@ -15,7 +18,7 @@ import config from '../../nuxt.config.js';
 		},
 		computed: {
 			path () {
-				return config.router.base + this.to;
+				return baseUrl + this.to;
 			}
 		},
 		mounted () {

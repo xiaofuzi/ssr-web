@@ -47,3 +47,7 @@ $ npm run start
 
 ## Todo
  * 主题功能
+
+## Trigers
+
+    * `<a-link></a-link>` component shuld specific base url
