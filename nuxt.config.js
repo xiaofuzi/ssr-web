@@ -1,12 +1,10 @@
-var mdToJson = require('./lib/mdToJson.js')(),
-    total = mdToJson.parsedFiles().total;
-
+var mdToJson = require('./lib/mdToJson.js')();
 
 /**
  * page server render ids generate plugin
  */
 mdToJson.use(function (res, next) {
-    let pageNumbers = Math.ceil(total/10),
+    let pageNumbers = Math.ceil(res.total/10),
         pageIds = [];
     for (let i = 1; i <= pageNumbers; i++) {
         pageIds.push({
@@ -33,6 +31,7 @@ mdToJson.use(function (res, next) {
         next(res);
     }
 )
+
 
 module.exports = {
   srcDir: 'client/',
@@ -75,12 +74,12 @@ module.exports = {
         routeParams: {
           '/page/:id': function (cb) {
                 mdToJson.parse((res)=>{
-                    cb(res.pageIds);
+                    cb(null, res.pageIds);
                 })
             },
           '/posts/:id': function (cb) {
                 mdToJson.parse((res)=>{
-                    cb(res.postsIds);
+                    cb(null, res.postsIds);
                 })
             }
         }

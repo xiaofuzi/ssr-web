@@ -1,0 +1,80 @@
+<!DOCTYPE html><html n-head=""n-head-ssr><meta n-head="true"charset="utf-8"><meta n-head="true"content="width=device-width,initial-scale=1"name="viewport"><meta n-head="true"content="ffe blog"name="description"hid="description"><title n-head="true">post list</title><link href="/favicon.ico"rel="icon"n-head="true"type="image/x-icon"><link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"rel="stylesheet"n-head="true"><base href="/ssr-web/"><link href="/ssr-web/_nuxt/style.css"rel="stylesheet"><body n-head=""><div id="__nuxt"server-rendered="true"><div class="progress"data-v-1ef32859 style="width:0;height:2px;background-color:#000;opacity:0"></div><div class="wrapper"><nav class="main-menu navbar navbar-default"><div class="container"><div class="logo"><a href="/ssr-web/"class="nuxt-link-active"><h2>ffe</h2></a></div><div class="nav-item"><ul class="nav navbar-nav navbar-right"><li><a href="/ssr-web/"class="nuxt-link-active">Home</a><li><a href="/ssr-web/page/1">Posts</a><li><a href="/ssr-web/about">About</a></ul></div></div></nav><div class="container post-wrapper"><div><a href="/ssr-web/posts/15"class="nuxt-link-active"><h2>轮播图，So easy</h2></a></div><div class="post-meta"><span>css、js、jquery、插件</span><span>2015-11-25</span></div><div><div><hr><h2 id="-">轮播效果预览</h2><p></p><style>iframe{width:100%;min-height:400px}</style><p></p><iframe frameborder="0"src="/compents/galler/index.html"></iframe><h3 id="-">结构布局</h3><p>三层布局：<p>——page-wrapp —— ——item-wrap[轮播效果是通过这一层的滚动实现的] —— —— ——sub-item<p>说明：<ul><li>page-wrapp作为轮播盒子框架，即限定可见区域<li>item-wrap作为轮播外层的盒子<li>sub-item作为每一个轮播图的盒子</ul><p>1 .page-wrapp的宽高等于sub-item的宽高,page-wrapp的overflow属性设为hidden,这样超出page-wrap范围的将是不可见的 2 .item-wrap的宽度等于sub-item的总宽度，,多个sub-item并排[可以用浮动的方式实现],高度等于sub-item的高度. 3 .这样虽然item-wrap的宽度大于page-wrapp的宽度，但因为page-wrapp设置了overflow:hidden,所以也只能显示一张图片的大小。 4 .为了得到轮播的效果这时可以使用动画将item-wrap在水平方向平移，也就得到了轮播的效果<pre><code class="lang-html">&lt;div class="page-wrapp">
+    &lt;div class="item-wrap">
+        &lt;div class="sub-item">
+            &lt;img src="/img/compents/background01.jpg" alt="" class="img-item">
+        &lt;/div>
+        &lt;div class="sub-item">
+            &lt;img src="/img/compents/cat-cartoon.jpg" alt="" class="img-item">
+        &lt;/div>
+        &lt;div class="sub-item">
+            &lt;img src="/img/compents/cup.jpg" alt="" class="img-item">
+        &lt;/div>
+        &lt;div class="sub-item">
+            &lt;img src="/img/compents/leaf.jpg" alt="" class="img-item">
+        &lt;/div>
+        &lt;div class="sub-item">
+            &lt;img src="/img/compents/nature01.jpg" alt="" class="img-item">
+        &lt;/div>
+    &lt;/div>
+&lt;/div>
+</code></pre><p>css样式<pre><code class="lang-css">/*这里的样式是针对全屏设置的，最外层的轮播框架宽高在此设为浏览器窗口的大小*/
+.page-wrapper,
+    .page-wrapper .item-wrap,
+    .page-wrapper .sub-item,
+    .page-wrapper .sub-item .img-item {
+        position: relative;
+        height: 100%;
+    }
+
+    .page-wrapper {
+        min-width: 720px;
+        min-height: 500px;
+        overflow: hidden;
+        zoom: 1;
+    }
+
+    .page-wrapper .item-wrap {
+        /*因为有5个子元素，所以宽度是5个子元素之和[子元素和父级的宽度是相等的],所以总宽度为父级的5倍*/
+        width: 500%;
+        overflow: hidden;
+        zoom: 1;
+    }
+
+    .page-wrapper .sub-item {
+        float: left;
+        width: 20%;
+    }
+
+    .page-wrapper .sub-item .img-item {
+        width: 100%;
+    }
+</code></pre><h3 id="-">轮播动画实现</h3><p>添加轮播按钮，点击时触发轮播事件<pre><code class="lang-html">&lt;!-- 轮播按钮 -->
+&lt;div class="left-btn-wrap">
+    &lt;span class="silder-left-btn" id="leftBtn">&lt;/span>
+&lt;/div>
+&lt;div class="right-btn-wrap">
+    &lt;span class="silder-right-btn" id="rightBtn">&lt;/span>
+&lt;/div>
+</code></pre><p>这里可以使用jQuery的animate动效实现轮播效果<pre><code class="lang-javascript">/*左滚动
+参数说明：
+$itemWrap=$('.item-wrap'); 轮播外层盒子
+*/
+$leftBtn.on('click', function(){
+    $itemWrap.animate({
+        'margin-left': 0 - $imgItems.width()
+    }, 1000, function(){
+        /*轮播一次就动态的将第一个图片元素移到最后，变成最后一张图片，这样可以实现无限循环的效果*/
+        $itemWrap.append($('.item-wrap .sub-item').first());
+        $itemWrap.css("margin-left",0);
+    })
+}）
+
+/*右滚动*/
+$rightBtn.on('click', function(){
+    $itemWrap.prepend($('#itemWrap .sub-item').last());
+        $itemWrap.css("margin-left",0 - $imgItems.width());
+    $itemWrap.animate({
+        'margin-left': 0
+    }, 1000)
+}）
+</code></pre><p>这样就可以实现一个简单的轮播图的效果，上面给出的事例还带有轮播导航条[右下角],这可以通过增加一个data-index属性来记录轮播索引位置。<p>注：这中做法每旋转一次就需要动态的修改DOM结构，另一种思路是将第一屏copy到最后的方式来实现无缝衔接<p><a href="/compents/galler/index.html">查看完整demo</a><p>github:<a href="https://github.com/xiaofuzi/gallery">https://github.com/xiaofuzi/gallery</a></div></div></div><footer class="footer">Visit our website for more documentation : <a href="https://github.com/xiaofuzi/ssr-web"target="_blank">ssr-web</a></footer></div></div><script defer>window.__NUXT__={data:[{post:{meta:{title:"轮播图，So easy",date:"2015-11-25T15:36:51.000Z",archives:"pl",tags:["css","js","jquery","插件"],id:"15",createTime:"2015-11-25",url:"2015-11-25-轮播图，So easy",strTag:"css、js、jquery、插件"},content:'<hr>\n<h2 id="-">轮播效果预览</h2>\n<p><style>iframe{width: 100%;min-height: 400px;}</style></p>\n<iframe src="/compents/galler/index.html" frameborder="0"></iframe>\n\n\n\n\n\n<h3 id="-">结构布局</h3>\n<p>三层布局：</p>\n<p>——page-wrapp\n—— ——item-wrap[轮播效果是通过这一层的滚动实现的]\n—— —— ——sub-item</p>\n<p>说明：</p>\n<ul>\n<li>page-wrapp作为轮播盒子框架，即限定可见区域</li>\n<li>item-wrap作为轮播外层的盒子</li>\n<li>sub-item作为每一个轮播图的盒子</li>\n</ul>\n<p>1 .page-wrapp的宽高等于sub-item的宽高,page-wrapp的overflow属性设为hidden,这样超出page-wrap范围的将是不可见的\n2 .item-wrap的宽度等于sub-item的总宽度，,多个sub-item并排[可以用浮动的方式实现],高度等于sub-item的高度.\n3 .这样虽然item-wrap的宽度大于page-wrapp的宽度，但因为page-wrapp设置了overflow:hidden,所以也只能显示一张图片的大小。\n4 .为了得到轮播的效果这时可以使用动画将item-wrap在水平方向平移，也就得到了轮播的效果</p>\n<pre><code class="lang-html">&lt;div class=&quot;page-wrapp&quot;&gt;\n    &lt;div class=&quot;item-wrap&quot;&gt;\n        &lt;div class=&quot;sub-item&quot;&gt;\n            &lt;img src=&quot;/img/compents/background01.jpg&quot; alt=&quot;&quot; class=&quot;img-item&quot;&gt;\n        &lt;/div&gt;\n        &lt;div class=&quot;sub-item&quot;&gt;\n            &lt;img src=&quot;/img/compents/cat-cartoon.jpg&quot; alt=&quot;&quot; class=&quot;img-item&quot;&gt;\n        &lt;/div&gt;\n        &lt;div class=&quot;sub-item&quot;&gt;\n            &lt;img src=&quot;/img/compents/cup.jpg&quot; alt=&quot;&quot; class=&quot;img-item&quot;&gt;\n        &lt;/div&gt;\n        &lt;div class=&quot;sub-item&quot;&gt;\n            &lt;img src=&quot;/img/compents/leaf.jpg&quot; alt=&quot;&quot; class=&quot;img-item&quot;&gt;\n        &lt;/div&gt;\n        &lt;div class=&quot;sub-item&quot;&gt;\n            &lt;img src=&quot;/img/compents/nature01.jpg&quot; alt=&quot;&quot; class=&quot;img-item&quot;&gt;\n        &lt;/div&gt;\n    &lt;/div&gt;\n&lt;/div&gt;\n</code></pre>\n<p>css样式</p>\n<pre><code class="lang-css">/*这里的样式是针对全屏设置的，最外层的轮播框架宽高在此设为浏览器窗口的大小*/\n.page-wrapper,\n    .page-wrapper .item-wrap,\n    .page-wrapper .sub-item,\n    .page-wrapper .sub-item .img-item {\n        position: relative;\n        height: 100%;\n    }\n\n    .page-wrapper {\n        min-width: 720px;\n        min-height: 500px;\n        overflow: hidden;\n        zoom: 1;\n    }\n\n    .page-wrapper .item-wrap {\n        /*因为有5个子元素，所以宽度是5个子元素之和[子元素和父级的宽度是相等的],所以总宽度为父级的5倍*/\n        width: 500%;\n        overflow: hidden;\n        zoom: 1;\n    }\n\n    .page-wrapper .sub-item {\n        float: left;\n        width: 20%;\n    }\n\n    .page-wrapper .sub-item .img-item {\n        width: 100%;\n    }\n</code></pre>\n<h3 id="-">轮播动画实现</h3>\n<p>添加轮播按钮，点击时触发轮播事件</p>\n<pre><code class="lang-html">&lt;!-- 轮播按钮 --&gt;\n&lt;div class=&quot;left-btn-wrap&quot;&gt;\n    &lt;span class=&quot;silder-left-btn&quot; id=&quot;leftBtn&quot;&gt;&lt;/span&gt;\n&lt;/div&gt;\n&lt;div class=&quot;right-btn-wrap&quot;&gt;\n    &lt;span class=&quot;silder-right-btn&quot; id=&quot;rightBtn&quot;&gt;&lt;/span&gt;\n&lt;/div&gt;\n</code></pre>\n<p>这里可以使用jQuery的animate动效实现轮播效果</p>\n<pre><code class="lang-javascript">/*左滚动\n参数说明：\n$itemWrap=$(&#39;.item-wrap&#39;); 轮播外层盒子\n*/\n$leftBtn.on(&#39;click&#39;, function(){\n    $itemWrap.animate({\n        &#39;margin-left&#39;: 0 - $imgItems.width()\n    }, 1000, function(){\n        /*轮播一次就动态的将第一个图片元素移到最后，变成最后一张图片，这样可以实现无限循环的效果*/\n        $itemWrap.append($(&#39;.item-wrap .sub-item&#39;).first());\n        $itemWrap.css(&quot;margin-left&quot;,0);\n    })\n}）\n\n/*右滚动*/\n$rightBtn.on(&#39;click&#39;, function(){\n    $itemWrap.prepend($(&#39;#itemWrap .sub-item&#39;).last());\n        $itemWrap.css(&quot;margin-left&quot;,0 - $imgItems.width());\n    $itemWrap.animate({\n        &#39;margin-left&#39;: 0\n    }, 1000)\n}）\n</code></pre>\n<p>这样就可以实现一个简单的轮播图的效果，上面给出的事例还带有轮播导航条[右下角],这可以通过增加一个data-index属性来记录轮播索引位置。</p>\n<p>注：这中做法每旋转一次就需要动态的修改DOM结构，另一种思路是将第一屏copy到最后的方式来实现无缝衔接</p>\n<p><a href="/compents/galler/index.html">查看完整demo</a></p>\n<p>github:<a href="https://github.com/xiaofuzi/gallery">https://github.com/xiaofuzi/gallery</a></p>\n',summary:'<hr>\n<h2 id="-">轮播效果预览</h2>\n<p><style>iframe{width: 100%;min-height: 400px;}</style></p>\n<iframe src="/compents/galler/index.html" frameborder="0"></iframe>\n\n'}}],error:null,serverRendered:!0}</script><script defer src="/ssr-web/_nuxt/vendor.bundle.js"></script><script defer src="/ssr-web/_nuxt/nuxt.bundle.js"></script>

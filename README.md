@@ -42,7 +42,8 @@ $ npm run start
 * server
     * 博客文档存放的目录，`source/_posts`目录下的会作为博文处理
 
+* 插件功能
+    [查看mdToJson文档](https://github.com/xiaofuzi/mdToJson)
 
 ## Todo
- * 插件功能
  * 主题功能

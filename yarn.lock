@@ -2769,9 +2769,9 @@ math-expression-evaluator@^1.2.14:
   version "1.2.16"
   resolved "https://registry.npmjs.org/math-expression-evaluator/-/math-expression-evaluator-1.2.16.tgz#b357fa1ca9faefb8e48d10c14ef2bcb2d9f0a7c9"
 
-mds-to-json@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/mds-to-json/-/mds-to-json-0.0.2.tgz#0be9ef90dc419de3f9ad1d328bcbe66eaef1a3fa"
+mds-to-json@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/mds-to-json/-/mds-to-json-0.0.4.tgz#4ac51237f5053b725347e2522cf7704fab69b8f0"
   dependencies:
     js-yaml "^3.8.1"
     marked "^0.3.6"
