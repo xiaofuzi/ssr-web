@@ -22,14 +22,14 @@
 	<nav class="navbar navbar-default main-menu">
 		<div class="container">
 			<div class="logo">
-				<nuxt-link to="/">
+				<a-link to="/">
 					<h2>ffe</h2>
-				</nuxt-link>
+				</a-link>
 			</div>
 			<div class="nav-item">
 				<ul class="nav navbar-nav navbar-right">
 					<li v-for='item in navItems'>
-						<nuxt-link :to="item.url">{{item.text}}</nuxt-link>
+						<a-link :to="item.url">{{item.text}}</a-link>
 					</li>
 				</ul>
 			</div>
