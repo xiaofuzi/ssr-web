@@ -170,10 +170,6 @@ async-each@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
 
-async-validator@^1.6.6:
-  version "1.6.8"
-  resolved "https://registry.yarnpkg.com/async-validator/-/async-validator-1.6.8.tgz#fbaaa9002b41066fdf3ba21d8a4ca8b1179ad36b"
-
 async@^1.5.0:
   version "1.5.2"
   resolved "https://registry.npmjs.org/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
@@ -211,7 +207,7 @@ aws4@^1.2.1:
   version "1.6.0"
   resolved "https://registry.npmjs.org/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
-axios@^0.15.2, axios@^0.15.3:
+axios@^0.15.3:
   version "0.15.3"
   resolved "https://registry.npmjs.org/axios/-/axios-0.15.3.tgz#2c9d638b2e191a08ea1d6cc988eadd6ba5bdc053"
   dependencies:
@@ -382,10 +378,6 @@ babel-helper-replace-supers@^6.22.0, babel-helper-replace-supers@^6.23.0:
     babel-template "^6.23.0"
     babel-traverse "^6.23.0"
     babel-types "^6.23.0"
-
-babel-helper-vue-jsx-merge-props@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-2.0.2.tgz#aceb1c373588279e2755ea1cfd35c22394fd33f8"
 
 babel-helpers@^6.23.0:
   version "6.23.0"
@@ -1356,13 +1348,13 @@ de-indent@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
 
-debug@^2.1.1, debug@^2.6.0:
+debug@^2.1.1, debug@^2.2.0, debug@^2.6.0:
   version "2.6.1"
   resolved "https://registry.npmjs.org/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
     ms "0.7.2"
 
-debug@^2.2.0, debug@~2.2.0:
+debug@~2.2.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
   dependencies:
@@ -1522,15 +1514,6 @@ ejs@^2.5.5:
 electron-to-chromium@^1.2.2:
   version "1.2.2"
   resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.2.2.tgz#e41bc9488c88e3cfa1e94bde28e8420d7d47c47c"
-
-element-ui@^1.2.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/element-ui/-/element-ui-1.2.1.tgz#02b93500c07d7596faa73985b1450226865a2928"
-  dependencies:
-    async-validator "^1.6.6"
-    babel-helper-vue-jsx-merge-props "^2.0.0"
-    deepmerge "^1.2.0"
-    throttle-debounce "^1.0.1"
 
 elliptic@^6.0.0:
   version "6.3.3"
@@ -2046,15 +2029,6 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-github-api@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/github-api/-/github-api-3.0.0.tgz#2832f98d0d3a83f1485e2db32c9259e4b9c40a75"
-  dependencies:
-    axios "^0.15.2"
-    debug "^2.2.0"
-    js-base64 "^2.1.9"
-    utf8 "^2.1.1"
-
 glob-base@^0.3.0:
   version "0.3.0"
   resolved "https://registry.npmjs.org/glob-base/-/glob-base-0.3.0.tgz#dbb164f6221b1c0b1ccf82aea328b497df0ea3c4"
@@ -2517,7 +2491,7 @@ js-tokens@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmjs.org/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
 
-js-yaml@^3.5.1:
+js-yaml@^3.5.1, js-yaml@^3.8.1:
   version "3.8.1"
   resolved "https://registry.npmjs.org/js-yaml/-/js-yaml-3.8.1.tgz#782ba50200be7b9e5a8537001b7804db3ad02628"
   dependencies:
@@ -2794,6 +2768,14 @@ marked@^0.3.6:
 math-expression-evaluator@^1.2.14:
   version "1.2.16"
   resolved "https://registry.npmjs.org/math-expression-evaluator/-/math-expression-evaluator-1.2.16.tgz#b357fa1ca9faefb8e48d10c14ef2bcb2d9f0a7c9"
+
+mds-to-json@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/mds-to-json/-/mds-to-json-0.0.2.tgz#0be9ef90dc419de3f9ad1d328bcbe66eaef1a3fa"
+  dependencies:
+    js-yaml "^3.8.1"
+    marked "^0.3.6"
+    moment "^2.17.1"
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -4221,10 +4203,6 @@ text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
-throttle-debounce@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-1.0.1.tgz#dad0fe130f9daf3719fdea33dc36a8e6ba7f30b5"
-
 through@2, through@^2.3.6, through@~2.3, through@~2.3.1:
   version "2.3.8"
   resolved "https://registry.npmjs.org/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
@@ -4370,10 +4348,6 @@ user-home@^2.0.0:
   resolved "https://registry.npmjs.org/user-home/-/user-home-2.0.0.tgz#9c70bfd8169bc1dcbf48604e0f04b8b49cde9e9f"
   dependencies:
     os-homedir "^1.0.0"
-
-utf8@^2.1.1:
-  version "2.1.2"
-  resolved "https://registry.npmjs.org/utf8/-/utf8-2.1.2.tgz#1fa0d9270e9be850d9b05027f63519bf46457d96"
 
 util-deprecate@~1.0.1:
   version "1.0.2"
