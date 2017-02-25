@@ -10,6 +10,14 @@ A fast, simple & powerful blog framework, powered by Node.js and Vue.
 
 ##  五分钟搭建博客
 
+## 如何安装
+
+* `git clone https://github.com/xiaofuzi/ssr-web`
+
+* 通过 [iat](https://github.com/e-f-e/iat) 命令行工具
+    * `npm install iat -g`
+    * iat ssr-web
+
 ## Build Setup
 
 ``` bash
