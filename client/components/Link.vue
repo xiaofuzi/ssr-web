@@ -4,6 +4,8 @@
 	</a>
 </template>
 <script>
+import config from '../../nuxt.config.js';
+
 	export default {
 		data () {
 			return {}
@@ -13,7 +15,7 @@
 		},
 		computed: {
 			path () {
-				return this.to;
+				return config.router.base + this.to;
 			}
 		},
 		mounted () {
