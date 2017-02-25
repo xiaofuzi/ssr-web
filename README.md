@@ -5,6 +5,7 @@ A fast, simple & powerful blog framework, powered by Node.js and Vue.
 
 一个基于 Node.js 和 Vue 的高效、简单功能强大的静态博客生成器。
 
+### Online: [http://yangxiaofu.com/ssr-web/](http://yangxiaofu.com/ssr-web/)
 ### 依赖项
 
 * [express](https://github.com/expressjs/express)
