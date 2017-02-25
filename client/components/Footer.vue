@@ -7,6 +7,6 @@
 </style>
 <template>
   <footer class="footer">
-    Visit our website for more documentation : <a href="https://nuxtjs.org" target="_blank">nuxtjs.org</a>
+    Visit our website for more documentation : <a href="https://github.com/xiaofuzi/ssr-web" target="_blank">ssr-web</a>
   </footer>
 </template>

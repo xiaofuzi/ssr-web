@@ -1,6 +1,6 @@
 var router = require('express').Router(),
 	path = require('path'),
-	getPosts = require('../lib/mdToJson.js').parsedFiles;
+	getPosts = require('../lib/mdToJson.js')().parsedFiles;
 
 
 var pageSize = 20,

@@ -14,9 +14,7 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
-    "element-ui": "^1.2.0",
     "express": "^4.14.0",
-    "github-api": "^3.0.0",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
     "marked": "^0.3.6",

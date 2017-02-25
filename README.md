@@ -20,7 +20,8 @@ $ npm install # Or yarn install
 $ npm run dev
 
 # build for production and launch server
-$ npm start
+$ npm run build
+$ npm run start
 ```
 
 ## 静态文件生成

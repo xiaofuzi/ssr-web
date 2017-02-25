@@ -1,20 +1,38 @@
-var getPosts = require('./lib/mdToJson.js').parsedFiles,
-    total = getPosts().total,
-    pageNumbers = parseInt(total/10),
-    pageIds = [], postsIds = [];
+var mdToJson = require('./lib/mdToJson.js')(),
+    total = mdToJson.parsedFiles().total;
 
-for (let i = 1; i <= pageNumbers; i++) {
-    pageIds.push({
-      id: i
-    })
-}
 
-for( let i = 0; i < total; i++) {
-    postsIds.push({
-      id: i
-    })
-}
+/**
+ * page server render ids generate plugin
+ */
+mdToJson.use(function (res, next) {
+    let pageNumbers = Math.ceil(total/10),
+        pageIds = [];
+    for (let i = 1; i <= pageNumbers; i++) {
+        pageIds.push({
+          id: i
+        })
+    }
 
+    res.pageIds = pageIds;
+    next(res);
+})
+
+/**
+ * posts server render ids generate plugin
+ */
+mdToJson.use(function (res, next) {
+        let total = res.total,
+            postIds = [];
+        for ( let i = 0; i < total; i++) {
+            postIds.push({
+                id: i
+            })
+        }
+        res.postsIds = postIds;
+        next(res);
+    }
+)
 
 module.exports = {
   srcDir: 'client/',
@@ -53,11 +71,19 @@ module.exports = {
     base: '/ssr-web/'
   },
   generate: {
-      dir: 'docs',
-      routeParams: {
-          '/page/:id': pageIds,
-          '/posts/:id': postsIds
-      }
-  }
+        dir: 'docs',
+        routeParams: {
+          '/page/:id': function (cb) {
+                mdToJson.parse((res)=>{
+                    cb(res.pageIds);
+                })
+            },
+          '/posts/:id': function (cb) {
+                mdToJson.parse((res)=>{
+                    cb(res.postsIds);
+                })
+            }
+        }
+    }
 }
 

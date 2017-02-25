@@ -5080,10 +5080,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "footer"
   }, [_vm._v("\n  Visit our website for more documentation : "), _c('a', {
     attrs: {
-      "href": "https://nuxtjs.org",
+      "href": "https://github.com/xiaofuzi/ssr-web",
       "target": "_blank"
     }
-  }, [_vm._v("nuxtjs.org")])])
+  }, [_vm._v("ssr-web")])])
 }]}
 module.exports.render._withStripped = true
 
