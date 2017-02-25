@@ -24,13 +24,18 @@ $ npm run build
 $ npm run start
 ```
 
-## 静态文件生成
+## 生成博客
 
 打开两个终端分别运行以下命令
 
 * npm run start
 * npm run g
 
+## 使用 github Page 托管博客
+## 提示
+
+    * `<a-link></a-link>` 组件是为了替代 `<nuxt-link></nuxt-link>`组件。
+    * 若不是根目录，需要更改链接的跟地址，nuxt.config.js 的 router.base 属性和 `<a-link></a-link>` 组件的根地址。
 
 ## DOC
 
@@ -48,6 +53,3 @@ $ npm run start
 ## Todo
  * 主题功能
 
-## Trigers
-
-    * `<a-link></a-link>` component shuld specific base url
